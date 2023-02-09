@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Budget Buddy</string>
+ <string name="app_name">Budget Buddy</string>
+    <string name="TxtSignIn">Sign In</string>
+    <string name="txtHi">Hi there! Nice to see you again</string>
+    <string name="txtE">Email</string>
+    <string name="txtEmail">Your email address</string>
+    <string name="txtPassword">Password</string>
+    <string name="btnSignIn">Sign In</string>
+    <string name="txtSocials">or Sign In with your Gmail Account</string>
+    <string name="btnTwitter">GMAIL</string>
+    <string name="btnFacebook">FACEBOOK</string>
+    <string name="txtForgotPwd">Forgot Password?</string>
+    <string name="txtSignUp">SignUp</string>
+    <string name="txtPwd">Password</string>
 </resources>
