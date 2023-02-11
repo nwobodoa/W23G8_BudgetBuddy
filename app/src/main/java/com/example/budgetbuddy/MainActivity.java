@@ -14,9 +14,10 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
 
+        assert actionBar != null;
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setLogo(R.mipmap.ic_launcher_bb_round);
+        actionBar.setLogo(R.mipmap.ic_launcher_white_logo);
         actionBar.setTitle(R.string.app_name);
     }
 }
