@@ -12,5 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/red_200</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/red_200</item>
     </style>
 </resources>

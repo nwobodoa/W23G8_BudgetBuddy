@@ -6,12 +6,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher_bb"
-        android:roundIcon="@mipmap/ic_launcher_bb_round"
+        android:icon="@mipmap/ic_launcher_color_logo_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_color_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetBuddy"
         tools:targetApi="31">
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SigninActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
