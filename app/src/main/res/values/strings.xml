@@ -17,7 +17,11 @@
     <string name="company_logo">Company Logo</string>
     <string name="txtViewSignIn">sign in</string>
     <string name="txtViewEmail">Email:</string>
-    <string name="edittxtEmail">johnsmith@email.com</string>
+    <string name="editTxtEmail">johnsmith@email.com</string>
     <string name="txtViewPassword">Password:</string>
-    <string name="btnSignin2">SIgn In</string>
+    <string name="btnSignIn2">Sign In</string>
+    <string name="editTxtPassword">Password</string>
+    <string name="txtViewForgotPassword">Forgot Password?</string>
+    <string name="txtViewThirdPartySignIn">or use one of your social profiles</string>
+    <string name="email">Email</string>
 </resources>
