@@ -3,9 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#FFFFFF"
     android:layout_height="match_parent"
+    android:background="@color/brown_100"
     tools:context=".LoginActivity">
+
+    <Button
+        android:id="@+id/btn_signIn2"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/rounded_corner"
+        android:text="@string/btnSignIn2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordLayout" />
+
+
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/btn_white_bg"
+        android:drawableStart="@drawable/btn_google_signin_light_normal_xhdpi"
+        android:text="@string/btnGoogle"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewThirdPartySignIn"
+        app:layout_constraintVertical_bias="0.120000005" />
+
+    <Button
+        android:id="@+id/btnFacebook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/btn_white_bg"
+        android:text="@string/btnFacebook"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGoogle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnGoogle"
+        app:layout_constraintTop_toTopOf="@+id/btnGoogle" />
+
+    <TextView
+        android:id="@+id/txtViewThirdPartySignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/txtViewForgotPwd"
+        android:textColor="@color/red_700"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmailLayout"
@@ -24,22 +82,21 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="50dp"
             android:ems="12"
-            android:hint="@string/email"
+            android:hint="@string/hint_Email"
             android:inputType="textEmailAddress"
             android:textColor="@color/red_200"
-            android:textColorHint="@drawable/hide_hint"
-            android:textColorLink="@color/red_200" />
+            android:textColorHint="@color/red_700"
+            android:textColorLink="@color/red_200"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPasswordLayout"
         android:layout_width="349dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:hint="@string/editTxtPassword"
         android:textColor="@color/red_200"
         android:textColorHint="@color/red_200"
         app:hintTextColor="@color/red_200"
@@ -55,37 +112,14 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="12"
-            android:hint="@string/editTxtPassword"
+            android:hint="@string/hint_pwd"
             android:inputType="textPassword"
             android:textColor="@color/red_200"
-            android:textColorHighlight="@color/red_100"
-            android:textColorHint="@drawable/hide_hint"
-            android:textColorLink="@color/red_100" />
+            android:textColorHighlight="@color/red_200"
+            android:textColorHint="@color/red_700"
+            android:textColorLink="@color/red_200"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btn_signIn2"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/rounded_corner"
-        android:textSize="18sp"
-        android:text="@string/btnSignIn2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordLayout" />
-
-    <TextView
-        android:id="@+id/txtViewThirdPartySignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/txtViewThirdPartySignIn"
-        android:textColor="@color/purple_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
