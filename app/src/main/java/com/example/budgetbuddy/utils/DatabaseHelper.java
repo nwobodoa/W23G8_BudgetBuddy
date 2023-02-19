@@ -2,7 +2,6 @@ package com.example.budgetbuddy.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -23,7 +22,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //upgrade
 
         //drop table if it exists
         db.execSQL("DROP TABLE IF EXISTS " + Constants.TABLE_INCOME);
@@ -32,14 +30,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //insert into DB
-    public long insertIncome(int income, int incomeDate){
+    public long insertIncome(int income, String incomeDate){
         //get writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(Constants.COLUMN_AMOUNT_INCOME, income);
         contentValues.put(Constants.COLUMN_DATE_INCOME, incomeDate);
-
 
         //insert date to DB | This returns the id for the record
         long id = db.insert(Constants.TABLE_INCOME, null, contentValues);
@@ -50,15 +47,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
 
     }
-
-//    public boolean isDataInserted() {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String query = "SELECT * FROM Constants.DATABASE_NAME";
-//        Cursor cursor = db.rawQuery(query, null);
-//        boolean isInserted = cursor.moveToFirst();
-//        cursor.close();
-//        db.close();
-//        return isInserted;
-//    }
 
 }

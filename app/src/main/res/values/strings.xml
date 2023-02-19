@@ -23,4 +23,5 @@
     <string name="income">Income</string>
     <string name="incomeDate">Select Income Date</string>
     <string name="addIncome">Add Income</string>
+    <string name="txtVLogin">Sign In</string>
 </resources>

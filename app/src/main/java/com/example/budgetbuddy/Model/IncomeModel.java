@@ -5,43 +5,37 @@ import java.sql.Date;
 public class IncomeModel {
     private int id;
     private int income;
-    private int incomeDate;
+    private String incomeDate;
 
     public IncomeModel() {
     }
 
-    public IncomeModel(int income, int incomeDate) {
+    public IncomeModel(int income, String incomeDate) {
         this.income = income;
         this.incomeDate = incomeDate;
     }
 
     public int getId() {
-
         return id;
     }
 
     public void setId(int id) {
-
         this.id = id;
     }
 
     public int getIncome() {
-
         return income;
     }
 
     public void setIncome(int income) {
-
         this.income = income;
     }
 
-    public int getIncomeDate() {
-
+    public String getIncomeDate() {
         return incomeDate;
     }
 
-    public void setIncomeDate(int incomeDate) {
-
+    public void setIncomeDate(String incomeDate) {
         this.incomeDate = incomeDate;
     }
 }

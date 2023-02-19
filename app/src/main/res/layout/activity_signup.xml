@@ -8,7 +8,7 @@
     tools:context=".SignupActivity">
 
     <TextView
-        android:id="@+id/txtAddIncome"
+        android:id="@+id/txtSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtVRegister"
@@ -43,7 +43,7 @@
         android:textColorHint="@color/red_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddIncome" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSignIn" />
 
     <EditText
         android:id="@+id/editTxtEmail"

@@ -3,11 +3,11 @@ package com.example.budgetbuddy.Model;
 public class ExpenseModel {
     private int id;
     private int expense;
-    private int expenseDate;
+    private String expenseDate;
 
     public ExpenseModel() {
     }
-    public ExpenseModel(int expense, int expenseDate) {
+    public ExpenseModel(int expense, String expenseDate) {
         this.expense = expense;
         this.expenseDate = expenseDate;
     }
@@ -28,11 +28,11 @@ public class ExpenseModel {
         this.expense = expense;
     }
 
-    public int getExpenseDate() {
+    public String getExpenseDate() {
         return expenseDate;
     }
 
-    public void setExpenseDate(int expenseDate) {
+    public void setExpenseDate(String expenseDate) {
         this.expenseDate = expenseDate;
     }
 }

@@ -7,17 +7,76 @@
     android:background="@color/brown_100"
     tools:context=".LoginActivity">
 
+    <TextView
+        android:id="@+id/txtSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtVLogin"
+        android:textColor="@color/red_200"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13999999" />
+
+    <EditText
+        android:id="@+id/editTxtEmail"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_email"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/email2"
+        android:inputType="textPersonName|textEmailAddress"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/red_700"
+        app:layout_constraintEnd_toEndOf="@+id/txtSignIn"
+        app:layout_constraintStart_toStartOf="@+id/txtSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/txtSignIn" />
+
+    <EditText
+        android:id="@+id/editTextPwd"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints="Password"
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_security"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/red_700"
+        app:layout_constraintEnd_toEndOf="@+id/editTxtEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTxtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtEmail" />
+
+
     <Button
         android:id="@+id/btn_signIn2"
-        android:layout_width="320dp"
+        android:layout_width="349dp"
         android:layout_height="50dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rounded_corner"
         android:text="@string/btnSignIn2"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPwd" />
 
 
     <Button
@@ -57,69 +116,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="@string/txtViewForgotPwd"
         android:textColor="@color/blue"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etEmailLayout"
-        android:layout_width="349dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:textColor="@color/red_200"
-        android:textColorHint="@color/red_200"
-        app:hintTextColor="@color/red_200"
-        app:layout_constraintBottom_toTopOf="@+id/etPasswordLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/etEmailLayout"-->
+<!--        android:layout_width="349dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="128dp"-->
+<!--        android:textColor="@color/red_200"-->
+<!--        android:textColorHint="@color/red_200"-->
+<!--        app:hintTextColor="@color/red_200"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/etPasswordLayout"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.65999997">-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:ems="12"
-            android:hint="@string/hint_Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/red_200"
-            android:textColorHint="@color/red_700"
-            android:textColorLink="@color/red_200"
-            android:textSize="20sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/etEmail"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:ems="12"-->
+<!--            android:hint="@string/hint_Email"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            android:textColor="@color/red_200"-->
+<!--            android:textColorHint="@color/red_700"-->
+<!--            android:textColorLink="@color/red_200"-->
+<!--            android:textSize="20sp" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etPasswordLayout"
-        android:layout_width="349dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:textColor="@color/red_200"
-        android:textColorHint="@color/red_200"
-        app:hintTextColor="@color/red_200"
-        app:layout_constraintBottom_toTopOf="@+id/btn_signIn2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailLayout"
-        app:layout_constraintVertical_bias="0.0"
-        app:passwordToggleEnabled="true">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/etPasswordLayout"-->
+<!--        android:layout_width="349dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="64dp"-->
+<!--        android:textColor="@color/red_200"-->
+<!--        android:textColorHint="@color/red_200"-->
+<!--        app:hintTextColor="@color/red_200"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btn_signIn2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/etEmailLayout"-->
+<!--        app:layout_constraintVertical_bias="0.0"-->
+<!--        app:passwordToggleEnabled="true">-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:ems="12"
-            android:hint="@string/hint_pwd"
-            android:inputType="textPassword"
-            android:textColor="@color/red_200"
-            android:textColorHighlight="@color/red_200"
-            android:textColorHint="@color/red_700"
-            android:textColorLink="@color/red_200"
-            android:textSize="20sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/etPassword"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:ems="12"-->
+<!--            android:hint="@string/hint_pwd"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:textColor="@color/red_200"-->
+<!--            android:textColorHighlight="@color/red_200"-->
+<!--            android:textColorHint="@color/red_700"-->
+<!--            android:textColorLink="@color/red_200"-->
+<!--            android:textSize="20sp" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
