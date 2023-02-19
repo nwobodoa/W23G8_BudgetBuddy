@@ -19,4 +19,8 @@
     <string name="txtSign_in">Sign In</string>
     <string name="btnFacebook">Facebook</string>
     <string name="btnGoogle">Google</string>
+    <string name="txtAddIncome">Add Income</string>
+    <string name="income">Income</string>
+    <string name="incomeDate">Select Income Date</string>
+    <string name="addIncome">Add Income</string>
 </resources>
