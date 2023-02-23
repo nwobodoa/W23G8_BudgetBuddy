@@ -25,7 +25,7 @@
         android:id="@+id/editTxtEmail"
         android:layout_width="349dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:autofillHints=""
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/baseline_email"
@@ -79,106 +79,44 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPwd" />
 
 
-    <Button
-        android:id="@+id/btnGoogle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/btn_white_bg"
-        android:drawableStart="@drawable/btn_google_signin_light_normal_xhdpi"
-        android:text="@string/btnGoogle"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewThirdPartySignIn"
-        app:layout_constraintVertical_bias="0.120000005" />
-
-    <Button
-        android:id="@+id/btnFacebook"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/btn_white_bg"
-        android:text="@string/btnFacebook"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnGoogle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnGoogle"
-        app:layout_constraintTop_toTopOf="@+id/btnGoogle" />
-
     <TextView
-        android:id="@+id/txtViewThirdPartySignIn"
+        android:id="@+id/txtViewForgotPwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/txtViewForgotPwd"
         android:textColor="@color/blue"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/etEmailLayout"-->
-<!--        android:layout_width="349dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="128dp"-->
-<!--        android:textColor="@color/red_200"-->
-<!--        android:textColorHint="@color/red_200"-->
-<!--        app:hintTextColor="@color/red_200"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/etPasswordLayout"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.65999997">-->
+    <TextView
+        android:id="@+id/txtViewSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/txtNoAccount"
+        android:textColor="@color/blue"
+        app:layout_constraintEnd_toStartOf="@+id/txtViewForgotPwd"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
 
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/etEmail"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:ems="12"-->
-<!--            android:hint="@string/hint_Email"-->
-<!--            android:inputType="textEmailAddress"-->
-<!--            android:textColor="@color/red_200"-->
-<!--            android:textColorHint="@color/red_700"-->
-<!--            android:textColorLink="@color/red_200"-->
-<!--            android:textSize="20sp" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+    <TextView
+        android:id="@+id/textViewSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/txtSignUp"
+        android:textColor="@color/red_200"
+        app:layout_constraintEnd_toStartOf="@+id/txtViewForgotPwd"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toEndOf="@+id/txtViewSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/etPasswordLayout"-->
-<!--        android:layout_width="349dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="64dp"-->
-<!--        android:textColor="@color/red_200"-->
-<!--        android:textColorHint="@color/red_200"-->
-<!--        app:hintTextColor="@color/red_200"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/btn_signIn2"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/etEmailLayout"-->
-<!--        app:layout_constraintVertical_bias="0.0"-->
-<!--        app:passwordToggleEnabled="true">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/etPassword"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:ems="12"-->
-<!--            android:hint="@string/hint_pwd"-->
-<!--            android:inputType="textPassword"-->
-<!--            android:textColor="@color/red_200"-->
-<!--            android:textColorHighlight="@color/red_200"-->
-<!--            android:textColorHint="@color/red_700"-->
-<!--            android:textColorLink="@color/red_200"-->
-<!--            android:textSize="20sp" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

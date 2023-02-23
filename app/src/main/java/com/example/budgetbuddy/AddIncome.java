@@ -1,31 +1,32 @@
 package com.example.budgetbuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.app.DatePickerDialog;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.budgetbuddy.constants.Constants;
+import com.example.budgetbuddy.model.Income;
+import com.example.budgetbuddy.repository.AppDatabase;
 import com.example.budgetbuddy.utils.DatabaseHelper;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AddIncome extends AppCompatActivity {
 
-    public DatabaseHelper databaseHelper = new DatabaseHelper(this);;
+    public DatabaseHelper databaseHelper = new DatabaseHelper(this);
+    ;
     EditText editTextIncome;
     EditText editTextDate;
     Button btnAddIncome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,37 +35,39 @@ public class AddIncome extends AppCompatActivity {
         editTextDate = findViewById(R.id.editTextDate);
         btnAddIncome = findViewById(R.id.btnAddIncome);
 
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "budget_buddy").build();
+
         btnAddIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              if(editTextIncome.getText().toString() != null && editTextDate.getText().toString() != null){
+                if (editTextIncome.getText().toString().isBlank()) {
+                    Toast.makeText(AddIncome.this, "Income cannot be empty, enter a valid Integer", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (editTextDate.getText().toString().isBlank()) {
+                    Toast.makeText(AddIncome.this, "Data cannot be empty, enter a valid date", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                  int income = Integer.parseInt(editTextIncome.getText().toString());
-                  String incomeDate = editTextDate.getText().toString();
-                  long insertedId = databaseHelper.insertIncome(income, incomeDate);
-                    try{
-                        if (isDataInserted()) {
-                            Toast.makeText(AddIncome.this, "Income added successfully in row: " + insertedId, Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(AddIncome.this, "Error adding income", Toast.LENGTH_LONG).show();
-                        }
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        Toast.makeText(AddIncome.this, "Exception", Toast.LENGTH_SHORT).show();
-                    }
-              }else{
-                  Toast.makeText(AddIncome.this, "Empty/invalid input", Toast.LENGTH_SHORT).show();
-              }
+                try {
+                    double income = Double.parseDouble(editTextIncome.getText().toString());
+                    String incomeDate = editTextDate.getText().toString();
+                    //TODO Please use futures to handle work that needs to leave the main UI thread
+                    new Thread(() -> db
+                            .incomeDao()
+                            .insertAll(new Income(income, LocalDate.parse(incomeDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
+                            .start();
+
+                    Toast.makeText(AddIncome.this, "Income added successfully", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(AddIncome.this, "Exception", Toast.LENGTH_SHORT).show();
+                }
             }
-        });
 
-
-        editTextDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
         });
+        editTextDate.setOnClickListener(v -> showDatePickerDialog());
 
     }
 
@@ -76,30 +79,14 @@ public class AddIncome extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         // Create a new date picker dialog
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        // Set the selected date in the EditText view
-                        String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        editTextDate.setText(selectedDate);
-                    }
-                },
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
+            // Set the selected date in the EditText view
+            String selectedDate = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+            editTextDate.setText(selectedDate);
+        },
                 year, month, day);
-
         // Show the date picker dialog
         datePickerDialog.show();
     }
-
-
-    public boolean isDataInserted() {
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        String query = "SELECT * FROM " + Constants.TABLE_INCOME;
-        Cursor cursor = db.rawQuery(query, null);
-        boolean isInserted = cursor.moveToFirst();
-        cursor.close();
-        db.close();
-        return isInserted;
-    }
-
 
 }

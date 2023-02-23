@@ -8,7 +8,6 @@
     <string name="btnSignIn2">Sign In</string>
     <string name="hint_pwd">*************</string>
     <string name="txtViewForgotPwd">Forgot Password?</string>
-    <string name="txtViewThirdPartySignIn">or use one of your social profiles</string>
     <string name="hint_Email">johnsmith@email.com</string>
     <string name="txtVRegister">Register</string>
     <string name="btn_register">Register</string>
@@ -24,4 +23,6 @@
     <string name="incomeDate">Select Income Date</string>
     <string name="addIncome">Add Income</string>
     <string name="txtVLogin">Sign In</string>
+    <string name="txtNoAccount">No Account?</string>
+    <string name="txtSignUp">SignUp</string>
 </resources>
