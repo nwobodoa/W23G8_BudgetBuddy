@@ -20,8 +20,15 @@
     <string name="btnFacebook">Facebook</string>
     <string name="btnGoogle">Google</string>
     <string name="txtAddIncome">Add Income</string>
-    <string name="income">Income</string>
+    <string name="income">Income Amount</string>
     <string name="incomeDate">Select Income Date</string>
     <string name="addIncome">Add Income</string>
     <string name="txtVLogin">Sign In</string>
+    <string name="txtAddExpense">Add Expense</string>
+    <string name="hintExpense">Expense Amount</string>
+    <string name="txtIncomeDate">Add Income Date</string>
+    <string name="txtCategory">Category</string>
+    <string name="txtOr">Or</string>
+    <string name="txtAccount">Need an Account?</string>
+    <string name="txt">Register Here</string>
 </resources>

@@ -147,6 +147,7 @@
             android:textColorLink="@color/red_700" />
 
         <TextView
+            android:id="@+id/txtViewSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"

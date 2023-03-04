@@ -43,6 +43,8 @@
         app:layout_constraintStart_toStartOf="@+id/txtSignIn"
         app:layout_constraintTop_toBottomOf="@+id/txtSignIn" />
 
+
+
     <EditText
         android:id="@+id/editTextPwd"
         android:layout_width="349dp"
@@ -89,12 +91,10 @@
         android:drawableStart="@drawable/btn_google_signin_light_normal_xhdpi"
         android:text="@string/btnGoogle"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewThirdPartySignIn"
-        app:layout_constraintVertical_bias="0.120000005" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewOr" />
 
     <Button
         android:id="@+id/btnFacebook"
@@ -115,16 +115,58 @@
         android:id="@+id/txtViewThirdPartySignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/txtViewForgotPwd"
         android:textColor="@color/blue"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
+    <TextView
+        android:id="@+id/txtViewOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/red_700"
+        android:text="@string/txtOr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewThirdPartySignIn" />
+
+    <TextView
+        android:id="@+id/txtViewNeedandAcct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/txtAccount"
+
+
+        android:textColor="@color/blue"
+        android:textColorHint="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGoogle" />
+
+    <TextView
+        android:id="@+id/txtViewRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/txt"
+        android:textColor="@color/red_700"
+        app:layout_constraintBottom_toBottomOf="@+id/txtViewNeedandAcct"
+        app:layout_constraintStart_toEndOf="@+id/txtViewNeedandAcct"
+        app:layout_constraintTop_toTopOf="@+id/txtViewNeedandAcct" />
+
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
 <!--        android:id="@+id/etEmailLayout"-->
 <!--        android:layout_width="349dp"-->
 <!--        android:layout_height="wrap_content"-->

@@ -3,12 +3,10 @@ package com.example.budgetbuddy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,8 +15,6 @@ import android.widget.Toast;
 
 import com.example.budgetbuddy.constants.Constants;
 import com.example.budgetbuddy.utils.DatabaseHelper;
-
-import java.util.Date;
 
 public class AddIncome extends AppCompatActivity {
 
@@ -30,9 +26,9 @@ public class AddIncome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
-        editTextIncome = findViewById(R.id.editTextIncome);
+        editTextIncome = findViewById(R.id.editTextExpense);
         editTextDate = findViewById(R.id.editTextDate);
-        btnAddIncome = findViewById(R.id.btnAddIncome);
+        btnAddIncome = findViewById(R.id.btnAddExpense);
 
         btnAddIncome.setOnClickListener(new View.OnClickListener() {
             @Override
