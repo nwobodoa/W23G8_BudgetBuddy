@@ -25,4 +25,8 @@
     <string name="txtVLogin">Sign In</string>
     <string name="txtNoAccount">No Account?</string>
     <string name="txtSignUp">SignUp</string>
+    <string name="txtAddExpense">Add Expense</string>
+    <string name="hintExpense">Add Expense</string>
+    <string name="txtCategory">Select Category</string>
+    <string name="txtIncomeDate">Income Date</string>
 </resources>

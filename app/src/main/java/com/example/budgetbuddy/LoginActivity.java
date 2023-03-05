@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,15 +29,15 @@ public class LoginActivity extends AppCompatActivity {
         // to quickly access the addIncome activity before auth is added
 
         btnSignIn2 = findViewById(R.id.btn_signIn2);
-        txtRegister = findViewById(R.id.txtViewRegister);
+//        txtRegister = findViewById(R.id.txtViewRegister);
 
-        txtRegister.setOnClickListener((View view)-> {
-
-            Intent signUp = new Intent(LoginActivity.this,SignupActivity.class);
-            startActivity(signUp);
-        });
+//        txtRegister.setOnClickListener((View view)-> {
+//
+//            Intent signUp = new Intent(LoginActivity.this,SignupActivity.class);
+//            startActivity(signUp);
+//        });
         btnSignIn2.setOnClickListener(view -> {
-            Intent addIncome = new Intent(LoginActivity.this, AddIncome.class);
+            Intent addIncome = new Intent(LoginActivity.this, AddIncomeActivity.class);
             startActivity(addIncome);
         });
     }

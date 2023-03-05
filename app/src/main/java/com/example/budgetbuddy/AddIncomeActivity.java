@@ -13,16 +13,12 @@ import android.widget.Toast;
 
 import com.example.budgetbuddy.model.Income;
 import com.example.budgetbuddy.repository.AppDatabase;
-import com.example.budgetbuddy.utils.DatabaseHelper;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class AddIncome extends AppCompatActivity {
+public class AddIncomeActivity extends AppCompatActivity {
 
-    public DatabaseHelper databaseHelper = new DatabaseHelper(this);
-    ;
     EditText editTextIncome;
     EditText editTextDate;
     Button btnAddIncome;
@@ -42,11 +38,11 @@ public class AddIncome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (editTextIncome.getText().toString().isBlank()) {
-                    Toast.makeText(AddIncome.this, "Income cannot be empty, enter a valid Integer", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddIncomeActivity.this, "Income cannot be empty, enter a valid Integer", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (editTextDate.getText().toString().isBlank()) {
-                    Toast.makeText(AddIncome.this, "Data cannot be empty, enter a valid date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddIncomeActivity.this, "Data cannot be empty, enter a valid date", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -59,10 +55,10 @@ public class AddIncome extends AppCompatActivity {
                             .insertAll(new Income(income, LocalDate.parse(incomeDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
                             .start();
 
-                    Toast.makeText(AddIncome.this, "Income added successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddIncomeActivity.this, "Income added successfully", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(AddIncome.this, "Exception", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddIncomeActivity.this, "Exception", Toast.LENGTH_SHORT).show();
                 }
             }
 
