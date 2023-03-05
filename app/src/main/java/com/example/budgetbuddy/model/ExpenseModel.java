@@ -1,4 +1,4 @@
-package com.example.budgetbuddy.Model;
+package com.example.budgetbuddy.model;
 
 public class ExpenseModel {
     private int id;
