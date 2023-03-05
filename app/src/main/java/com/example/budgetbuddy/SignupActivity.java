@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.budgetbuddy.ui.login.LoginActivity;
+
 public class SignupActivity extends AppCompatActivity {
         TextView txtSignIn;
     @Override
@@ -27,7 +29,7 @@ public class SignupActivity extends AppCompatActivity {
 
         txtSignIn.setOnClickListener((View view)  ->{
 
-            Intent logIn = new Intent(SignupActivity.this,LoginActivity.class);
+            Intent logIn = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(logIn);
         });
     }
