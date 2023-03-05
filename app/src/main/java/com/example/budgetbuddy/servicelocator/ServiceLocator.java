@@ -6,6 +6,7 @@ import androidx.room.Room;
 
 import com.example.budgetbuddy.repository.AppDatabase;
 import com.example.budgetbuddy.repository.dao.IncomeDao;
+import com.example.budgetbuddy.repository.dao.UserDao;
 
 public class ServiceLocator {
     private static ServiceLocator instance = null;
@@ -25,7 +26,11 @@ public class ServiceLocator {
     public AppDatabase getDb(Context ctx) {
         if(db == null) {
             synchronized (ServiceLocator.class) {
-                db = Room.databaseBuilder(ctx, AppDatabase.class, "budget_buddy").build();
+                db = Room.databaseBuilder(ctx, AppDatabase.class, "budget_buddy")
+                        .fallbackToDestructiveMigration()
+                        //TODO: Handle login out of main thread
+                        .allowMainThreadQueries()
+                        .build();
             }
         }
         return db;
@@ -33,5 +38,9 @@ public class ServiceLocator {
 
     public IncomeDao getIncomeDao(Context ctx) {
         return getDb(ctx).incomeDao();
+    }
+
+    public UserDao getUserDao(Context ctx) {
+        return getDb(ctx).userDao();
     }
 }

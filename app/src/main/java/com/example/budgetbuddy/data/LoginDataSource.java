@@ -1,24 +1,34 @@
 package com.example.budgetbuddy.data;
 
-import com.example.budgetbuddy.data.model.LoggedInUser;
+import android.content.Context;
+import android.util.Log;
+
+import com.example.budgetbuddy.model.User;
+import com.example.budgetbuddy.repository.dao.UserDao;
+import com.example.budgetbuddy.servicelocator.ServiceLocator;
+import com.example.budgetbuddy.utils.PasswordHelper;
 
 import java.io.IOException;
+import java.io.OptionalDataException;
+import java.util.Optional;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
-
+    public Result<User> login(String username, String password, Context context) {
+        UserDao userDao = ServiceLocator.getInstance().getUserDao(context);
         try {
             // TODO: handle loggedInUser authentication
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(),
-                            "Jane Doe");
-            return new Result.Success<>(fakeUser);
+             Optional<User> optionalUser = Optional.ofNullable(userDao.findByUsernameAndPassword(username,password));
+             User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
+             if(!PasswordHelper.verifyPassword(password,user.password)) {
+                 throw new RuntimeException("Invalid password");
+             }
+            return new Result.Success<User>(user);
         } catch (Exception e) {
+            Log.i("Login Failure","Login failed", e);
             return new Result.Error(new IOException("Error logging in", e));
         }
     }
