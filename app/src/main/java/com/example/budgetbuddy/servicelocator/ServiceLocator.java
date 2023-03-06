@@ -24,16 +24,11 @@ public class ServiceLocator {
     }
 
     public AppDatabase getDb(Context ctx) {
-        if(db == null) {
-            synchronized (ServiceLocator.class) {
-                db = Room.databaseBuilder(ctx, AppDatabase.class, "budget_buddy")
-                        .fallbackToDestructiveMigration()
-                        //TODO: Handle login out of main thread
-                        .allowMainThreadQueries()
-                        .build();
-            }
-        }
-        return db;
+     return Room.databaseBuilder(ctx, AppDatabase.class, "budget_buddy")
+                .fallbackToDestructiveMigration()
+                //TODO: Handle login out of main thread
+                .allowMainThreadQueries()
+                .build();
     }
 
     public IncomeDao getIncomeDao(Context ctx) {
