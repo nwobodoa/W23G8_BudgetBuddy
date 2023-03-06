@@ -10,7 +10,7 @@ import com.example.budgetbuddy.repository.dao.UserDao;
 
 public class ServiceLocator {
     private static ServiceLocator instance = null;
-    private static AppDatabase db = null;
+    private static final AppDatabase db = null;
     private ServiceLocator(){
     }
 

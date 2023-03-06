@@ -71,7 +71,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:autofillHints="Password"
+        android:autofillHints=" "
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/baseline_security"
         android:drawablePadding="10dp"
@@ -93,7 +93,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:autofillHints="Confirm Password"
+        android:autofillHints=" "
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/baseline_security"
         android:drawablePadding="10dp"
@@ -111,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPwd" />
 
     <Button
-        android:id="@+id/btn_Register"
+        android:id="@+id/btn_Reset"
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
@@ -129,9 +129,9 @@
         android:orientation="horizontal"
         android:textAlignment="center"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="@+id/btn_Register"
-        app:layout_constraintStart_toStartOf="@+id/btn_Register"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Register">
+        app:layout_constraintEnd_toEndOf="@+id/btn_Reset"
+        app:layout_constraintStart_toStartOf="@+id/btn_Reset"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Reset">
 
         <TextView
             android:id="@+id/txtViewHaveAnAcct"

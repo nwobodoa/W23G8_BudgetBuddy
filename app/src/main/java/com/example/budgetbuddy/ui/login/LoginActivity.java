@@ -2,9 +2,11 @@ package com.example.budgetbuddy.ui.login;
 
 import android.app.Activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,18 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.budgetbuddy.PasswordReset;
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.ui.login.LoginViewModel;
-import com.example.budgetbuddy.ui.login.LoginViewModelFactory;
+import com.example.budgetbuddy.SignupActivity;
 import com.example.budgetbuddy.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,6 +34,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+
+        assert actionBar != null;
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setLogo(R.mipmap.ic_launcher_white_logo);
+        actionBar.setTitle(R.string.app_name);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -45,6 +51,15 @@ public class LoginActivity extends AppCompatActivity {
         final EditText emailEditText = binding.editTxtEmail;
         final EditText passwordEditText = binding.editTextPwd;
         final Button loginButton = binding.btnSignIn2;
+        final TextView linkSignup = binding.txtViewSignupLink;
+        final TextView pwdResetLink = binding.txtViewForgotPwd;
+
+        pwdResetLink.setOnClickListener(v ->
+            startActivity(new Intent(this, PasswordReset.class)));
+
+
+        linkSignup.setOnClickListener(v ->
+            startActivity(new Intent(this, SignupActivity.class)));
 
 
         loginViewModel.getLoginFormState().observe(this, loginFormState -> {
@@ -60,24 +75,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
+        loginViewModel.getLoginResult().observe(this, loginResult -> {
+            if (loginResult == null) {
+                return;
             }
+
+            if (loginResult.getError() != null) {
+                showLoginFailed(loginResult.getError());
+            }
+            if (loginResult.getSuccess() != null) {
+                updateUiWithUser(loginResult.getSuccess());
+            }
+            setResult(Activity.RESULT_OK);
+
+            //Complete and destroy login activity once successful
+            finish();
         });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
@@ -99,26 +111,22 @@ public class LoginActivity extends AppCompatActivity {
         };
         emailEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(emailEditText.getText().toString(),
-                            passwordEditText.getText().toString(), getApplicationContext());
-                }
-                return false;
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(emailEditText.getText().toString(),
-                        passwordEditText.getText().toString(),getApplicationContext());
+                        passwordEditText.getText().toString(), getApplicationContext());
             }
+            return false;
         });
+
+        loginButton.setOnClickListener(v -> {
+            loginViewModel.login(emailEditText.getText().toString(),
+             passwordEditText.getText().toString(),getApplicationContext());
+            emailEditText.setText(null);
+            passwordEditText.setText(null);
+        });
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
