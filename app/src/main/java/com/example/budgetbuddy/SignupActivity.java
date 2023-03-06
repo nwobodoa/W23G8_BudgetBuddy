@@ -21,17 +21,12 @@ import com.example.budgetbuddy.utils.PasswordHelper;
 import static android.content.ContentValues.TAG;
 
 public class SignupActivity extends AppCompatActivity {
-    private final AppCompatActivity activity = SignupActivity.this;
-    private NestedScrollView nestedScrollView;
-    private EditText email;
+   private EditText email;
     private EditText userName;
     private EditText password;
     private EditText confirmPassword;
     private Button btnRegister;
     private TextView logInLink;
-    //    private InputValidation inputValidation;
-//    private DatabaseHelper databaseHelper;
-    private User user;
     private UserDao userDao;
 
 
@@ -59,11 +54,11 @@ public class SignupActivity extends AppCompatActivity {
 
     logInLink.setOnClickListener(v ->
         startActivity( new Intent(this,LoginActivity.class)));
-   
+
     }
 
     private void initView() {
-        //nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
+
         userName = findViewById(R.id.editTextUsername);
         email = findViewById(R.id.editTxtEmail);
         password = findViewById(R.id.editTextPwd);
@@ -112,40 +107,14 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        user = new User(userName.getText().toString().trim(), email.getText().toString().trim(), PasswordHelper.hashedPassword(password.getText().toString().trim()));
+
+        User user = new User(userName.getText().toString().trim(), email.getText().toString().trim(), PasswordHelper.hashedPassword(password.getText().toString().trim()));
         userDao.insert(user);
     }
 
-    private void postDataToSQLite() {
-//        if (!inputValidation.isInputEditTextFilled(userName, textInputLayoutName, getString(R.id.error_message_name))) {
-//            return;
-//        }
-//        if (!inputValidation.isInputEditTextFilled(email, textInputLayoutEmail, getString(R.id.error_message_email))) {
-//            return;
-//        }
-//        if (!inputValidation.isInputEditTextEmail(userName, textInputLayoutName, getString(R.id.error_message_name))) {
-//            return;
-//        }
-//        if (!inputValidation.isInputEditTextMatches(password, confirmPassword, textInputLayoutConfirmPassword, getString(R.id.error_password_match))) {
-//            return;
-//        }
-//        if (!databaseHelper.checkUser(email.getText().toString().trim())) {
-//            user.setName(userName.getText().toString().trim());
-//            user.setEmail(email.getText().toString().trim());
-//            user.setPassword(password.getText().toString().trim());
-//
-//            databaseHelper.addUser(user);
-//            //snack Bar to show success message that record saved successfully
-//            Snackbar.make(nestedScrollView, getString(R.string.sucess_message), Snackbar.LENGTH_LONG).show();
-//            emptyEditText();
-//        } else {
-//            // snack Bar to show success message that record saved sucessfully
-//            Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
-//
-//        }
 
     }
 
 
-}
+
 
