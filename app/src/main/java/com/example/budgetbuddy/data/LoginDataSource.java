@@ -12,17 +12,20 @@ import java.io.IOException;
 import java.io.OptionalDataException;
 import java.util.Optional;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
 
-    public Result<User> login(String username, String password, Context context) {
+    public Result<User> login(String email, String password, Context context) {
         UserDao userDao = ServiceLocator.getInstance().getUserDao(context);
         try {
             // TODO: handle loggedInUser authentication
-             Optional<User> optionalUser = Optional.ofNullable(userDao.findByUsernameAndPassword(username,password));
+             Optional<User> optionalUser = Optional.ofNullable(userDao.findByEmail(email));
              User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
+            Log.i(TAG, "login: hashedPassword -> "+user.password + " plain password -> " + password);
              if(!PasswordHelper.verifyPassword(password,user.password)) {
                  throw new RuntimeException("Invalid password");
              }

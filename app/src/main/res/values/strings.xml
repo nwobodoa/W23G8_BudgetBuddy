@@ -15,9 +15,7 @@
     <string name="username">User name</string>
     <string name="email2">Email Address</string>
     <string name="password">*************</string>
-    <string name="txtSign_in">Sign In</string>
-    <string name="btnFacebook">Facebook</string>
-    <string name="btnGoogle">Google</string>
+    <string name="txtSign_in">Login</string>
     <string name="txtAddIncome">Add Income</string>
     <string name="income">Income</string>
     <string name="incomeDate">Select Income Date</string>
@@ -38,4 +36,9 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="txtForgotPassword">Forgot Password</string>
+    <string name="txtEmail">Email*</string>
+    <string name="txtViewText">Please enter your registered email below to receive password reset link </string>
+    <string name="btnResetPwd">Reset Password</string>
+    <string name="hintTxtEmailReset">Enter your registered Email</string>
 </resources>

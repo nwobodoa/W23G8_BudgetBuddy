@@ -30,9 +30,9 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password, Context context) {
+    public void login(String email, String password, Context context) {
         // can be launched in a separate asynchronous job
-        Result<User> result = loginRepository.login(username, password, context);
+        Result<User> result = loginRepository.login(email, password, context);
 
         if (result instanceof Result.Success) {
             User data = ((Result.Success<User>) result).getData();

@@ -11,15 +11,14 @@
         android:id="@+id/txtSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:text="@string/txtVRegister"
         android:textColor="@color/red_200"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13999999" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -72,7 +71,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:autofillHints="Password"
+        android:autofillHints=" "
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/baseline_security"
         android:drawablePadding="10dp"
@@ -94,13 +93,13 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:autofillHints="Confirm Password"
+        android:autofillHints=" "
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/baseline_security"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword|numberPassword"
+        android:inputType="textPassword"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
@@ -112,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPwd" />
 
     <Button
-        android:id="@+id/btn_Register"
+        android:id="@+id/btn_Reset"
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
@@ -130,9 +129,9 @@
         android:orientation="horizontal"
         android:textAlignment="center"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="@+id/btn_Register"
-        app:layout_constraintStart_toStartOf="@+id/btn_Register"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Register">
+        app:layout_constraintEnd_toEndOf="@+id/btn_Reset"
+        app:layout_constraintStart_toStartOf="@+id/btn_Reset"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Reset">
 
         <TextView
             android:id="@+id/txtViewHaveAnAcct"
