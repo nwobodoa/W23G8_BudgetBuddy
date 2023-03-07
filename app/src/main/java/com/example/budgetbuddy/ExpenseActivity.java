@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ExpenseActivity extends AppCompatActivity {
+public class ExpenseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

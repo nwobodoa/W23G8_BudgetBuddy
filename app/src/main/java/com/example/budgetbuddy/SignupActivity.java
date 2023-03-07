@@ -20,7 +20,7 @@ import com.example.budgetbuddy.utils.PasswordHelper;
 
 import static android.content.ContentValues.TAG;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends BaseActivity {
    private EditText email;
     private EditText userName;
     private EditText password;
