@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.budgetbuddy.ui.login.LoginActivity;
 
-public class PasswordReset extends AppCompatActivity {
+public class PasswordReset extends BaseActivity {
     EditText editTextEmail;
     Button btnResetPwd;
     @Override

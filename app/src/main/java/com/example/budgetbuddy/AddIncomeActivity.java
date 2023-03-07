@@ -21,7 +21,7 @@ import com.example.budgetbuddy.servicelocator.ServiceLocator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class AddIncomeActivity extends AppCompatActivity {
+public class AddIncomeActivity extends BaseActivity {
 
     EditText editTextIncome;
     EditText editTextDate;

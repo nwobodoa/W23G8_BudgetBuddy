@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.example.budgetbuddy.ui.login.LoginActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Button btnSignUp;
     private Button btnLogin;

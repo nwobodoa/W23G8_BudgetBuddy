@@ -1,18 +1,10 @@
 package com.example.budgetbuddy.ui.login;
 
 import android.app.Activity;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.EditorInfo;
@@ -21,11 +13,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.budgetbuddy.MainActivity;
 import com.example.budgetbuddy.PasswordReset;
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.SignupActivity;
 import com.example.budgetbuddy.databinding.ActivityLoginBinding;
 
+import java.time.LocalDateTime;
+
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
@@ -87,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 updateUiWithUser(loginResult.getSuccess());
             }
             setResult(Activity.RESULT_OK);
+            startActivity(new Intent(this, MainActivity.class));
 
             //Complete and destroy login activity once successful
             finish();
@@ -126,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
             emailEditText.setText(null);
             passwordEditText.setText(null);
         });
-
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
