@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.budgetbuddy.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_addExpense"
+        android:name="com.example.budgetbuddy.ui.add_expense.AddExpenseFragment"
+        android:label="@string/menu_expense"
+        tools:layout="@layout/fragment_add_expense" />
+
+    <fragment
+        android:id="@+id/nav_addIncome"
+        android:name="com.example.budgetbuddy.ui.add_income.IncomeFragment"
+        android:label="@string/menu_income"
+        tools:layout="@layout/fragment_add_income" />
+    <fragment
+        android:id="@+id/nav_addBudget"
+        android:name="com.example.budgetbuddy.ui.budget.AddBudgetFragment"
+        android:label="@string/menu_income"
+        tools:layout="@layout/fragment_add_income" />
+    <fragment
+        android:id="@+id/nav_spendingByCat"
+        android:name="com.example.budgetbuddy."
+        android:label="@string/menu_income"
+        tools:layout="@layout/fragment_spending_by_cat" />
+    <fragment
+        android:id="@+id/nav_spendingHistory"
+        android:name="com.example.budgetbuddy."
+        android:label="@string/menu_income"
+        tools:layout="@layout/fragment_spending_history" />
+</navigation>

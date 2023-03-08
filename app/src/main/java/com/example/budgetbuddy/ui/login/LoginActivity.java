@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.MainActivity;
+import com.example.budgetbuddy.MainActivity2;
 import com.example.budgetbuddy.PasswordReset;
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.SignupActivity;
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 updateUiWithUser(loginResult.getSuccess());
             }
             setResult(Activity.RESULT_OK);
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity2.class));
 
             //Complete and destroy login activity once successful
             finish();

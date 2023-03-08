@@ -41,4 +41,17 @@
     <string name="txtViewText">Please enter your registered email below to receive password reset link </string>
     <string name="btnResetPwd">Reset Password</string>
     <string name="hintTxtEmailReset">Enter your registered Email</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+        <string name="nav_header_desc">Navigation header</string>
+    <string name="action_logout">Logout</string>
+<string name="SpendingHistory">Spending History</string>
+    <string name="spendingByCat">Spending By Category</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_income">Add Income</string>
+    <string name="menu_expense">Add Expense</string>
+    <string name="menu_addBudget">Add Budget</string>
+    <string name="menu_history">Spending History</string>
+    <string name="menu_spendingByCat">Spending by Category</string>
 </resources>

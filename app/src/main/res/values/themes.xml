@@ -10,8 +10,17 @@
         <item name="colorSecondaryVariant">@color/brown_700</item>
         <item name="colorOnSecondary">@color/light_brown</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimary </item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/red_200</item>
     </style>
+
+    <style name="Theme.BudgetBuddy.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.BudgetBuddy.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.BudgetBuddy.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -16,7 +16,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private LoginRepository loginRepository;
     public void redirectToLoginIfNoUser(){
         if (!loginRepository.isLoggedIn()){
-            startActivity(new Intent(this, LoginActivity.class));
+           // startActivity(new Intent(this, LoginActivity.class)); TODO check the method as it's affecting the login page
         }
     }
     @Override
