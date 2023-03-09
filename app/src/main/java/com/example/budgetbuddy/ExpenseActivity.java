@@ -1,10 +1,8 @@
 package com.example.budgetbuddy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class ExpenseActivity extends BaseActivity {
+public class ExpenseActivity extends ProtectedActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

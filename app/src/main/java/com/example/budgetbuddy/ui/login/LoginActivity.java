@@ -18,7 +18,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.budgetbuddy.MainActivity2;
+import com.example.budgetbuddy.MainActivity;
 import com.example.budgetbuddy.PasswordReset;
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.SignupActivity;
@@ -86,8 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                 updateUiWithUser(loginResult.getSuccess());
             }
             setResult(Activity.RESULT_OK);
-            startActivity(new Intent(this, MainActivity2.class));
-
+            Intent intent = new Intent(this, MainActivity.class);
+            String name = loginResult.getSuccess().getDisplayName();
+            intent.putExtra("username",name);
+            startActivity(intent);
             //Complete and destroy login activity once successful
             finish();
         });
@@ -129,9 +131,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String name = model.getDisplayName();
+        String welcome = getString(R.string.welcome) + name;
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+
+
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

@@ -17,11 +17,11 @@
         android:label="@string/menu_expense"
         tools:layout="@layout/fragment_add_expense" />
 
-    <fragment
+    <activity
         android:id="@+id/nav_addIncome"
-        android:name="com.example.budgetbuddy.ui.add_income.IncomeFragment"
+        android:name="com.example.budgetbuddy.AddIncomeActivity"
         android:label="@string/menu_income"
-        tools:layout="@layout/fragment_add_income" />
+        tools:layout="@layout/activity_add_income" />
     <fragment
         android:id="@+id/nav_addBudget"
         android:name="com.example.budgetbuddy.ui.budget.AddBudgetFragment"
