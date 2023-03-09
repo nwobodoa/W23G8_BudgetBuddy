@@ -19,8 +19,8 @@ public class SpendingByCategoryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AddExpenseViewModel addExpenseViewModel =
-                new ViewModelProvider(this).get(AddExpenseViewModel.class);
+        SpendingByCatViewModel addExpenseViewModel =
+                new ViewModelProvider(this).get(SpendingByCatViewModel.class);
 
         binding = FragmentSpendingByCatBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

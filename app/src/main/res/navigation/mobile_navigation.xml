@@ -26,15 +26,15 @@
         android:id="@+id/nav_addBudget"
         android:name="com.example.budgetbuddy.ui.budget.AddBudgetFragment"
         android:label="@string/menu_income"
-        tools:layout="@layout/fragment_add_income" />
+        tools:layout="@layout/fragment_add_budget" />
     <fragment
         android:id="@+id/nav_spendingByCat"
-        android:name="com.example.budgetbuddy."
-        android:label="@string/menu_income"
+        android:name="com.example.budgetbuddy.ui.spendingbycat.SpendingByCategoryFragment"
+        android:label="@string/menu_spendingByCat"
         tools:layout="@layout/fragment_spending_by_cat" />
     <fragment
         android:id="@+id/nav_spendingHistory"
-        android:name="com.example.budgetbuddy."
-        android:label="@string/menu_income"
+        android:name="com.example.budgetbuddy.ui.history.SpendingHistoryFragment"
+        android:label="@string/menu_history"
         tools:layout="@layout/fragment_spending_history" />
 </navigation>

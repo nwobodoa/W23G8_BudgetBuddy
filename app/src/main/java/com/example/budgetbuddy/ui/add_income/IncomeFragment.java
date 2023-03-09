@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.budgetbuddy.databinding.FragmentAddIncomeBinding;
 
 
@@ -21,14 +19,14 @@ public class IncomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AddIncomeViewModel slideshowViewModel =
+        AddIncomeViewModel addIncomeViewModel =
                 new ViewModelProvider(this).get(AddIncomeViewModel.class);
 
         binding = FragmentAddIncomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textAddIncome;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        addIncomeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

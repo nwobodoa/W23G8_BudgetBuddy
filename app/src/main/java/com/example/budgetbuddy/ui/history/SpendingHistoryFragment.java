@@ -19,14 +19,14 @@ public class SpendingHistoryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        HistoryViewModel historyViewModel =
+                new ViewModelProvider(this).get(HistoryViewModel.class);
 
-        binding =FragmentSpendingHistoryBinding.inflate(inflater, container, false);
+        binding = FragmentSpendingHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.txtHistory;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        historyViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

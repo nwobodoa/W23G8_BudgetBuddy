@@ -2,7 +2,6 @@ package com.example.budgetbuddy.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,14 +18,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.budgetbuddy.MainActivity;
 import com.example.budgetbuddy.MainActivity2;
 import com.example.budgetbuddy.PasswordReset;
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.SignupActivity;
 import com.example.budgetbuddy.databinding.ActivityLoginBinding;
-
-import java.time.LocalDateTime;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class LoginActivity extends AppCompatActivity {
