@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_addExpense"
+            android:icon="@drawable/ic_menu_money"
+            android:title="@string/txtAddExpense" />
+        <item
+            android:id="@+id/nav_addIncome"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/addIncome" />
+        <item
+            android:id="@+id/nav_addBudget"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_addBudget" />
+        <item
+            android:id="@+id/nav_spendingHistory"
+            android:icon="@drawable/ic_menu_history"
+            android:title="@string/SpendingHistory" />
+        <item
+            android:id="@+id/nav_spendingByCat"
+            android:icon="@drawable/ic_menu_category"
+            android:title="@string/spendingByCat" />
+    </group>
+</menu>

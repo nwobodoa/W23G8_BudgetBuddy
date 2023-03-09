@@ -1,27 +1,23 @@
 package com.example.budgetbuddy;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.budgetbuddy.model.Income;
-import com.example.budgetbuddy.repository.AppDatabase;
 import com.example.budgetbuddy.repository.dao.IncomeDao;
 import com.example.budgetbuddy.servicelocator.ServiceLocator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class AddIncomeActivity extends BaseActivity {
+public class AddIncomeActivity extends ProtectedActivity {
 
     EditText editTextIncome;
     EditText editTextDate;
@@ -31,6 +27,7 @@ public class AddIncomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
+
 
         ActionBar actionBar = getSupportActionBar();
 

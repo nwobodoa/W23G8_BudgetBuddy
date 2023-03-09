@@ -2,7 +2,6 @@ package com.example.budgetbuddy.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,8 +23,6 @@ import com.example.budgetbuddy.PasswordReset;
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.SignupActivity;
 import com.example.budgetbuddy.databinding.ActivityLoginBinding;
-
-import java.time.LocalDateTime;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class LoginActivity extends AppCompatActivity {
@@ -89,8 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                 updateUiWithUser(loginResult.getSuccess());
             }
             setResult(Activity.RESULT_OK);
-            startActivity(new Intent(this, MainActivity.class));
-
+            Intent intent = new Intent(this, MainActivity.class);
+            String name = loginResult.getSuccess().getDisplayName();
+            intent.putExtra("username",name);
+            startActivity(intent);
             //Complete and destroy login activity once successful
             finish();
         });
@@ -132,9 +131,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String name = model.getDisplayName();
+        String welcome = getString(R.string.welcome) + name;
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+
+
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
