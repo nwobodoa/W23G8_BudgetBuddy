@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/brown_100"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+    <TextView
+        android:id="@+id/txtSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/txtVRegister"
+        android:textColor="@color/red_200"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_person"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/red_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSignIn" />
+
+    <EditText
+        android:id="@+id/editTxtEmail"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_email"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/email2"
+        android:inputType="textPersonName|textEmailAddress"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/red_700"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUsername"
+        app:layout_constraintStart_toStartOf="@+id/editTextUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+
+    <EditText
+        android:id="@+id/editTextPwd"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=" "
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_security"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/red_700"
+        app:layout_constraintEnd_toEndOf="@+id/editTxtEmail"
+        app:layout_constraintStart_toStartOf="@+id/editTxtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtEmail" />
+
+    <EditText
+        android:id="@+id/editTxtConfirmPwd"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=" "
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_security"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/red_700"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPwd"
+        app:layout_constraintStart_toStartOf="@+id/editTextPwd"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPwd" />
+
+    <Button
+        android:id="@+id/btn_Reset"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_corner"
+        android:text="@string/btn_register"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTxtConfirmPwd"
+        app:layout_constraintStart_toStartOf="@+id/editTxtConfirmPwd"
+        app:layout_constraintTop_toBottomOf="@+id/editTxtConfirmPwd" />
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Reset"
+        app:layout_constraintStart_toStartOf="@+id/btn_Reset"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Reset">
+
+        <TextView
+            android:id="@+id/txtViewHaveAnAcct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:shadowColor="@color/red_700"
+            android:text="@string/txtViewHaveAnAcct"
+            android:textColor="@color/blue"
+            android:textColorLink="@color/red_700" />
+
+        <TextView
+            android:id="@+id/txtViewSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:shadowColor="@color/red_700"
+            android:text="@string/txtSign_in"
+            android:textColor="@color/red_700"
+            android:textColorLink="@color/red_700" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
