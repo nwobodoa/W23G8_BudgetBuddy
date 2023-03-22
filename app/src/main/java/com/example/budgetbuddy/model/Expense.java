@@ -7,22 +7,22 @@ import androidx.room.PrimaryKey;
 import java.time.LocalDate;
 
 @Entity
-public class Income {
+public class Expense {
     @PrimaryKey(autoGenerate = true)
     public int id;
     public double value;
 
     public String description;
-    @ColumnInfo(name = "pay_date")
-    public LocalDate payDate;
+    @ColumnInfo(name = "expense_date")
+    public LocalDate expenseDate;
 
-    public Income(double value, String description, LocalDate payDate) {
+    public Expense(double value, String description, LocalDate expenseDate) {
         this.value = value;
         this.description = description;
-        this.payDate = payDate;
+        this.expenseDate = expenseDate;
     }
 
-    public double getIncome() {
+    public double getExpense() {
         return this.value;
     }
 
@@ -30,7 +30,7 @@ public class Income {
         return this.description;
     }
 
-    public LocalDate getIncomeDate() {
-        return this.payDate;
+    public LocalDate getExpenseDate() {
+        return this.expenseDate;
     }
 }

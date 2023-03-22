@@ -1,5 +1,4 @@
-package com.example.budgetbuddy.ui.add_income;
-
+package com.example.budgetbuddy.ui.add_expense;
 
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -11,48 +10,49 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Entity;
 
-import com.example.budgetbuddy.databinding.FragmentAddIncomeBinding;
+import com.example.budgetbuddy.databinding.FragmentAddExpenseBinding;
+import com.example.budgetbuddy.model.Expense;
 import com.example.budgetbuddy.model.Income;
+//import com.example.budgetbuddy.repository.dao.ExpenseDao;
+import com.example.budgetbuddy.repository.dao.ExpenseDao;
 import com.example.budgetbuddy.repository.dao.IncomeDao;
 import com.example.budgetbuddy.servicelocator.ServiceLocator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 //by Smart Egbuchulem (SmartGlaxx)
-@Entity
-public class IncomeFragment extends Fragment {
-    EditText editTextIncome;
-    EditText editTextDescription;
-    EditText editTextDate;
-    Button btnAddIncome;
-    private FragmentAddIncomeBinding binding;
+public class ExpenseFragment extends Fragment {
+    EditText editTextExpense;
+    EditText editTextExpenseDescription;
+    EditText editTextExpenseDate;
+    Button btnAddExpense;
+    private FragmentAddExpenseBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AddIncomeViewModel addIncomeViewModel =
-                new ViewModelProvider(this).get(AddIncomeViewModel.class);
+        AddExpenseViewModel addExpenseViewModel =
+                new ViewModelProvider(this).get(AddExpenseViewModel.class);
 
-        binding = FragmentAddIncomeBinding.inflate(inflater, container, false);
+        binding = FragmentAddExpenseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        editTextIncome = binding.editTextIncome;
-        editTextDescription = binding.editTextDescription;
-        editTextDate = binding.editTextDate;
-        btnAddIncome = binding.btnAddIncome;
+        editTextExpense = binding.editTextExpense;
+        editTextExpenseDescription = binding.editTextExpenseDescription;
+        editTextExpenseDate = binding.editTextExpenseDate;
+        btnAddExpense = binding.btnAddExpense;
 
 
-        IncomeDao incomeDao = ServiceLocator.getInstance().getIncomeDao(getContext());
+        ExpenseDao expenseDao = ServiceLocator.getInstance().getExpenseDao(getContext());
 
-        editTextDate.addTextChangedListener(new TextWatcher() {
+        editTextExpenseDate.addTextChangedListener(new TextWatcher() {
             private String current = "";
             private String ddmmyyyy = "DDMMYYYY";
             private Calendar cal = Calendar.getInstance();
@@ -100,8 +100,8 @@ public class IncomeFragment extends Fragment {
                         currentDate.set(Calendar.SECOND, 0);
                         currentDate.set(Calendar.MILLISECOND, 0);
                         if (cal.after(currentDate)) {
-                            editTextDate.setError("Invalid date");
-                            editTextDate.requestFocus();
+                            editTextExpenseDate.setError("Invalid date");
+                            editTextExpenseDate.requestFocus();
                             return;
                         }
                     }
@@ -112,41 +112,41 @@ public class IncomeFragment extends Fragment {
 
                     sel = Math.max(sel, 0);
                     current = clean;
-                    editTextDate.setText(current);
-                    editTextDate.setSelection(Math.min(sel, current.length()));
+                    editTextExpenseDate.setText(current);
+                    editTextExpenseDate.setSelection(Math.min(sel, current.length()));
                 }
             }
         });
 
 
-        btnAddIncome.setOnClickListener(v -> {
+        btnAddExpense.setOnClickListener(v -> {
 
             try {
-                if(editTextIncome.getText().toString().equalsIgnoreCase("0") ||
-                        editTextIncome.getText().toString().equalsIgnoreCase("")){
+                if(editTextExpense.getText().toString().equalsIgnoreCase("0") ||
+                        editTextExpense.getText().toString().equalsIgnoreCase("")){
                     Toast.makeText(getContext(), "Income cannot be 0 or empty", Toast.LENGTH_SHORT).show();
                 }
-                if(editTextDescription.getText().toString().equalsIgnoreCase("")){
+                if(editTextExpenseDescription.getText().toString().equalsIgnoreCase("")){
                     Toast.makeText(getContext(), "Please enter a description", Toast.LENGTH_SHORT).show();
                 }
-                if(editTextDate.getText().toString().equalsIgnoreCase("") ||
-                        editTextDate.getText().toString().toLowerCase().contains("d") ||
-                        editTextDate.getText().toString().toLowerCase().contains("m") ||
-                        editTextDate.getText().toString().toLowerCase().contains("y")){
+                if(editTextExpenseDate.getText().toString().equalsIgnoreCase("") ||
+                        editTextExpenseDate.getText().toString().toLowerCase().contains("d") ||
+                        editTextExpenseDate.getText().toString().toLowerCase().contains("m") ||
+                        editTextExpenseDate.getText().toString().toLowerCase().contains("y")){
                     Toast.makeText(getContext(), "Please enter a valid date", Toast.LENGTH_SHORT).show();
 
                 }else{
-                    double income = Double.parseDouble(editTextIncome.getText().toString());
-                    String description = editTextDescription.getText().toString();
-                    String incomeDate = editTextDate.getText().toString();
+                    double expense = Double.parseDouble(editTextExpense.getText().toString());
+                    String description = editTextExpenseDescription.getText().toString();
+                    String expenseDate = editTextExpenseDate.getText().toString();
                     //TODO Please use futures to handle work that needs to leave the main UI thread
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        new Thread(() -> incomeDao
-                                .insertAll(new Income(income, description, LocalDate.parse(incomeDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
+                        new Thread(() -> expenseDao
+                                .insertAll(new Expense(expense, description, LocalDate.parse(expenseDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
                                 .start();
                     }
 
-                    Toast.makeText(getContext(), "Income added successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Expense added successfully", Toast.LENGTH_LONG).show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();

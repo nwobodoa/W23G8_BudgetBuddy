@@ -13,15 +13,15 @@
 
     <fragment
         android:id="@+id/nav_addExpense"
-        android:name="com.example.budgetbuddy.ui.add_expense.AddExpenseFragment"
+        android:name="com.example.budgetbuddy.ui.add_expense.ExpenseFragment"
         android:label="@string/menu_expense"
         tools:layout="@layout/fragment_add_expense" />
 
-    <activity
+    <fragment
         android:id="@+id/nav_addIncome"
-        android:name="com.example.budgetbuddy.AddIncomeActivity"
+        android:name="com.example.budgetbuddy.ui.add_income.IncomeFragment"
         android:label="@string/menu_income"
-        tools:layout="@layout/activity_add_income" />
+        tools:layout="@layout/fragment_add_income" />
     <fragment
         android:id="@+id/nav_addBudget"
         android:name="com.example.budgetbuddy.ui.budget.AddBudgetFragment"
