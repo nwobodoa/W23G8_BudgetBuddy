@@ -6,16 +6,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.MainActivity;
@@ -24,7 +28,6 @@ import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.SignupActivity;
 import com.example.budgetbuddy.databinding.ActivityLoginBinding;
 
-@RequiresApi(api = Build.VERSION_CODES.O)
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
@@ -52,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = binding.btnSignIn2;
         final TextView linkSignup = binding.txtViewSignupLink;
         final TextView pwdResetLink = binding.txtViewForgotPwd;
+        final ProgressBar loadingProgressBar = binding.loading;
 
         pwdResetLink.setOnClickListener(v ->
             startActivity(new Intent(this, PasswordReset.class)));
@@ -75,23 +79,26 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginViewModel.getLoginResult().observe(this, loginResult -> {
+
             if (loginResult == null) {
                 return;
             }
+            loadingProgressBar.setVisibility(View.GONE);
 
             if (loginResult.getError() != null) {
                 showLoginFailed(loginResult.getError());
             }
+
             if (loginResult.getSuccess() != null) {
                 updateUiWithUser(loginResult.getSuccess());
                 setResult(Activity.RESULT_OK);
                 Intent intent = new Intent(this, MainActivity.class);
                 String name = loginResult.getSuccess().getDisplayName();
-                intent.putExtra("username",name);
-                startActivity(intent);
-                //Complete and destroy login activity once successful
+                intent.putExtra("username", name);
+                startActivity(intent);//Complete and destroy login activity once successful
                 finish();
             }
+
 
         });
 
@@ -128,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
              passwordEditText.getText().toString(),getApplicationContext());
             emailEditText.setText(null);
             passwordEditText.setText(null);
+            loadingProgressBar.setVisibility(View.VISIBLE);
         });
     }
 
@@ -136,9 +144,6 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + name;
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-
-
-
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
