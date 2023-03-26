@@ -70,7 +70,9 @@ public class IncomeAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView == null){
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_budget_income, parent, false);
+            convertView = LayoutInflater.from(
+                    parent.getContext())
+                    .inflate(R.layout.layout_budget_income, parent, false);
         }
         textViewIncome = convertView.findViewById(R.id.textViewIncome);
         textViewIncomeDescription = convertView.findViewById(R.id.textViewIncomeDescription);

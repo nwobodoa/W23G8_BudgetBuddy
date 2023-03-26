@@ -54,8 +54,8 @@ public class IncomeFragment extends Fragment {
 
         editTextDate.addTextChangedListener(new TextWatcher() {
             private String current = "";
-            private String ddmmyyyy = "DDMMYYYY";
-            private Calendar cal = Calendar.getInstance();
+            private final String ddmmyyyy = "DDMMYYYY";
+            private final Calendar cal = Calendar.getInstance();
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

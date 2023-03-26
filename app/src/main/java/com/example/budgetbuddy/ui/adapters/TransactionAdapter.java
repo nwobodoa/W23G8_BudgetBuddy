@@ -82,9 +82,9 @@ public class TransactionAdapter extends BaseAdapter {
         textViewTransactionDate.setText(""+TransactionList.get(position).getTransactionDate());
 
 
-        int textColor = R.color.blue;
+        int textColor = R.color.green;
         if (TransactionList.get(position).getAmount() < 0 ) {
-            textColor = R.color.red_700;
+            textColor = R.color.red;
         }
 
         textViewTransaction.setTextColor(ContextCompat.getColor(parent.getContext(), textColor));

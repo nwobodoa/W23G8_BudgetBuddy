@@ -57,4 +57,5 @@
     <string name="morning">Good Morning %1$s!</string>
     <string name="noon">Good Afternoon %1$s!</string>
     <string name="evening">Good Evening %1$s!</string>
+    <string name="txtView">Text View</string>
 </resources>

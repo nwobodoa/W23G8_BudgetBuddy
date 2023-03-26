@@ -12,9 +12,9 @@
         android:layout_weight="0.33"
         android:height="70dp"
         android:padding="5dp"
-        android:text="TextView"
+        android:text="@string/txtView"
         android:textAlignment="textEnd"
-        android:textColor="#222332" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textViewTransactionDescription"
@@ -23,9 +23,9 @@
         android:layout_weight="0.33"
         android:height="70dp"
         android:padding="5dp"
-        android:text="TextView"
+        android:text="@string/txtView"
         android:textAlignment="textEnd"
-        android:textColor="#222332" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textViewTransactionDate"
@@ -34,7 +34,7 @@
         android:layout_weight="0.33"
         android:height="70dp"
         android:padding="5dp"
-        android:text="TextView"
+        android:text="@string/txtView"
         android:textAlignment="textEnd"
-        android:textColor="#222332" />
+        android:textColor="@color/white" />
 </LinearLayout>

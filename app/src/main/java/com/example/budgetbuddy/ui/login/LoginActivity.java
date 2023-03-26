@@ -84,14 +84,15 @@ public class LoginActivity extends AppCompatActivity {
             }
             if (loginResult.getSuccess() != null) {
                 updateUiWithUser(loginResult.getSuccess());
+                setResult(Activity.RESULT_OK);
+                Intent intent = new Intent(this, MainActivity.class);
+                String name = loginResult.getSuccess().getDisplayName();
+                intent.putExtra("username",name);
+                startActivity(intent);
+                //Complete and destroy login activity once successful
+                finish();
             }
-            setResult(Activity.RESULT_OK);
-            Intent intent = new Intent(this, MainActivity.class);
-            String name = loginResult.getSuccess().getDisplayName();
-            intent.putExtra("username",name);
-            startActivity(intent);
-            //Complete and destroy login activity once successful
-            finish();
+
         });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
