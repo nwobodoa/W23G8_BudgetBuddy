@@ -8,6 +8,8 @@
     <color name="light_brown">#FFF5ED</color>
     <color name="blue">#0C00FE</color>
     <color name="white">#ffffff</color>
+    <color name="green">#26A82B</color>
+    <color name="red">#E91E63</color>
 
 
 </resources>
