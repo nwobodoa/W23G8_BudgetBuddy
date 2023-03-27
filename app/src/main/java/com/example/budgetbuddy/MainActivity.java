@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_addExpense, R.id.nav_addIncome, R.id.nav_addBudget, R.id.nav_spendingByCat, R.id.nav_spendingHistory,R.id.action_logout)
+                R.id.nav_home, R.id.nav_addExpense, R.id.nav_addIncome, R.id.nav_addBudget, R.id.nav_spendingByCat, R.id.nav_spendingHistory,R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main2);
@@ -84,21 +84,5 @@ public class MainActivity extends AppCompatActivity {
                 txtViewGreeting.setText("Good Evening " + name + "!");
             }
     }
-//    NavigationView navigationView;
 //
-//    {
-//        navigationView = findViewById(R.id.nav_view);
-//        Menu menu = navigationView.getMenu();
-//        MenuItem logoutItem = menu.findItem(R.id.action_logout);
-//
-//        logoutItem.setOnMenuItemClickListener(item -> {
-//            SharedPreferences preferences = getSharedPreferences("my_app",MODE_PRIVATE);
-//            preferences.edit().clear().apply();
-//
-//            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//            finish();
-//            return true;
-//        });
-//    }
-
 }
