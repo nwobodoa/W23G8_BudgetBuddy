@@ -12,13 +12,13 @@ public class Expense {
     public int id;
     public double value;
 
-    public String description;
+    public String category;
     @ColumnInfo(name = "expense_date")
     public LocalDate expenseDate;
 
-    public Expense(double value, String description, LocalDate expenseDate) {
+    public Expense(double value, String category, LocalDate expenseDate) {
         this.value = value;
-        this.description = description;
+        this.category = category;
         this.expenseDate = expenseDate;
     }
 
@@ -26,8 +26,8 @@ public class Expense {
         return this.value;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getCategory() {
+        return this.category;
     }
 
     public LocalDate getExpenseDate() {

@@ -57,4 +57,15 @@
     <string name="morning">Good Morning %1$s!</string>
     <string name="noon">Good Afternoon %1$s!</string>
     <string name="evening">Good Evening %1$s!</string>
+    <string-array name="categories">
+        <item>Housing</item>
+        <item>Transportation</item>
+        <item>Food</item>
+        <item>Utilities</item>
+        <item>Insurance</item>
+        <item>Medical</item>
+        <item>Personal</item>
+        <item>Entertainment</item>
+        <item>Miscellaneous</item>
+    </string-array>
 </resources>

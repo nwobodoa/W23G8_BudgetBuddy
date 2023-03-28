@@ -14,7 +14,7 @@
         android:textColor="#222332" />
 
     <TextView
-        android:id="@+id/textViewExpenseDescription"
+        android:id="@+id/textViewExpenseCategory"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_weight="0.33"

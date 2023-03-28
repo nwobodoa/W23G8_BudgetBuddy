@@ -6,8 +6,10 @@ import static com.example.budgetbuddy.constants.Constants.COLUMN_DATE_INCOME;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.constants.Constants;
 import com.example.budgetbuddy.databinding.FragmentHomeBinding;
+import com.example.budgetbuddy.model.Budget;
 import com.example.budgetbuddy.model.Expense;
 import com.example.budgetbuddy.model.Income;
 import com.example.budgetbuddy.model.Transaction;
@@ -40,7 +43,23 @@ import java.util.stream.Collectors;
 public class HomeFragment extends Fragment {
     List<Income> IncomeList = new ArrayList<Income>();
     ListView listViewBudgetTransaction;
-//    ListView listViewBudgetReportExpense;
+    TextView textViewBudget;
+    TextView textViewBudgetBalanceValue;
+    TextView textViewIncome;
+    TextView textViewIncomeBalanceValue;
+    TextView textViewExpense;
+
+
+    List<Budget> budgets = new ArrayList<>();
+    List<Income> incomes = new ArrayList<>();
+    List<Expense> expenses = new ArrayList<>();
+
+    double totalBudgetValue = 0.0;
+    double budgetBalance = 0.0;
+    double totalIncomeValue = 0.0;
+    double incomeBalance = 0.0;
+    double totalExpenseValue = 0.0;
+
 
     private FragmentHomeBinding binding;
 
@@ -53,12 +72,19 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         listViewBudgetTransaction = binding.listViewBudgetTransaction;
+        textViewBudget = binding.textViewBudget;
+        textViewBudgetBalanceValue = binding.textViewBudgetBalanceValue;
+        textViewIncome = binding.textViewIncome;
+        textViewIncomeBalanceValue = binding.textViewIncomeBalanceValue;
+        textViewExpense = binding.textViewExpense;
 //        listViewBudgetReportExpense = binding.listViewBudgetReportExpense;
 
         ServiceLocator db = ServiceLocator.getInstance(getContext());
 
         List<Income> incomeData = db.getIncomeDao(getContext()).getAll();
         List<Expense> expenseData = db.getExpenseDao(getContext()).getAll();
+        List<Budget> budgetData = db.getBudgetDao(getContext()).getAll();
+
 
         List<Transaction> transactionData = new ArrayList<>();
 
@@ -66,7 +92,7 @@ public class HomeFragment extends Fragment {
             transactionData.add(new Transaction(income.getIncome(), income.getDescription(), income.getIncomeDate()));
         }
         for (Expense expense : expenseData) {
-            transactionData.add(new Transaction(-expense.getExpense(), expense.getDescription(), expense.getExpenseDate()));
+            transactionData.add(new Transaction(-expense.getExpense(), expense.getCategory(), expense.getExpenseDate()));
         }
 
 
@@ -92,7 +118,42 @@ public class HomeFragment extends Fragment {
 //        listViewBudgetReportIncome.setAdapter(incomeBudgetAdapter);
         listViewBudgetTransaction.setAdapter(transactionAdapter);
 
+        totalBudgetValue = budgetData.stream()
+                .mapToDouble(Budget::getBudget)
+                .sum();
 
+        totalIncomeValue = incomeData.stream()
+                .mapToDouble(Income::getIncome)
+                .sum();
+
+        totalExpenseValue = expenseData.stream()
+                .mapToDouble(Expense::getExpense)
+                .sum();
+
+        budgetBalance = totalBudgetValue - totalExpenseValue;
+        incomeBalance = totalIncomeValue - totalExpenseValue;
+
+        textViewBudget.setText("$"+totalBudgetValue);
+        textViewIncome.setText("$"+totalIncomeValue);
+        textViewExpense.setText("-$"+totalExpenseValue);
+        if(budgetBalance < 0){
+            String hexColor = "#86042F";
+            int color = Color.parseColor(hexColor);
+            textViewBudgetBalanceValue.setTextColor(color);
+        }else {
+            String hexColor = "#FF669900";
+            int color = Color.parseColor(hexColor);
+            textViewBudgetBalanceValue.setTextColor(color);
+        }
+        if(incomeBalance < 0){
+            String hexColor = "#86042F";
+            int color = Color.parseColor(hexColor);
+            textViewIncomeBalanceValue.setTextColor(color);
+        }else {
+            textViewIncomeBalanceValue.setTextColor(Color.BLUE);
+        }
+        textViewBudgetBalanceValue.setText(""+budgetBalance);
+        textViewIncomeBalanceValue.setText(""+incomeBalance);
 
 
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +29,9 @@ import com.example.budgetbuddy.servicelocator.ServiceLocator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-//by Smart Egbuchulem (SmartGlaxx)
 public class ExpenseFragment extends Fragment {
     EditText editTextExpense;
-    EditText editTextExpenseDescription;
+    Spinner spinnerExpenseCategory;
     EditText editTextExpenseDate;
     Button btnAddExpense;
     private FragmentAddExpenseBinding binding;
@@ -45,7 +45,7 @@ public class ExpenseFragment extends Fragment {
         View root = binding.getRoot();
 
         editTextExpense = binding.editTextExpense;
-        editTextExpenseDescription = binding.editTextExpenseDescription;
+        spinnerExpenseCategory = binding.spinnerExpenseCategory;
         editTextExpenseDate = binding.editTextExpenseDate;
         btnAddExpense = binding.btnAddExpense;
 
@@ -126,7 +126,7 @@ public class ExpenseFragment extends Fragment {
                         editTextExpense.getText().toString().equalsIgnoreCase("")){
                     Toast.makeText(getContext(), "Income cannot be 0 or empty", Toast.LENGTH_SHORT).show();
                 }
-                if(editTextExpenseDescription.getText().toString().equalsIgnoreCase("")){
+                if(spinnerExpenseCategory.getSelectedItem().toString().equalsIgnoreCase("")){
                     Toast.makeText(getContext(), "Please enter a description", Toast.LENGTH_SHORT).show();
                 }
                 if(editTextExpenseDate.getText().toString().equalsIgnoreCase("") ||
@@ -137,16 +137,18 @@ public class ExpenseFragment extends Fragment {
 
                 }else{
                     double expense = Double.parseDouble(editTextExpense.getText().toString());
-                    String description = editTextExpenseDescription.getText().toString();
+                    String category = spinnerExpenseCategory.getSelectedItem().toString();
                     String expenseDate = editTextExpenseDate.getText().toString();
                     //TODO Please use futures to handle work that needs to leave the main UI thread
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         new Thread(() -> expenseDao
-                                .insertAll(new Expense(expense, description, LocalDate.parse(expenseDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
+                                .insertAll(new Expense(expense, category, LocalDate.parse(expenseDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
                                 .start();
                     }
 
                     Toast.makeText(getContext(), "Expense added successfully", Toast.LENGTH_LONG).show();
+                    editTextExpense.setText("");
+                    editTextExpenseDate.setText("");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

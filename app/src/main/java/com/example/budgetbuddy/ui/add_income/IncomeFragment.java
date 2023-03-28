@@ -27,7 +27,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-//by Smart Egbuchulem (SmartGlaxx)
 @Entity
 public class IncomeFragment extends Fragment {
     EditText editTextIncome;
@@ -147,6 +146,9 @@ public class IncomeFragment extends Fragment {
                     }
 
                     Toast.makeText(getContext(), "Income added successfully", Toast.LENGTH_LONG).show();
+                    editTextIncome.setText("");
+                    editTextDescription.setText("");
+                    editTextDate.setText("");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

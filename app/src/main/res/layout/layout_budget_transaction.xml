@@ -13,7 +13,7 @@
         android:height="70dp"
         android:padding="5dp"
         android:text="TextView"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="#222332" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:height="70dp"
         android:padding="5dp"
         android:text="TextView"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="#222332" />
 
     <TextView
@@ -35,6 +35,6 @@
         android:height="70dp"
         android:padding="5dp"
         android:text="TextView"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="#222332" />
 </LinearLayout>

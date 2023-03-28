@@ -16,7 +16,7 @@ public class ExpenseAdapter extends BaseAdapter {
     List<Expense> ExpenseList;
     int SelectedIndex;
     TextView textViewExpense;
-    TextView textViewExpenseDescription;
+    TextView textViewExpenseCategory;
     TextView textViewExpenseDate;
 
     public ExpenseAdapter(List<Expense> expenseList) {
@@ -61,11 +61,11 @@ public class ExpenseAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_budget_expense, parent, false);
         }
         textViewExpense = convertView.findViewById(R.id.textViewExpense);
-        textViewExpenseDescription = convertView.findViewById(R.id.textViewExpenseDescription);
+        textViewExpenseCategory = convertView.findViewById(R.id.textViewExpenseCategory);
         textViewExpenseDate = convertView.findViewById(R.id.textViewExpenseDate);
 
         textViewExpense.setText(""+ExpenseList.get(position).getExpense());
-        textViewExpenseDescription.setText(""+ExpenseList.get(position).getDescription());
+        textViewExpenseCategory.setText(""+ExpenseList.get(position).getCategory());
         textViewExpenseDate.setText(""+ExpenseList.get(position).getExpenseDate());
 
         return convertView;

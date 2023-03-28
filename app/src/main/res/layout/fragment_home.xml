@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Budget Transactions"
+        android:text="Budget Report"
         android:textColor="@color/red_200"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -21,7 +21,193 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/budgetReportIncomeHeader"
+        android:id="@+id/budgetReportHeader"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBudgetReportTitle">
+
+        <TextView
+            android:id="@+id/textViewBudgetHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Budget"
+            android:textAlignment="center"
+            android:textColor="#222332"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewIncomeHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Income"
+            android:textAlignment="center"
+            android:textColor="#222332"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewIncomeHeader"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewExpenseHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Expense"
+            android:textAlignment="center"
+            android:textColor="#222332"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/listViewBudgetReport"
+            app:layout_constraintStart_toEndOf="@+id/textViewIncomeDescriptionHeader"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/budgetValuesReportHeader"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/budgetReportHeader">
+
+        <TextView
+            android:id="@+id/textViewBudget"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewIncome"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewIncomeHeader"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textViewExpense"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/red_700"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/listViewBudgetReport"
+            app:layout_constraintStart_toEndOf="@+id/textViewIncomeDescriptionHeader"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textViewBudgetBalance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        android:text="Budget Balance:"
+        android:textAlignment="center"
+        android:textColor="#222332"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/budgetValuesReportHeader" />
+
+
+    <TextView
+        android:id="@+id/textViewBudgetBalanceValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#222332"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textViewBudgetBalance"
+        app:layout_constraintTop_toBottomOf="@+id/budgetValuesReportHeader" />
+
+
+    <TextView
+        android:id="@+id/textViewIncomeBalance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="76dp"
+        android:layout_weight="1"
+        android:text="Income Balance:"
+        android:textAlignment="center"
+        android:textColor="#222332"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/budgetValuesReportHeader" />
+
+
+    <TextView
+        android:id="@+id/textViewIncomeBalanceValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="76dp"
+        android:layout_weight="1"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="#222332"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textViewBudgetBalance"
+        app:layout_constraintTop_toBottomOf="@+id/budgetValuesReportHeader" />
+
+    <LinearLayout
+        android:id="@+id/budgetTransactionReportHeader"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -33,10 +219,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBudgetReportTitle"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.363">
 
         <TextView
-            android:id="@+id/textViewIncomeHeader"
+            android:id="@+id/textViewAmountHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -51,7 +237,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textViewIncomeDescriptionHeader"
+            android:id="@+id/textViewDescriptionHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -66,7 +252,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textViewIncomeDateHeader"
+            android:id="@+id/textViewDateHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -84,80 +270,13 @@
     <ListView
         android:id="@+id/listViewBudgetTransaction"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="350dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/budgetReportIncomeHeader" />
-
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/budgetReportHeaderExpense"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/listViewBudgetReportIncome"-->
-    <!--        app:layout_constraintVertical_bias="0.0">-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/textViewExpenseHeader"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="8dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="Expense"-->
-    <!--            android:textColor="#222332"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/textView"-->
-    <!--            app:layout_constraintVertical_bias="0.0" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/textViewExpenseDescriptionHeader"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="8dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="Description"-->
-    <!--            android:textColor="#222332"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintStart_toEndOf="@+id/textViewIncomeHeader"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/textView"-->
-    <!--            app:layout_constraintVertical_bias="0.0" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/textViewExpenseDateHeader"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="8dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:text="Date"-->
-    <!--            android:textColor="#222332"-->
-    <!--            app:layout_constraintBottom_toBottomOf="@+id/listViewBudgetReport"-->
-    <!--            app:layout_constraintStart_toEndOf="@+id/textViewIncomeDescriptionHeader"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/textView"-->
-    <!--            app:layout_constraintVertical_bias="0.0" />-->
-    <!--    </LinearLayout>-->
-
-    <!--    <ListView-->
-    <!--        android:id="@+id/listViewBudgetReportExpense"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="200dp"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/budgetReportHeaderExpense" />-->
+        app:layout_constraintTop_toBottomOf="@+id/budgetTransactionReportHeader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
