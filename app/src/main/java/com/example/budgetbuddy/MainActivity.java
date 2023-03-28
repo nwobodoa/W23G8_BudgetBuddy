@@ -1,9 +1,12 @@
 package com.example.budgetbuddy;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -15,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.budgetbuddy.databinding.ActivityMainBinding;
+import com.example.budgetbuddy.ui.add_income.IncomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalTime;
@@ -26,8 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private ImageView imgViewExpenseIcon;
+
 
     TextView txtViewGreeting;
+    ImageView imgViewHome;
+    ImageView imgViewIncome;
+    ImageView imgViewExpense;
+    ImageView imgViewBudget;
 
 
     @Override
@@ -36,10 +46,51 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.appBarMain.toolbar);
-//        txtViewGreeting = binding.drawerLayout.findViewById(R.id.txtViewGreeting);
-        DrawerLayout drawer = binding.drawerLayout;
+
+
+        imgViewHome = binding.drawerLayout.findViewById(R.id.imgViewHomeIcon);
+        imgViewIncome = binding.drawerLayout.findViewById(R.id.imgViewAddIncome);
+        imgViewExpense = binding.drawerLayout.findViewById(R.id.imgViewExpenseIcon);
+        imgViewBudget = binding.drawerLayout.findViewById(R.id.imgViewBudgettIcon);
+
+        imgViewIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+                navControllerIncome.navigateUp();
+                navControllerIncome.navigate(R.id.nav_addIncome);
+            }
+        });
+
+        imgViewExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+                navControllerIncome.navigateUp();
+                navControllerIncome.navigate(R.id.nav_addExpense);
+            }
+        });
+
+        imgViewBudget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+                navControllerIncome.navigateUp();
+                navControllerIncome.navigate(R.id.nav_addBudget);
+            }
+        });
+
+        imgViewHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+                navControllerIncome.navigateUp();
+                navControllerIncome.navigate(R.id.nav_home);
+            }
+        });
+
+       DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         txtViewGreeting =  navigationView.getHeaderView(0).findViewById(R.id.txtViewGreeting);
         // Passing each menu ID as a set of Ids because each
@@ -54,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         displayGreeting(getIntent().getExtras().getString("username"));
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,11 +126,13 @@ public class MainActivity extends AppCompatActivity {
     public void displayGreeting(String name) {
             int timeOfDay =  LocalTime.now().getHour();
             if (timeOfDay >= 0 && timeOfDay < 12) {
-                txtViewGreeting.setText("Good Morning" + name);
+                txtViewGreeting.setText("Good Morning " + name);
             } else if (timeOfDay >= 12 && timeOfDay < 16) {
                 txtViewGreeting.setText("Good Afternoon " + name);
             } else {
                 txtViewGreeting.setText("Good Evening " + name);
             }
     }
+
+
 }
