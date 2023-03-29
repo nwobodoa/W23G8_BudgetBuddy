@@ -9,7 +9,7 @@ public class HistoryViewModel extends ViewModel {
 
     public HistoryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is Add Budget fragment");
+        mText.setValue("This is Add Spending History fragment");
     }
 
     public LiveData<String> getText() {

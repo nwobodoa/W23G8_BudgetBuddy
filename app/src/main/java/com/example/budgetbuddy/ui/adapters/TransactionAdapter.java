@@ -1,8 +1,6 @@
 package com.example.budgetbuddy.ui.adapters;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,12 +77,12 @@ public class TransactionAdapter extends BaseAdapter {
         }
         textViewTransaction.setText(prefix + amount);
         textViewTransactionDescription.setText(""+TransactionList.get(position).getDescription());
-        textViewTransactionDate.setText(""+TransactionList.get(position).getTransactionDate());
+        textViewTransactionDate.setText(""+TransactionList.get(position).getCreatedAt());
 
 
-        int textColor = R.color.blue;
+        int textColor = R.color.green;
         if (TransactionList.get(position).getAmount() < 0 ) {
-            textColor = R.color.red_700;
+            textColor = R.color.red;
         }
 
         textViewTransaction.setTextColor(ContextCompat.getColor(parent.getContext(), textColor));

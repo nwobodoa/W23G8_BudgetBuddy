@@ -2,7 +2,6 @@ package com.example.budgetbuddy.ui.add_income;
 
 
 import android.icu.util.Calendar;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,8 +18,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Entity;
 
 import com.example.budgetbuddy.databinding.FragmentAddIncomeBinding;
-import com.example.budgetbuddy.model.Income;
-import com.example.budgetbuddy.repository.dao.IncomeDao;
+import com.example.budgetbuddy.model.Category;
+import com.example.budgetbuddy.model.Transaction;
+import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.servicelocator.ServiceLocator;
 
 import java.time.LocalDate;
@@ -50,12 +50,12 @@ public class IncomeFragment extends Fragment {
         btnAddIncome = binding.btnAddIncome;
 
 
-        IncomeDao incomeDao = ServiceLocator.getInstance().getIncomeDao(getContext());
+        TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
 
         editTextDate.addTextChangedListener(new TextWatcher() {
             private String current = "";
-            private String ddmmyyyy = "DDMMYYYY";
-            private Calendar cal = Calendar.getInstance();
+            private final String ddmmyyyy = "DDMMYYYY";
+            private final Calendar cal = Calendar.getInstance();
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -140,11 +140,9 @@ public class IncomeFragment extends Fragment {
                     String description = editTextDescription.getText().toString();
                     String incomeDate = editTextDate.getText().toString();
                     //TODO Please use futures to handle work that needs to leave the main UI thread
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        new Thread(() -> incomeDao
-                                .insertAll(new Income(income, description, LocalDate.parse(incomeDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
-                                .start();
-                    }
+                    new Thread(() -> transactionDao
+                            .insertAll(new Transaction(income,description, Category.INCOME,LocalDate.parse(incomeDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
+                            .start();
 
                     Toast.makeText(getContext(), "Income added successfully", Toast.LENGTH_LONG).show();
                 }

@@ -54,12 +54,13 @@
     <string name="menu_addBudget">Add Budget</string>
     <string name="menu_history">Spending History</string>
     <string name="menu_spendingByCat">Spending by Category</string>
-    <string name="morning">Good Morning  %1$s!</string>
-    <string name="noon">Good Afternoon  %1$s!</string>
-    <string name="evening">Good Evening  %1$s!</string>
-
     <string name="txtExpenseIcon">EXPENSE</string>
     <string name="txtIconAddIncome">INCOME</string>
     <string name="txtAddBudget">BUDGET</string>
     <string name="txtHomeIcon">HOME</string>
+    <string name="morning">Good Morning %1$s!</string>
+    <string name="noon">Good Afternoon %1$s!</string>
+    <string name="evening">Good Evening %1$s!</string>
+    <string name="txtView">Text View</string>
+
 </resources>

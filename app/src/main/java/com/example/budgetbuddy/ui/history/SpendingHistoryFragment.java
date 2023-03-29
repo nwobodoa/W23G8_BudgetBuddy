@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.budgetbuddy.databinding.FragmentAddBudgetBinding;
 import com.example.budgetbuddy.databinding.FragmentHomeBinding;
 import com.example.budgetbuddy.databinding.FragmentSpendingHistoryBinding;
 import com.example.budgetbuddy.ui.home.HomeViewModel;
@@ -19,14 +20,14 @@ public class SpendingHistoryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HistoryViewModel historyViewModel =
+        HistoryViewModel ViewModel =
                 new ViewModelProvider(this).get(HistoryViewModel.class);
 
         binding = FragmentSpendingHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.txtHistory;
-        historyViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
