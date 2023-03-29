@@ -54,11 +54,11 @@ public class HomeFragment extends Fragment {
     List<Income> incomes = new ArrayList<>();
     List<Expense> expenses = new ArrayList<>();
 
-    double totalBudgetValue = 0.00;
-    double budgetBalance = 0.00;
-    double totalIncomeValue = 0.00;
-    double incomeBalance = 0.00;
-    double totalExpenseValue = 0.00;
+    double totalBudgetValue = 0.0;
+    double budgetBalance = 0.0;
+    double totalIncomeValue = 0.0;
+    double incomeBalance = 0.0;
+    double totalExpenseValue = 0.0;
 
 
     private FragmentHomeBinding binding;
