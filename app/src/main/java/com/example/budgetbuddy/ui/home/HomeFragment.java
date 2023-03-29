@@ -54,11 +54,11 @@ public class HomeFragment extends Fragment {
     List<Income> incomes = new ArrayList<>();
     List<Expense> expenses = new ArrayList<>();
 
-    double totalBudgetValue = 0.0;
-    double budgetBalance = 0.0;
-    double totalIncomeValue = 0.0;
-    double incomeBalance = 0.0;
-    double totalExpenseValue = 0.0;
+    double totalBudgetValue = 0.00;
+    double budgetBalance = 0.00;
+    double totalIncomeValue = 0.00;
+    double incomeBalance = 0.00;
+    double totalExpenseValue = 0.00;
 
 
     private FragmentHomeBinding binding;
@@ -133,9 +133,13 @@ public class HomeFragment extends Fragment {
         budgetBalance = totalBudgetValue - totalExpenseValue;
         incomeBalance = totalIncomeValue - totalExpenseValue;
 
-        textViewBudget.setText("$"+totalBudgetValue);
-        textViewIncome.setText("$"+totalIncomeValue);
-        textViewExpense.setText("-$"+totalExpenseValue);
+        String totalBudgetValueFormated = String.format("%.2f", totalBudgetValue);
+        String totalIncomeValueFormated = String.format("%.2f", totalIncomeValue);
+        String totalExpenseValueFormated = String.format("%.2f", totalExpenseValue);
+
+        textViewBudget.setText("$"+totalBudgetValueFormated);
+        textViewIncome.setText("$"+totalIncomeValueFormated);
+        textViewExpense.setText("-$"+totalExpenseValueFormated);
         if(budgetBalance < 0){
             String hexColor = "#86042F";
             int color = Color.parseColor(hexColor);
