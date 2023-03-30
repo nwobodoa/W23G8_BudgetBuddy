@@ -29,7 +29,7 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         listViewBudgetTransaction = binding.listViewBudgetTransaction;
-        TransactionDao transactionDao = ServiceLocator.getInstance(getContext()).getTransactionDao(getContext());
+        TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
         List<Transaction> sortedTransactions = transactionDao.getAll();
 
         TransactionAdapter transactionAdapter = new TransactionAdapter(sortedTransactions);

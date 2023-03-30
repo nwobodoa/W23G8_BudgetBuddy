@@ -22,14 +22,6 @@ public class ServiceLocator {
         }
         return instance;
     }
-    public static ServiceLocator getInstance(Context context) {
-        if (instance == null) {
-            synchronized (ServiceLocator.class) {
-                instance = new ServiceLocator();
-            }
-        }
-        return instance;
-    }
 
     public AppDatabase getDb(Context ctx) {
         return Room.databaseBuilder(ctx, AppDatabase.class, "budget_buddy")
