@@ -1,34 +1,136 @@
 package com.example.budgetbuddy.ui.spendingbycat;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.databinding.FragmentAddExpenseBinding;
+import com.example.budgetbuddy.databinding.FragmentHomeBinding;
 import com.example.budgetbuddy.databinding.FragmentSpendingByCatBinding;
+import com.example.budgetbuddy.ui.adapters.TransactionAdapter;
 import com.example.budgetbuddy.ui.add_expense.AddExpenseViewModel;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class SpendingByCategoryFragment extends Fragment {
     private FragmentSpendingByCatBinding binding;
-
+    PieChart pieChart;
+    ListView listViewExpense;
+    TextView txtHomeTitle;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SpendingByCatViewModel addExpenseViewModel =
-                new ViewModelProvider(this).get(SpendingByCatViewModel.class);
 
         binding = FragmentSpendingByCatBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.txtCat;
-        addExpenseViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        txtHomeTitle = binding.txtHomeTitle;
+        pieChart = binding.pieChartView;
+        listViewExpense = binding.listViewExpense;
+
+        initPieChart();
+        showPieChart();
+
+        pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                if(e == null)
+                    return;
+               // listViewExpense.setAdapter();
+                    //TODO set adapter to display details of the clicked category
+
+            }
+
+            @Override
+            public void onNothingSelected() {
+                //TODO show text
+                //listViewExpense.setText("No category selected");
+
+            }
+        });
+
         return root;
     }
+    //TODO show the title from data gotten from db.
+
+
+    private void showPieChart(){
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+        String label = "type";
+
+        Map<String, Integer> expenseCategory = new HashMap<>();
+        expenseCategory.put("Housing",200);
+        expenseCategory.put("Transportation",230);
+        expenseCategory.put("Food",0);
+        expenseCategory.put("Utilities",200);
+        expenseCategory.put("Insurance",200);
+        expenseCategory.put("Medical",200);
+        expenseCategory.put("Personal",200);
+        expenseCategory.put("Entertainment",200);
+        expenseCategory.put("Miscellaneous",200);
+
+        ArrayList<Integer> colors =  new ArrayList<>();
+        colors.add(Color.parseColor("#304567"));
+        colors.add(Color.parseColor("#309967"));
+        colors.add(Color.parseColor("#476567"));
+        colors.add(Color.parseColor("#890567"));
+        colors.add(Color.parseColor("#a35567"));
+        colors.add(Color.parseColor("#ff5f67"));
+        colors.add(Color.parseColor("#3ca567"));
+        colors.add(Color.parseColor("#FFA600"));
+        colors.add(Color.parseColor("#DE425B"));
+
+        for(String type: expenseCategory.keySet()){
+            pieEntries.add(new PieEntry(Objects.requireNonNull(expenseCategory.get(type)).floatValue(),type));
+        }
+
+        PieDataSet pieDataSet = new PieDataSet(pieEntries,label);
+        pieDataSet.setValueTextSize(12f);
+        pieDataSet.setColors(colors);
+        PieData pieData = new PieData(pieDataSet);
+        pieData.setDrawValues(true);
+        pieChart.setData(pieData);
+        pieChart.invalidate();
+        pieData.setValueFormatter(new PercentFormatter());
+    }
+
+    private void initPieChart(){
+       //pieChart.setOnChartValueSelectedListener(this);
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setRotationEnabled(true);
+        pieChart.setDragDecelerationFrictionCoef(0.9f);
+        pieChart.setRotationAngle(0);
+        pieChart.setHighlightPerTapEnabled(true);
+        pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        pieChart.setHoleRadius(40f);
+        pieChart.setTransparentCircleRadius(50f);
+        pieChart.setHoleColor( Color.parseColor("#F5E3DC"));
+        pieChart.getLegend().setEnabled(false);
+    }
+
 
     @Override
     public void onDestroyView() {

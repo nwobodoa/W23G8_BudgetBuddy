@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    ProgressBar loadingProgressBar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = binding.btnSignIn2;
         final TextView linkSignup = binding.txtViewSignupLink;
         final TextView pwdResetLink = binding.txtViewForgotPwd;
-        final ProgressBar loadingProgressBar = binding.loading;
+        loadingProgressBar = binding.loading;
 
         pwdResetLink.setOnClickListener(v ->
             startActivity(new Intent(this, PasswordReset.class)));
@@ -148,5 +150,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+
     }
 }

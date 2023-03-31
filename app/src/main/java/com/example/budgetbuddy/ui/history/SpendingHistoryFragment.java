@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class SpendingHistoryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSpendingHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        Button btnExport = binding.btnExport;
         ListView listViewTransactionHistory = binding.listViewTransactionHistory;
         TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
         List<Transaction> sortedTransactions = transactionDao.getAll();

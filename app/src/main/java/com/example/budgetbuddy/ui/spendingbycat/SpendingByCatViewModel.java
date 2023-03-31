@@ -9,7 +9,7 @@ public class SpendingByCatViewModel extends ViewModel {
 
     public SpendingByCatViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is Spending By Category fragment");
+        mText.setValue("");
     }
 
     public LiveData<String> getText() {
