@@ -9,16 +9,28 @@ import java.time.LocalDate;
 @Entity
 public class Income {
     @PrimaryKey(autoGenerate = true)
-    private int id;
-    private double value;
+    public int id;
+    public double value;
 
-    private String description;
-
-    private LocalDate createdAt;
+    public String description;
+    @ColumnInfo(name = "pay_date")
+    public LocalDate payDate;
 
     public Income(double value, String description, LocalDate payDate) {
         this.value = value;
         this.description = description;
-        this.createdAt = payDate;
+        this.payDate = payDate;
+    }
+
+    public double getIncome() {
+        return this.value;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public LocalDate getIncomeDate() {
+        return this.payDate;
     }
 }

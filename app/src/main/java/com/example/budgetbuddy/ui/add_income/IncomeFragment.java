@@ -19,7 +19,10 @@ import androidx.room.Entity;
 
 import com.example.budgetbuddy.databinding.FragmentAddIncomeBinding;
 import com.example.budgetbuddy.model.Category;
+import com.example.budgetbuddy.model.Income;
 import com.example.budgetbuddy.model.Transaction;
+import com.example.budgetbuddy.repository.dao.ExpenseDao;
+import com.example.budgetbuddy.repository.dao.IncomeDao;
 import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.servicelocator.ServiceLocator;
 
@@ -50,8 +53,7 @@ public class IncomeFragment extends Fragment {
         btnAddIncome = binding.btnAddIncome;
 
 
-        TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
-
+        IncomeDao incomeDao = ServiceLocator.getInstance().getIncomeDao(getContext());
         editTextDate.addTextChangedListener(new TextWatcher() {
             private String current = "";
             private final String ddmmyyyy = "DDMMYYYY";
@@ -140,8 +142,8 @@ public class IncomeFragment extends Fragment {
                     String description = editTextDescription.getText().toString();
                     String incomeDate = editTextDate.getText().toString();
                     //TODO Please use futures to handle work that needs to leave the main UI thread
-                    new Thread(() -> transactionDao
-                            .insertAll(new Transaction(income,description, Category.INCOME,LocalDate.parse(incomeDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
+                    new Thread(() -> incomeDao
+                            .insertAll(new Income(income,description,LocalDate.parse(incomeDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
                             .start();
 
                     Toast.makeText(getContext(), "Income added successfully", Toast.LENGTH_LONG).show();

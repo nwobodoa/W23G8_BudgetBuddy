@@ -11,9 +11,10 @@
         android:layout_height="32dp"
         android:layout_weight="0.33"
         android:height="70dp"
+        android:gravity="center_horizontal|center_vertical"
         android:padding="5dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="@color/white" />
 
     <TextView
@@ -22,9 +23,10 @@
         android:layout_height="32dp"
         android:layout_weight="0.33"
         android:height="70dp"
+        android:gravity="center_horizontal|center_vertical"
         android:padding="5dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="@color/white" />
 
     <TextView
@@ -33,8 +35,9 @@
         android:layout_height="32dp"
         android:layout_weight="0.33"
         android:height="70dp"
+        android:gravity="center_horizontal|center_vertical"
         android:padding="5dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="@color/white" />
 </LinearLayout>
