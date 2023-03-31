@@ -7,12 +7,49 @@
     android:background="@color/brown_100"
     tools:context=".ui.add_expense.ExpenseFragment">
 
+    <GridView
+        android:id="@+id/gridViewImages"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddExpense"
+        app:layout_constraintVertical_bias="0.17000002" />
+
+    <EditText
+        android:id="@+id/editTextCategory"
+        android:layout_width="349dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_calendar_month_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Select Category"
+        android:inputType="date"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/material_dynamic_neutral70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseDescription" />
 
     <TextView
         android:id="@+id/txtExpenseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:text="Add Expense"
         android:textColor="@color/red_200"
         android:textSize="24sp"
@@ -26,7 +63,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:autoText="true"
         android:autofillHints=""
@@ -52,7 +89,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:autoText="true"
         android:autofillHints=""
@@ -78,7 +115,7 @@
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:autofillHints=""
         android:background="@drawable/input_bg"
@@ -96,13 +133,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCategory" />
 
     <Button
         android:id="@+id/btnAddExpense"
         android:layout_width="354dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corner"
         android:text="Add Expense"
         android:textSize="18sp"
