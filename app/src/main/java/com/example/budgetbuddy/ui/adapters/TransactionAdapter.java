@@ -77,7 +77,7 @@ public class TransactionAdapter extends BaseAdapter {
         }
         textViewTransaction.setText(prefix + amount);
         textViewTransactionDescription.setText(""+TransactionList.get(position).getDescription());
-        textViewTransactionDate.setText(""+TransactionList.get(position).getCreatedAt());
+        textViewTransactionDate.setText(""+TransactionList.get(position).getTransactionDate());
 
 
         int textColor = R.color.green;

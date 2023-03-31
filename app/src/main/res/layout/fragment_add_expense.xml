@@ -41,46 +41,30 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
         android:textColor="@color/red_700"
-        android:textColorHint="@color/material_dynamic_neutral70"
+        android:textColorHint="@color/red_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtExpenseTitle"
         tools:ignore="Deprecated" />
 
-    <EditText
-        android:id="@+id/editTextExpenseDescription"
-        android:layout_width="349dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:autoText="true"
-        android:autofillHints=""
-        android:background="@drawable/input_bg"
-        android:drawableStart="@drawable/baseline_description_24"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Description"
-        android:inputType="text"
-        android:paddingStart="20dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/red_700"
-        android:textColorHint="@color/material_dynamic_neutral70"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <Spinner
+        android:id="@+id/spinnerExpenseCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/categories"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextExpense"
-        tools:ignore="Deprecated" />
+        app:layout_constraintVertical_bias="0.099"
+        tools:layout_editor_absoluteX="-27dp" />
 
     <EditText
         android:id="@+id/editTextExpenseDate"
         android:layout_width="349dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:autofillHints=""
+        android:layout_marginTop="32dp"
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/baseline_calendar_month_24"
         android:drawablePadding="10dp"
@@ -92,11 +76,11 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
         android:textColor="@color/red_700"
-        android:textColorHint="@color/material_dynamic_neutral70"
+        android:textColorHint="@color/red_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextExpenseDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerExpenseCategory" />
 
     <Button
         android:id="@+id/btnAddExpense"
