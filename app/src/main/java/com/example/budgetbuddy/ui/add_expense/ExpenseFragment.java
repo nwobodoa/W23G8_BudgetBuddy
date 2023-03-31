@@ -1,6 +1,7 @@
 package com.example.budgetbuddy.ui.add_expense;
 
 import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,26 +10,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.databinding.FragmentAddExpenseBinding;
-import com.example.budgetbuddy.model.Category;
 import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.servicelocator.ServiceLocator;
+import com.example.budgetbuddy.ui.adapters.CategoryAdapter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 //by Smart Egbuchulem (SmartGlaxx)
 public class ExpenseFragment extends Fragment {
+
+
+    List<Category> categories = new ArrayList<>();
     EditText editTextExpense;
     EditText editTextExpenseDescription;
     EditText editTextExpenseDate;
+
+    EditText editTextCategory;
     Button btnAddExpense;
     private FragmentAddExpenseBinding binding;
 
@@ -39,13 +49,21 @@ public class ExpenseFragment extends Fragment {
 
         binding = FragmentAddExpenseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        GridView categoryGrid = binding.gridViewImages;
         editTextExpense = binding.editTextExpense;
         editTextExpenseDescription = binding.editTextExpenseDescription;
         editTextExpenseDate = binding.editTextExpenseDate;
         btnAddExpense = binding.btnAddExpense;
+        editTextCategory = binding.editTextCategory;
 
+        AddData();
 
+        GridView gridViewImages = binding.gridViewImages;
+        CategoryAdapter categoryAdapter = new CategoryAdapter(categories);
+        gridViewImages.setAdapter(categoryAdapter);
+        gridViewImages.setNumColumns(3);
+        gridViewImages.setVerticalSpacing(8);
+        gridViewImages.setHorizontalSpacing(8);
         TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
 
         editTextExpenseDate.addTextChangedListener(new TextWatcher() {
@@ -115,6 +133,8 @@ public class ExpenseFragment extends Fragment {
         });
 
 
+
+
         btnAddExpense.setOnClickListener(v -> {
 
             try {
@@ -137,9 +157,11 @@ public class ExpenseFragment extends Fragment {
                     String expenseDate = editTextExpenseDate.getText().toString();
                     //TODO Please use futures to handle work that needs to leave the main UI thread
                     // TODO Change category
-                    new Thread(() -> transactionDao
-                            .insertAll(new Transaction(-1 * expense,description, Category.INCOME,LocalDate.parse(expenseDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
-                            .start();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        new Thread(() -> transactionDao
+                                .insertAll(new Transaction(-1 * expense,description, com.example.budgetbuddy.model.Category.INCOME,LocalDate.parse(expenseDate, DateTimeFormatter.ofPattern("dd/M/yyyy")))))
+                                .start();
+                    }
 
                     Toast.makeText(getContext(), "Expense added successfully", Toast.LENGTH_LONG).show();
                 }
@@ -150,6 +172,18 @@ public class ExpenseFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void AddData() {
+        categories.add(new Category(101, "Housing", R.drawable.housing));
+        categories.add(new Category(102, "Transportation", R.drawable.transportation));
+        categories.add(new Category(103, "Food and Dining", R.drawable.feeding));
+        categories.add(new Category(104, "Utilities", R.drawable.utilities));
+        categories.add(new Category(105, "Insurance", R.drawable.insurance));
+        categories.add(new Category(106, "Medical and Healthcare", R.drawable.medical));
+        categories.add(new Category(104, "Personal Spending", R.drawable.personal_spending));
+        categories.add(new Category(105, "Recreation and Entertainment", R.drawable.entertainment));
+        categories.add(new Category(106, "Miscellaneous", R.drawable.miscellaneous));
     }
 
     @Override
