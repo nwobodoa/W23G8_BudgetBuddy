@@ -28,9 +28,9 @@ public class LoginDataSource {
                  return  new Result.Error(new RuntimeException("User not found"));
              }
              User user = optionalUser.get();
-            Log.i(TAG, "login: hashedPassword -> "+user.password + " plain password -> " + password);
+
              if(!PasswordHelper.verifyPassword(password,user.password)) {
-                 return new Result.Error(new RuntimeException("Invalid password"));
+                 return new Result.Error(new RuntimeException("Invalid Username or password"));
              }
             return new Result.Success<User>(user);
         } catch (Exception e) {
