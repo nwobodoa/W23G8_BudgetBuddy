@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.databinding.FragmentAddBudgetBinding;
-import com.example.budgetbuddy.databinding.FragmentHomeBinding;
-import com.example.budgetbuddy.ui.home.HomeViewModel;
 
 public class AddBudgetFragment extends Fragment {
     private FragmentAddBudgetBinding binding;
