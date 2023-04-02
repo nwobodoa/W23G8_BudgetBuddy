@@ -9,7 +9,8 @@ import java.time.LocalDate;
 public class Budget {
     @PrimaryKey(autoGenerate = true)
     private int id;
-   private LocalDate createdAt;
+    private LocalDate createdAt;
+    private Double amount;
 
     public int getId() {
         return id;
@@ -35,5 +36,5 @@ public class Budget {
         this.amount = amount;
     }
 
-    private Double amount;
+
 }

@@ -46,13 +46,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_logout">Logout</string>
-    <string name="SpendingHistory">Spending History</string>
+    <string name="SpendingHistory">Transaction History</string>
     <string name="spendingByCat">Spending By Category</string>
     <string name="menu_home">Home</string>
     <string name="menu_income">Add Income</string>
     <string name="menu_expense">Add Expense</string>
     <string name="menu_addBudget">Add Budget</string>
-    <string name="menu_history">Spending History</string>
+    <string name="menu_history">Transaction History</string>
     <string name="menu_spendingByCat">Spending by Category</string>
     <string name="txtExpenseIcon">EXPENSE</string>
     <string name="txtIconAddIncome">INCOME</string>
@@ -62,5 +62,16 @@
     <string name="noon">Good Afternoon %1$s!</string>
     <string name="evening">Good Evening %1$s!</string>
     <string name="txtView">Text View</string>
-
+    <string name="txtbtnExport">Export Report</string>
+    <string-array name="Categories">
+        <item>Housing</item>
+        <item>Transportation</item>
+        <item>Food and Dinning</item>
+        <item>Utilities</item>
+        <item>Insurance</item>
+        <item>Medical and Healthcare</item>
+        <item>Personal spending</item>
+        <item>Recreation and Entertainment</item>
+        <item>Miscellaneous</item>
+    </string-array>
 </resources>
