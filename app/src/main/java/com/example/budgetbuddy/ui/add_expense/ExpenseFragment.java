@@ -1,28 +1,38 @@
 package com.example.budgetbuddy.ui.add_expense;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.databinding.FragmentAddExpenseBinding;
 import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.servicelocator.ServiceLocator;
-import com.example.budgetbuddy.ui.adapters.CategoryAdapter;
+import com.example.budgetbuddy.ui.adapters.CategoryRecyclerViewAdapter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +45,7 @@ public class ExpenseFragment extends Fragment {
 
     List<Category> categories = new ArrayList<>();
     EditText editTextExpense;
+    RecyclerView recyclerViewCategories;
     EditText editTextExpenseDescription;
     EditText editTextExpenseDate;
 
@@ -49,7 +60,7 @@ public class ExpenseFragment extends Fragment {
 
         binding = FragmentAddExpenseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        GridView categoryGrid = binding.gridViewImages;
+        recyclerViewCategories = binding.recyclerViewCategories;
         editTextExpense = binding.editTextExpense;
         editTextExpenseDescription = binding.editTextExpenseDescription;
         editTextExpenseDate = binding.editTextExpenseDate;
@@ -58,12 +69,56 @@ public class ExpenseFragment extends Fragment {
 
         AddData();
 
-        GridView gridViewImages = binding.gridViewImages;
-        CategoryAdapter categoryAdapter = new CategoryAdapter(categories);
-        gridViewImages.setAdapter(categoryAdapter);
-        gridViewImages.setNumColumns(3);
-        gridViewImages.setVerticalSpacing(8);
-        gridViewImages.setHorizontalSpacing(8);
+        editTextCategory.setInputType(InputType.TYPE_NULL);
+        editTextCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.d("MyActivity", "EditText clicked");
+                recyclerViewCategories.setVisibility(view.VISIBLE);
+            }
+        });
+
+        // InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // imm.showSoftInput(editTextCategory, InputMethodManager.SHOW_IMPLICIT);
+        editTextCategory.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    recyclerViewCategories.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        GridLayoutManager gm = new GridLayoutManager(getContext(), 3);
+
+        recyclerViewCategories.setLayoutManager(gm);
+        CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(categories, new CategoryRecyclerViewAdapter.onItemClickListener() {
+
+
+            @Override
+            public void onItemClick(int i) {
+                String selectedCategory = categories.get(i).getCategoryName();
+                int selectedImage = categories.get(i).getCategoryPic();
+
+                Drawable originalDrawable = ContextCompat.getDrawable(getContext(), selectedImage);
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) originalDrawable;
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                int desiredWidth = 35;
+                int desiredHeight = 35;
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, desiredWidth, desiredHeight, false);
+                Drawable drawable = new BitmapDrawable(getResources(), scaledBitmap);
+                editTextCategory.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+                editTextCategory.setText(selectedCategory);
+
+            }
+        });
+
+
+        recyclerViewCategories.setAdapter(categoryRecyclerViewAdapter);
+
+
         TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
 
         editTextExpenseDate.addTextChangedListener(new TextWatcher() {
