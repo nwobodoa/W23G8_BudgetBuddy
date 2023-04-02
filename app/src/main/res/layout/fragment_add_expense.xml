@@ -7,19 +7,6 @@
     android:background="@color/brown_100"
     tools:context=".ui.add_expense.ExpenseFragment">
 
-    <GridView
-        android:id="@+id/gridViewImages"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddExpense"
-        app:layout_constraintVertical_bias="0.17000002" />
-
     <EditText
         android:id="@+id/editTextCategory"
         android:layout_width="349dp"
@@ -29,11 +16,11 @@
         android:layout_marginEnd="32dp"
         android:autofillHints=""
         android:background="@drawable/input_bg"
-        android:drawableStart="@drawable/baseline_calendar_month_24"
+        android:drawableStart="@drawable/ic_menu_category"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Select Category"
-        android:inputType="date"
+        android:inputType="none"
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
@@ -44,6 +31,21 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextExpenseDescription" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategories"
+        android:layout_width="0dp"
+        android:layout_height="270dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/brown_100"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddExpense" />
 
     <TextView
         android:id="@+id/txtExpenseTitle"
