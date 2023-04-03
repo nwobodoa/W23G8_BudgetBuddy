@@ -62,6 +62,10 @@
     <string name="noon">Good Afternoon %1$s!</string>
     <string name="evening">Good Evening %1$s!</string>
     <string name="txtView">Text View</string>
+
+    <string name="txtaddnewbudget">ADD BUDGET</string>
+
+
     <string name="txtbtnExport">Export Report</string>
     <string-array name="Categories">
         <item>Housing</item>
