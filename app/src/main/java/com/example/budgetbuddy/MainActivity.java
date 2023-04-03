@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             int timeOfDay =  LocalTime.now().getHour();
             if (timeOfDay >= 0 && timeOfDay < 12) {
 
-                txtViewGreeting.setText("Good Morning" + name + "!");
+                txtViewGreeting.setText("Good Morning " + name + "!");
 
             } else if (timeOfDay >= 12 && timeOfDay < 16) {
                 txtViewGreeting.setText("Good Afternoon " + name + "!");

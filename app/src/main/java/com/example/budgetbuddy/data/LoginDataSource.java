@@ -9,7 +9,6 @@ import com.example.budgetbuddy.servicelocator.ServiceLocator;
 import com.example.budgetbuddy.utils.PasswordHelper;
 
 import java.io.IOException;
-import java.io.OptionalDataException;
 import java.util.Optional;
 
 import static android.content.ContentValues.TAG;
@@ -17,6 +16,7 @@ import static android.content.ContentValues.TAG;
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
+
 public class LoginDataSource {
 
     public Result<User> login(String email, String password, Context context) {
@@ -24,10 +24,13 @@ public class LoginDataSource {
         try {
             // TODO: handle loggedInUser authentication
              Optional<User> optionalUser = Optional.ofNullable(userDao.findByEmail(email));
-             User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
-            Log.i(TAG, "login: hashedPassword -> "+user.password + " plain password -> " + password);
+             if (optionalUser.isEmpty()) {
+                 return  new Result.Error(new RuntimeException("User not found"));
+             }
+             User user = optionalUser.get();
+
              if(!PasswordHelper.verifyPassword(password,user.password)) {
-                 throw new RuntimeException("Invalid password");
+                 return new Result.Error(new RuntimeException("Invalid Username or password"));
              }
             return new Result.Success<User>(user);
         } catch (Exception e) {

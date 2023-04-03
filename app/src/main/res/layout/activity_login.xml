@@ -7,40 +7,20 @@
     android:background="@color/brown_100"
     tools:context=".ui.login.LoginActivity">
 
-    <TextView
-        android:id="@+id/txtSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/txtSign_in"
-        android:textColor="@color/red_200"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTxtEmail"
+    <Button
+        android:id="@+id/btn_signIn2"
         android:layout_width="349dp"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:autofillHints=""
-        android:background="@drawable/input_bg"
-        android:drawableStart="@drawable/baseline_email"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="@string/hint_Email"
-        android:inputType="textPersonName|textEmailAddress"
-        android:paddingStart="20dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/red_700"
-        android:textColorHint="@color/material_dynamic_neutral70"
-        app:layout_constraintEnd_toEndOf="@+id/txtSignIn"
-        app:layout_constraintStart_toStartOf="@+id/txtSignIn"
-        app:layout_constraintTop_toBottomOf="@+id/txtSignIn" />
+        android:layout_marginTop="64dp"
+        android:background="@drawable/rounded_corner"
+        android:text="@string/btnSignIn"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPwd"
+        app:layout_constraintVertical_bias="0.04000002" />
 
     <EditText
         android:id="@+id/editTextPwd"
@@ -59,25 +39,49 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp"
         android:textColor="@color/red_700"
-        android:textColorHint="@color/material_dynamic_neutral70"
+        android:textColorHint="@color/material_dynamic_neutral60"
         app:layout_constraintEnd_toEndOf="@+id/editTxtEmail"
         app:layout_constraintStart_toStartOf="@+id/editTxtEmail"
         app:layout_constraintTop_toBottomOf="@+id/editTxtEmail" />
 
-
-    <Button
-        android:id="@+id/btn_signIn2"
-        android:layout_width="320dp"
+    <EditText
+        android:id="@+id/editTxtEmail"
+        android:layout_width="349dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rounded_corner"
-        android:text="@string/btnSignIn"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPwd" />
+        android:layout_marginTop="70dp"
+        android:autofillHints=""
+        android:background="@drawable/input_bg"
+        android:drawableStart="@drawable/baseline_email"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/hint_Email"
+        android:inputType="textPersonName|textEmailAddress"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/red_700"
+        android:textColorHint="@color/material_dynamic_neutral60"
+        app:layout_constraintEnd_toEndOf="@+id/txtSignIn"
+        app:layout_constraintStart_toStartOf="@+id/txtSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/txtSignIn" />
 
+
+    <ProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/editTextPwd"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="@id/editTextPwd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
 
     <TextView
         android:id="@+id/txtViewForgotPwd"
@@ -114,5 +118,18 @@
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toEndOf="@+id/txtViewSignUp"
         app:layout_constraintTop_toBottomOf="@+id/btn_signIn2" />
+
+    <TextView
+        android:id="@+id/txtSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/txtSign_in"
+        android:textColor="@color/red_200"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
