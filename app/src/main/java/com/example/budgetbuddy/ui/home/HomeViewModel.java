@@ -1,35 +1,26 @@
-package com.example.budgetbuddy.ui.spendingbycat;
+package com.example.budgetbuddy.ui.home;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.TransactionByCategory;
+import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.repository.respository.TransactionRepository;
 
 import java.util.List;
 
-public class SpendingByCatViewModel extends AndroidViewModel {
-    private final MutableLiveData<String> mText;
-
+public class HomeViewModel extends AndroidViewModel {
     private final TransactionRepository transactionRepository;
-    public SpendingByCatViewModel(@NonNull Application application) {
+    public HomeViewModel(@NonNull Application application) {
         super(application);
         transactionRepository = new TransactionRepository(application);
-        mText = new MutableLiveData<>();
-        mText.setValue("");
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
     public LiveData<List<TransactionByCategory>> getSpendingByCategory() {
         return transactionRepository.getSpendingByCategory();
     }
 }
-
-

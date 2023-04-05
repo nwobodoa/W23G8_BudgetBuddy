@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.databinding.FragmentSpendingHistoryBinding;
@@ -30,10 +31,11 @@ public class SpendingHistoryFragment extends Fragment {
         Button btnExport = binding.btnExport;
         ListView listViewTransactionHistory = binding.listViewTransactionHistory;
         TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
-        List<Transaction> sortedTransactions = transactionDao.getAll();
-
-        TransactionAdapter transactionAdapter = new TransactionAdapter(sortedTransactions);
-        listViewTransactionHistory.setAdapter(transactionAdapter);
+        LiveData<List<Transaction>> sortedTransactions = transactionDao.getAll();
+        sortedTransactions.observe(getViewLifecycleOwner(), transactions -> {
+            TransactionAdapter transactionAdapter = new TransactionAdapter(transactions);
+            listViewTransactionHistory.setAdapter(transactionAdapter);
+        });
         return root;
     }
 

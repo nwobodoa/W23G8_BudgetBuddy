@@ -34,10 +34,7 @@
             android:name=".ExpenseActivity"
             android:exported="false" />
         <activity
-            android:name=".AddIncomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignupActivity"
+            android:name=".ui.signup.SignupActivity"
             android:exported="false" />
     </application>
 

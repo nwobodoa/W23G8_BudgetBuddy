@@ -24,11 +24,7 @@ public class ServiceLocator {
     }
 
     public AppDatabase getDb(Context ctx) {
-        return Room.databaseBuilder(ctx, AppDatabase.class, "budget_buddy")
-                .fallbackToDestructiveMigration()
-                //TODO: Handle login out of main thread
-                .allowMainThreadQueries()
-                .build();
+        return AppDatabase.getDatabase(ctx);
     }
     public UserDao getUserDao(Context ctx) {
         return getDb(ctx).userDao();
