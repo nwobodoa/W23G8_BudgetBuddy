@@ -18,6 +18,7 @@ import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.servicelocator.ServiceLocator;
 import com.example.budgetbuddy.ui.adapters.TransactionAdapter;
+import com.example.budgetbuddy.ui.add_expense.ExpenseViewModel;
 
 import java.util.List;
 
@@ -30,12 +31,11 @@ public class SpendingHistoryFragment extends Fragment {
         View root = binding.getRoot();
         Button btnExport = binding.btnExport;
         ListView listViewTransactionHistory = binding.listViewTransactionHistory;
-        TransactionDao transactionDao = ServiceLocator.getInstance().getTransactionDao(getContext());
-        LiveData<List<Transaction>> sortedTransactions = transactionDao.getAll();
-        sortedTransactions.observe(getViewLifecycleOwner(), transactions -> {
-            TransactionAdapter transactionAdapter = new TransactionAdapter(transactions);
-            listViewTransactionHistory.setAdapter(transactionAdapter);
-        });
+        HistoryViewModel historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
+        historyViewModel.getAllTransactions()
+                .observe(getViewLifecycleOwner(),
+                        transactions -> listViewTransactionHistory
+                                .setAdapter(new TransactionAdapter(transactions)));
         return root;
     }
 

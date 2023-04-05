@@ -6,8 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import com.example.budgetbuddy.model.Category;
+import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.TransactionByCategory;
 import com.example.budgetbuddy.repository.respository.TransactionRepository;
 
@@ -29,6 +30,10 @@ public class SpendingByCatViewModel extends AndroidViewModel {
     }
     public LiveData<List<TransactionByCategory>> getSpendingByCategory() {
         return transactionRepository.getSpendingByCategory();
+    }
+
+    public LiveData<List<Transaction>> getTransactions(Category category) {
+        return transactionRepository.getAllTransactions(category);
     }
 }
 
