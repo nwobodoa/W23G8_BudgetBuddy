@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.converter.LocalDateConverter;
 import com.example.budgetbuddy.converter.MonthYearConverter;
 import com.example.budgetbuddy.databinding.FragmentSpendingByCatBinding;
@@ -73,7 +74,7 @@ public class SpendingByCategoryFragment extends Fragment {
         spendingByCatViewModel
                 .getTransactionsForCategory()
                 .observe(getViewLifecycleOwner(),transactions -> {
-            TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(transactions);
+                   TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(transactions);
             recyclerView.setAdapter(transactionAdapter);
         });
 

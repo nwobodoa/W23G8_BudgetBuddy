@@ -14,49 +14,83 @@ import com.example.budgetbuddy.model.Transaction;
 import java.util.List;
 
 
-public class TransactionRVAdapter extends RecyclerView.Adapter<TransactionRVAdapter.myViewHolder> {
-
+public class TransactionRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int VIEW_TYPE_HEADER = 0;
+    private static final int VIEW_TYPE_ITEM = 1;
     List<Transaction> transactionList;
+
 
     public TransactionRVAdapter(List<Transaction> transactionList) {
         this.transactionList = transactionList;
-    }
+      }
+
+
 
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+
+        if(viewType == VIEW_TYPE_HEADER){
+            View headerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_transaction_header,parent,false);
+            return new HeaderViewHolder(headerView);
+        }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_transaction, parent, false);
-        return new myViewHolder(view);
+        return new MyViewHolder(view);
     }
+
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.txtViewDesc.setText(transactionList.get(position).getDescription());
-        holder.txtViewDate.setText(String.valueOf(transactionList.get(position).getCreatedAt()));
-        holder.txtViewAmount.setText(String.valueOf(transactionList.get(position).getAmount()));
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof HeaderViewHolder) {
+            ((HeaderViewHolder) holder).titleAmount.setText(R.string.Amount);
+            ((HeaderViewHolder) holder).titleDate.setText(R.string.date);
+            ((HeaderViewHolder) holder).titleDesc.setText(R.string.Description);
 
+        } else if (holder instanceof MyViewHolder) {
 
+            Transaction transactions = transactionList.get(position - 1);
+
+            ((MyViewHolder) holder).txtViewDesc.setText(transactions.getDescription());
+            ((MyViewHolder) holder).txtViewDate.setText(String.valueOf(transactions.getCreatedAt()));
+            ((MyViewHolder) holder).txtViewAmount.setText(String.valueOf(transactions.getAmount()));
+
+        }
     }
 
     @Override
     public int getItemCount() {
-        return transactionList.size();
+        return transactionList.size() + 1;
     }
 
-    public class myViewHolder extends RecyclerView.ViewHolder{
+    public int getItemViewType(int position){
+       return position == 0 ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
+    }
+    public static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        TextView titleAmount;
+        TextView titleDesc;
+        TextView titleDate;
+        public HeaderViewHolder(@NonNull View itemView) {
+            super(itemView);
+            titleAmount = itemView.findViewById(R.id.txtViewHeaderAmount);
+            titleDesc = itemView.findViewById(R.id.txtViewHeaderDesc);
+            titleDate = itemView.findViewById(R.id.txtViewHeaderDate);
+        }
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
     TextView txtViewAmount;
     TextView txtViewDate;
     TextView txtViewDesc;
-    TextView txtViewCategory;
-        public myViewHolder(@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtViewAmount = itemView.findViewById(R.id.textViewTransactionAmount);
             txtViewDate = itemView.findViewById(R.id.textViewTransactionDate);
             txtViewDesc = itemView.findViewById(R.id.textViewTransactionDescription);
 
-
-
         }
+
     }
+
 }

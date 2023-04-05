@@ -10,30 +10,33 @@
         android:id="@+id/textViewTransactionDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
-        android:padding="5dp"
+        android:layout_weight="0.28"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="0dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="viewStart"
         android:textColor="@color/design_default_color_on_secondary" />
 
     <TextView
         android:id="@+id/textViewTransactionDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
-        android:padding="5dp"
+        android:layout_weight="0.45"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="0dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="@color/design_default_color_on_secondary" />
 
     <TextView
         android:id="@+id/textViewTransactionAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
-        android:padding="5dp"
+        android:layout_weight="0.27"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="0dp"
         android:text="@string/txtView"
-        android:textAlignment="center"
+        android:textAlignment="viewEnd"
         android:textColor="@color/design_default_color_on_secondary" />
 
 </LinearLayout>
