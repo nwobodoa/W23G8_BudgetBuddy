@@ -14,10 +14,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.budgetbuddy.converter.LocalDateConverter;
 import com.example.budgetbuddy.databinding.FragmentSpendingByCatBinding;
 import com.example.budgetbuddy.model.Category;
+import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.TransactionByCategory;
+import com.example.budgetbuddy.ui.adapters.TransactionRVAdapter;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -28,6 +33,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,11 +42,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SpendingByCategoryFragment extends Fragment {
+
+    List<Transaction> transactionList = new ArrayList<>();
     private FragmentSpendingByCatBinding binding;
     PieChart pieChart;
     ListView listViewExpense;
     TextView txtHomeTitle;
-
+    RecyclerView recyclerView;
     PieDataSet pieDataSet;
     private SpendingByCatViewModel spendingByCatViewModel;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,7 +59,21 @@ public class SpendingByCategoryFragment extends Fragment {
 
         txtHomeTitle = binding.txtHomeTitle;
         pieChart = binding.pieChartView;
-        listViewExpense = binding.listViewExpense;
+        recyclerView = binding.recyclerViewTransaction;
+
+
+
+        transactionList.add(new Transaction(23.00,"walmart",Category.EDUCATION, LocalDateConverter.fromString("23-02-2022")));
+        transactionList.add(new Transaction(5.00,"games",Category.DINING_OUT,LocalDateConverter.fromString("23-02-2022")));
+        transactionList.add(new Transaction(5.00,"uber",Category.DINING_OUT,LocalDateConverter.fromString("23-02-2022")));
+        transactionList.add(new Transaction(5.00,"games",Category.DINING_OUT,LocalDateConverter.fromString("23-02-2022")));
+        transactionList.add(new Transaction(5.00,"games",Category.DINING_OUT,LocalDateConverter.fromString("23-02-2022")));
+        transactionList.add(new Transaction(5.00,"games",Category.DINING_OUT,LocalDateConverter.fromString("23-02-2022")));
+
+        LinearLayoutManager lm = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(lm);
+        TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(transactionList);
+        recyclerView.setAdapter(transactionAdapter);
         spendingByCatViewModel = new ViewModelProvider(this).get(SpendingByCatViewModel.class);
         initPieChart();
         showPieChart();
@@ -99,7 +121,7 @@ public class SpendingByCategoryFragment extends Fragment {
 
 
     private void setupPieChart(List<TransactionByCategory> transactionByCategories) {
-       var pieEntries =  transactionByCategories
+       List<PieEntry> pieEntries =  transactionByCategories
                .stream()
                .map(t -> new PieEntry((float) Math.abs(t.total),t.category.toString()))
                .collect(Collectors.toList());
