@@ -2,7 +2,6 @@ package com.example.budgetbuddy.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,23 +13,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.MainActivity;
 import com.example.budgetbuddy.PasswordReset;
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.SignupActivity;
+import com.example.budgetbuddy.ui.signup.SignupActivity;
+import com.example.budgetbuddy.data.Result;
 import com.example.budgetbuddy.databinding.ActivityLoginBinding;
+import com.example.budgetbuddy.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+
     private ActivityLoginBinding binding;
     ProgressBar loadingProgressBar;
 
@@ -49,8 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
 
         final EditText emailEditText = binding.editTxtEmail;
         final EditText passwordEditText = binding.editTextPwd;
@@ -60,11 +60,11 @@ public class LoginActivity extends AppCompatActivity {
         loadingProgressBar = binding.loading;
 
         pwdResetLink.setOnClickListener(v ->
-            startActivity(new Intent(this, PasswordReset.class)));
+                startActivity(new Intent(this, PasswordReset.class)));
 
 
         linkSignup.setOnClickListener(v ->
-            startActivity(new Intent(this, SignupActivity.class)));
+                startActivity(new Intent(this, SignupActivity.class)));
 
 
         loginViewModel.getLoginFormState().observe(this, loginFormState -> {
@@ -81,11 +81,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginViewModel.getLoginResult().observe(this, loginResult -> {
+            loadingProgressBar.setVisibility(View.GONE);
 
             if (loginResult == null) {
                 return;
             }
-            loadingProgressBar.setVisibility(View.GONE);
 
             if (loginResult.getError() != null) {
                 showLoginFailed(loginResult.getError());
@@ -127,18 +127,25 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(emailEditText.getText().toString(),
-                        passwordEditText.getText().toString(), getApplicationContext());
+                        passwordEditText.getText().toString());
             }
             return false;
         });
 
         loginButton.setOnClickListener(v -> {
-            loginViewModel.login(emailEditText.getText().toString(),
-             passwordEditText.getText().toString(),getApplicationContext());
-            emailEditText.setText(null);
-            passwordEditText.setText(null);
             loadingProgressBar.setVisibility(View.VISIBLE);
-        });
+            loginViewModel.login(emailEditText.getText().toString(), passwordEditText.getText().toString())
+                    .observe(this, result -> {
+                        var loginResult =
+                                result instanceof Result.Success ?
+                                        new LoginResult(new LoggedInUserView((((Result.Success<User>) result).getData()).username))
+                                        : new LoginResult(R.string.login_failed);
+                        loginViewModel.setLoginResult(loginResult);
+                    });
+                    emailEditText.setText(null);
+                    passwordEditText.setText(null);
+                }
+        );
     }
 
     private void updateUiWithUser(LoggedInUserView model) {

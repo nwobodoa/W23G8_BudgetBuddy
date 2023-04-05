@@ -1,25 +1,30 @@
 package com.example.budgetbuddy.ui.login;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import android.content.Context;
+import android.app.Application;
 import android.util.Patterns;
 
-import com.example.budgetbuddy.data.LoginRepository;
-import com.example.budgetbuddy.data.Result;
-import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.model.User;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
-public class LoginViewModel extends ViewModel {
+import com.example.budgetbuddy.R;
+import com.example.budgetbuddy.data.Result;
+import com.example.budgetbuddy.model.User;
+import com.example.budgetbuddy.repository.respository.UserRepository;
+
+public class LoginViewModel extends AndroidViewModel {
 
     private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private final LoginRepository loginRepository;
 
-    LoginViewModel(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
+    private final UserRepository userRepository;
+
+
+
+   public LoginViewModel(Application application) {
+        super(application);
+        userRepository = new UserRepository(application);
     }
 
     LiveData<LoginFormState> getLoginFormState() {
@@ -30,16 +35,17 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String email, String password, Context context) {
+    public LiveData<Result<User>> login(String email, String password) {
         // can be launched in a separate asynchronous job
-        Result<User> result = loginRepository.login(email, password, context);
-
-        if (result instanceof Result.Success) {
-            User data = ((Result.Success<User>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.username)));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+       return Transformations.map(userRepository.login(email,password), result -> {
+            if (result instanceof Result.Success) {
+                User data = ((Result.Success<User>) result).getData();
+                loginResult.setValue(new LoginResult(new LoggedInUserView(data.username)));
+            } else {
+                loginResult.setValue(new LoginResult(R.string.login_failed));
+            }
+            return result;
+        });
     }
 
     public void loginDataChanged(String username, String password) {
@@ -67,5 +73,9 @@ public class LoginViewModel extends ViewModel {
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
+    }
+
+    public void setLoginResult(LoginResult result) {
+       loginResult.setValue(result);
     }
 }

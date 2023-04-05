@@ -68,5 +68,4 @@ public class Transaction {
         this.createdAt = transactionDate;
         this.category = category;
     }
-
 }
