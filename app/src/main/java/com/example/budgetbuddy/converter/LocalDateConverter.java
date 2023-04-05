@@ -1,7 +1,5 @@
 package com.example.budgetbuddy.converter;
 
-import android.os.Build;
-
 import androidx.room.TypeConverter;
 
 import java.time.LocalDate;

@@ -1,8 +1,6 @@
 package com.example.budgetbuddy.ui.budget;
 
 public class Budget {
-
-
     private int budgetId;
     private String budgetName;
     private int budgetPic;
@@ -14,7 +12,6 @@ public class Budget {
         this.budgetPic = budgetPic;
         this.budgetAmount = budgetAmount;
     }
-
 
     public int getBudgetId() {
         return budgetId;

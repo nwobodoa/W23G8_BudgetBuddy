@@ -22,12 +22,9 @@ import com.example.budgetbuddy.model.Category;
 import com.example.budgetbuddy.model.Transaction;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 import java.util.TimeZone;
 
 
@@ -41,6 +38,7 @@ public class IncomeFragment extends Fragment {
     private FragmentAddIncomeBinding binding;
     MutableLiveData<Calendar> pickedTime = new MutableLiveData<>();
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         AddIncomeViewModel addIncomeViewModel = new ViewModelProvider(this).get(AddIncomeViewModel.class);

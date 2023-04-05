@@ -7,7 +7,6 @@ import androidx.room.Transaction;
 
 import com.example.budgetbuddy.model.Budget;
 import com.example.budgetbuddy.model.BudgetWithLineItems;
-import com.example.budgetbuddy.model.Income;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -44,11 +44,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             clickedIndex= holder.getAdapterPosition();
             notifyDataSetChanged();
         });
-
-
-
         return holder;
-
     }
 
     @Override
@@ -56,13 +52,11 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             holder.imgViewItem.setImageResource(categories.get(position).getCategoryPic());
             holder.txtViewItem.setText(categories.get(position).getCategoryName());
             holder.txtViewItem.setGravity(Gravity.CENTER);
-
             if (position == clickedIndex){
                 holder.itemView.setBackgroundColor(Color.parseColor("#d5896c"));
 
             }else {
                 holder.itemView.setBackgroundColor(Color.parseColor("#BA3B0A"));
-
             }
     }
 
@@ -87,7 +81,6 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
 
         public interface onItemClickListener {
             void onItemClick(int i);
-
         }
 }
 

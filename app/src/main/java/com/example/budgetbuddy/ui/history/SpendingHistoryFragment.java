@@ -6,21 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.databinding.FragmentSpendingHistoryBinding;
-import com.example.budgetbuddy.model.Transaction;
-import com.example.budgetbuddy.repository.dao.TransactionDao;
-import com.example.budgetbuddy.servicelocator.ServiceLocator;
 import com.example.budgetbuddy.ui.adapters.TransactionAdapter;
-import com.example.budgetbuddy.ui.add_expense.ExpenseViewModel;
-
-import java.util.List;
 
 public class SpendingHistoryFragment extends Fragment {
     private FragmentSpendingHistoryBinding binding;

@@ -6,9 +6,9 @@ import android.util.Patterns;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 
 import com.example.budgetbuddy.R;
+import com.example.budgetbuddy.data.LoginRepository;
 import com.example.budgetbuddy.data.Result;
 import com.example.budgetbuddy.model.User;
 import com.example.budgetbuddy.repository.respository.UserRepository;
@@ -36,16 +36,17 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public LiveData<Result<User>> login(String email, String password) {
-        // can be launched in a separate asynchronous job
-       return Transformations.map(userRepository.login(email,password), result -> {
-            if (result instanceof Result.Success) {
-                User data = ((Result.Success<User>) result).getData();
-                loginResult.setValue(new LoginResult(new LoggedInUserView(data.username)));
-            } else {
-                loginResult.setValue(new LoginResult(R.string.login_failed));
-            }
-            return result;
-        });
+       return userRepository.login(email,password);
+    }
+
+    public void updateLoginResult(Result<User> result) {
+        if (result instanceof Result.Success) {
+            User data = ((Result.Success<User>) result).getData();
+            loginResult.setValue(new LoginResult(new LoggedInUserView(data.username)));
+            LoginRepository.getInstance().setUser(data);
+        } else {
+            loginResult.setValue(new LoginResult(R.string.login_failed));
+        }
     }
 
     public void loginDataChanged(String username, String password) {
@@ -78,4 +79,5 @@ public class LoginViewModel extends AndroidViewModel {
     public void setLoginResult(LoginResult result) {
        loginResult.setValue(result);
     }
+
 }

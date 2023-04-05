@@ -1,4 +1,4 @@
-package com.example.budgetbuddy;
+package com.example.budgetbuddy.auth;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.ui.login.LoginActivity;
 
 public class PasswordReset extends AppCompatActivity {

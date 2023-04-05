@@ -4,8 +4,6 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import com.example.budgetbuddy.utils.PasswordHelper;
-
 @Entity(indices = {@Index(value = {"email"},unique = true)})
 public class User {
     @PrimaryKey(autoGenerate = true)

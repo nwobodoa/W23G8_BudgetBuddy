@@ -6,11 +6,9 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.budgetbuddy.model.Category;
-import com.example.budgetbuddy.model.Income;
 import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.TransactionByCategory;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Dao
