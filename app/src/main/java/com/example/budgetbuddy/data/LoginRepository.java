@@ -45,14 +45,4 @@ public class LoginRepository {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
-
-    public Result<User> login(String email, String password, Context context) {
-        // handle login
-        Result<User> result = dataSource.login(email, password, context);
-
-        if (result instanceof Result.Success) {
-            setUser(((Result.Success<User>) result).getData());
-        }
-        return result;
-    }
 }

@@ -1,34 +1,31 @@
-package com.example.budgetbuddy;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
+package com.example.budgetbuddy.ui.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.model.User;
-import com.example.budgetbuddy.repository.dao.UserDao;
-import com.example.budgetbuddy.servicelocator.ServiceLocator;
 import com.example.budgetbuddy.ui.login.LoginActivity;
 import com.example.budgetbuddy.utils.PasswordHelper;
 
-import static android.content.ContentValues.TAG;
-
 public class SignupActivity extends AppCompatActivity {
-   private EditText email;
+    private final MutableLiveData<Long> userId = new MutableLiveData<>();
     private EditText userName;
     private EditText password;
     private EditText confirmPassword;
     private Button btnRegister;
     private TextView logInLink;
-    private UserDao userDao;
-
+    private EditText email;
+    private SignupViewModel signupViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +40,12 @@ public class SignupActivity extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setLogo(R.mipmap.ic_launcher_white_logo);
         actionBar.setTitle(R.string.app_name);
-
-        userDao = ServiceLocator.getInstance().getUserDao(getApplicationContext());
-
-        btnRegister.setOnClickListener(v -> {
-            registerUser();
-            clearTextFields();
-            startActivity( new Intent(this,LoginActivity.class));
-        });
-
-    logInLink.setOnClickListener(v ->
-        startActivity( new Intent(this,LoginActivity.class)));
-
+        signupViewModel = new ViewModelProvider(this).get(SignupViewModel.class);
+        btnRegister.setOnClickListener(v -> registerUser());
+        logInLink.setOnClickListener(v -> startActivity(new Intent(this, LoginActivity.class)));
     }
 
     private void initView() {
-
         userName = findViewById(R.id.editTextUsername);
         email = findViewById(R.id.editTxtEmail);
         password = findViewById(R.id.editTextPwd);
@@ -72,15 +59,6 @@ public class SignupActivity extends AppCompatActivity {
         email.setText(null);
         password.setText(null);
         confirmPassword.setText(null);
-    }
-    private boolean userExists(String email) {
-        try {
-            return userDao.findByEmail(email) != null;
-        } catch (Exception e) {
-            Log.e(TAG, "userExists: " + e.getMessage(), e);
-            return true;
-        }
-
     }
 
 
@@ -102,18 +80,31 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "please enter your Username", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (userExists(email.getText().toString().trim())) {
-            Toast.makeText(this, "User already Exists", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        signupViewModel.userExists(email.getText().toString().trim()).observe(
+                this, userExists -> {
+                    if (userExists) {
+                        Toast.makeText(this, "User already Exists", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    User user =
+                            new User(userName.getText().toString().trim(),
+                                    email.getText().toString().trim(),
+                                    PasswordHelper.hashedPassword(password.getText().toString().trim()));
+                    signupViewModel.addNewUser(userId, user);
+                }
+        );
 
-
-        User user = new User(userName.getText().toString().trim(), email.getText().toString().trim(), PasswordHelper.hashedPassword(password.getText().toString().trim()));
-        userDao.insert(user);
+        userId.observe(this, id -> {
+            if (id != null) {
+                Toast.makeText(this, "User Added Successfully", Toast.LENGTH_SHORT).show();
+                clearTextFields();
+                startActivity(new Intent(this, LoginActivity.class));
+            } else {
+                Toast.makeText(this, "User registration unsuccessful", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-
-
-    }
+}
 
 
 

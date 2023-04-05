@@ -2,6 +2,7 @@ package com.example.budgetbuddy.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import java.time.YearMonth;
 
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ public class Budget {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private LocalDate createdAt;
-    private Double amount;
+    private YearMonth yearMonth;
 
     public int getId() {
         return id;
@@ -28,13 +29,12 @@ public class Budget {
         this.createdAt = createdAt;
     }
 
-    public Double getAmount() {
-        return amount;
+    public YearMonth getYearMonth() {
+        return yearMonth;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setYearMonth(YearMonth yearMonth) {
+        this.yearMonth = yearMonth;
     }
-
 
 }

@@ -1,12 +1,12 @@
 package com.example.budgetbuddy.ui.add_expense;
 
-public class Category {
+public class CategoryIcon {
 
     private int categoryId;
     private String categoryName;
     private int categoryPic;
 
-    public Category(int categoryId, String categoryName, int categoryPic) {
+    public CategoryIcon(int categoryId, String categoryName, int categoryPic) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryPic = categoryPic;

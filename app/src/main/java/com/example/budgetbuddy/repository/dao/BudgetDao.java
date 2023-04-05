@@ -3,8 +3,10 @@ package com.example.budgetbuddy.repository.dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.budgetbuddy.model.Budget;
+import com.example.budgetbuddy.model.BudgetWithLineItems;
 import com.example.budgetbuddy.model.Income;
 
 import java.time.LocalDate;
@@ -16,6 +18,10 @@ public interface BudgetDao {
     List<Budget> findBudgetBetweenDates(LocalDate start, LocalDate end);
     @Query("SELECT * FROM BUDGET LIMIT 50")
     List<Budget> getAll();
+
+    @Transaction
+    @Query("SELECT * FROM Budget")
+    public List<BudgetWithLineItems> getBudgetWithLineItems();
     @Insert
     void insertAll(Budget... budgets);
 }

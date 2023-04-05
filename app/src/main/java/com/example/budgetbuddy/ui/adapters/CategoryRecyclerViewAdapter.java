@@ -5,8 +5,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,23 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.ui.add_expense.Category;
+import com.example.budgetbuddy.ui.add_expense.CategoryIcon;
 
 import java.util.List;
 
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>{
 
 
-    List<Category> categories;
+    List<CategoryIcon> categories;
     int clickedIndex = -1;
     onItemClickListener onItemClickListener;
 
 
-    public CategoryRecyclerViewAdapter(List<Category> categories) {
+    public CategoryRecyclerViewAdapter(List<CategoryIcon> categories) {
         this.categories = categories;
     }
 
-    public CategoryRecyclerViewAdapter(List<Category> categories, CategoryRecyclerViewAdapter.onItemClickListener onItemClickListener) {
+    public CategoryRecyclerViewAdapter(List<CategoryIcon> categories, CategoryRecyclerViewAdapter.onItemClickListener onItemClickListener) {
         this.categories = categories;
         this.onItemClickListener = onItemClickListener;
     }
@@ -41,13 +39,10 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_categoryitem,parent,false);
         CategoryViewHolder holder = new CategoryViewHolder(itemView);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onItemClickListener.onItemClick(holder.getAdapterPosition());
-                clickedIndex= holder.getAdapterPosition();
-                notifyDataSetChanged();
-            }
+        holder.itemView.setOnClickListener(view -> {
+            onItemClickListener.onItemClick(holder.getAdapterPosition());
+            clickedIndex= holder.getAdapterPosition();
+            notifyDataSetChanged();
         });
 
 
@@ -76,14 +71,13 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
         return categories.size();
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder{
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder{
 
             ImageView imgViewItem;
             TextView txtViewItem;
 
             public CategoryViewHolder(@NonNull View itemView) {
                 super(itemView);
-
                 imgViewItem = itemView.findViewById(R.id.imgViewExtItem);
                 txtViewItem = itemView.findViewById(R.id.txtViewExtItem);
 
@@ -92,7 +86,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
 
 
         public interface onItemClickListener {
-            public void onItemClick(int i);
+            void onItemClick(int i);
 
         }
 }
