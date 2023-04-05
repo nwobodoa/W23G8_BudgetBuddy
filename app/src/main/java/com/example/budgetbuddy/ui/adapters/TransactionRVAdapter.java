@@ -34,7 +34,7 @@ public class TransactionRVAdapter extends RecyclerView.Adapter<TransactionRVAdap
         holder.txtViewDesc.setText(transactionList.get(position).getDescription());
         holder.txtViewDate.setText(String.valueOf(transactionList.get(position).getCreatedAt()));
         holder.txtViewAmount.setText(String.valueOf(transactionList.get(position).getAmount()));
-        holder.txtViewCategory.setText(String.valueOf(transactionList.get(position).getCategory()));
+
 
     }
 
@@ -52,7 +52,6 @@ public class TransactionRVAdapter extends RecyclerView.Adapter<TransactionRVAdap
             super(itemView);
 
             txtViewAmount = itemView.findViewById(R.id.textViewTransactionAmount);
-            txtViewCategory = itemView.findViewById(R.id.textViewTransactionCategory);
             txtViewDate = itemView.findViewById(R.id.textViewTransactionDate);
             txtViewDesc = itemView.findViewById(R.id.textViewTransactionDescription);
 
