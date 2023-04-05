@@ -63,7 +63,7 @@ public class TransactionAdapter extends BaseAdapter {
         if(convertView ==null){
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_budget_transaction, parent, false);
         }
-        textViewTransaction = convertView.findViewById(R.id.textViewTransaction);
+        textViewTransaction = convertView.findViewById(R.id.textViewTransactionAmount);
         textViewTransactionDescription = convertView.findViewById(R.id.textViewTransactionDescription);
         textViewTransactionDate = convertView.findViewById(R.id.textViewTransactionDate);
 

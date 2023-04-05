@@ -22,7 +22,9 @@ public interface TransactionDao {
             "and  substr(createdAt,7) = strftime('%Y', date('now'))  group by category;")
     LiveData<List<TransactionByCategory>> getTransactionsSummaryByCategory();
 
-    @Query("SELECT * FROM `transaction` where category = :category order by createdAt DESC LIMIT 50")
+    @Query("SELECT * FROM `transaction` where category = :category and " +
+            "substr(createdAt,4,2)  = strftime('%m', date('now')) and substr(createdAt,7) = strftime('%Y', date('now'))" +
+            "order by createdAt DESC LIMIT 50")
     LiveData<List<Transaction>> getTransactions(Category category);
 }
 

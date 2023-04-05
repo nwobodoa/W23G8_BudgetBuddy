@@ -13,11 +13,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.budgetbuddy.R;
+import com.example.budgetbuddy.converter.LocalDateConverter;
+import com.example.budgetbuddy.converter.MonthYearConverter;
 import com.example.budgetbuddy.databinding.FragmentSpendingByCatBinding;
 import com.example.budgetbuddy.model.Category;
+import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.TransactionByCategory;
+import com.example.budgetbuddy.ui.adapters.TransactionRVAdapter;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -28,6 +36,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,13 +46,16 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SpendingByCategoryFragment extends Fragment {
+
+
     private FragmentSpendingByCatBinding binding;
     PieChart pieChart;
-    ListView listViewExpense;
-    TextView txtHomeTitle;
-
+   TextView txtHomeTitle;
+    RecyclerView recyclerView;
     PieDataSet pieDataSet;
     private SpendingByCatViewModel spendingByCatViewModel;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -51,7 +64,20 @@ public class SpendingByCategoryFragment extends Fragment {
 
         txtHomeTitle = binding.txtHomeTitle;
         pieChart = binding.pieChartView;
-        listViewExpense = binding.listViewExpense;
+        recyclerView = binding.recyclerViewTransaction;
+        txtHomeTitle.setText("Select a Category to view details");
+        spendingByCatViewModel = new ViewModelProvider(this).get(SpendingByCatViewModel.class);
+
+        LinearLayoutManager lm = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(lm);
+
+        spendingByCatViewModel
+                .getTransactionsForCategory()
+                .observe(getViewLifecycleOwner(),transactions -> {
+                   TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(transactions);
+            recyclerView.setAdapter(transactionAdapter);
+        });
+
         spendingByCatViewModel = new ViewModelProvider(this).get(SpendingByCatViewModel.class);
         initPieChart();
         showPieChart();
@@ -60,23 +86,29 @@ public class SpendingByCategoryFragment extends Fragment {
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                var label = ((PieEntry)e).getLabel().toLowerCase();
-                Log.d(TAG, "onValueSelected: "+ Category.valueOfLabel(label));
-
-                    //TODO set adapter to display details of the clicked category
+                String label = ((PieEntry)e).getLabel().toLowerCase();
+                Category selectedCategory = Category.valueOfLabel(label);
+                spendingByCatViewModel.getTransactionsForCategory(selectedCategory).observe(
+                        getViewLifecycleOwner(), transactions -> {
+                            String title = String.format("%s (%s)", selectedCategory.toString(), YearMonth.now());
+                            txtHomeTitle.setText(title);
+                            spendingByCatViewModel.updateTransactionsForCategory(transactions);
+                        }
+                );
             }
 
             @Override
             public void onNothingSelected() {
-                //TODO show text
-                //listViewExpense.setText("No category selected");
 
+                txtHomeTitle.setText("Select a Category to view details");
+                TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(List.of());
+                recyclerView.setAdapter(transactionAdapter);
             }
         });
 
         return root;
     }
-    //TODO show the title from data gotten from db.
+
 
 
     private void showPieChart(){
@@ -99,7 +131,7 @@ public class SpendingByCategoryFragment extends Fragment {
 
 
     private void setupPieChart(List<TransactionByCategory> transactionByCategories) {
-       var pieEntries =  transactionByCategories
+       List<PieEntry> pieEntries =  transactionByCategories
                .stream()
                .map(t -> new PieEntry((float) Math.abs(t.total),t.category.toString()))
                .collect(Collectors.toList());

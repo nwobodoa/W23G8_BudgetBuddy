@@ -74,6 +74,9 @@
     <string name="select_expense_date">Select Expense Date</string>
     <string name="icon_spinner_cat">Icon</string>
     <string name="category">Category</string>
+    <string name="date">Transaction Date</string>
+    <string name="Description">Description</string>
+    <string name="Amount">Amount</string>
     <string-array name="Categories">
         <item>Housing</item>
         <item>Transportation</item>
