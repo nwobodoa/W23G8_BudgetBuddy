@@ -2,7 +2,6 @@ package com.example.budgetbuddy.model;
 
 
 import androidx.annotation.NonNull;
-import androidx.room.util.StringUtil;
 
 import java.util.Arrays;
 import java.util.HashMap;

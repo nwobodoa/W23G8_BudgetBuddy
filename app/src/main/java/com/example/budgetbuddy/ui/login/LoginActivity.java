@@ -19,12 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.MainActivity;
-import com.example.budgetbuddy.PasswordReset;
+import com.example.budgetbuddy.auth.PasswordReset;
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.ui.signup.SignupActivity;
-import com.example.budgetbuddy.data.Result;
 import com.example.budgetbuddy.databinding.ActivityLoginBinding;
-import com.example.budgetbuddy.model.User;
+import com.example.budgetbuddy.ui.signup.SignupActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -82,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel.getLoginResult().observe(this, loginResult -> {
             loadingProgressBar.setVisibility(View.GONE);
-
             if (loginResult == null) {
                 return;
             }
@@ -102,6 +99,8 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 
+
+
         });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
@@ -117,8 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(emailEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                loginViewModel.loginDataChanged(emailEditText.getText().toString(), passwordEditText.getText().toString());
             }
         };
         emailEditText.addTextChangedListener(afterTextChangedListener);
@@ -126,26 +124,11 @@ public class LoginActivity extends AppCompatActivity {
 
         passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                loginViewModel.login(emailEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                loginViewModel.login(emailEditText.getText().toString(), passwordEditText.getText().toString());
             }
             return false;
         });
-
-        loginButton.setOnClickListener(v -> {
-            loadingProgressBar.setVisibility(View.VISIBLE);
-            loginViewModel.login(emailEditText.getText().toString(), passwordEditText.getText().toString())
-                    .observe(this, result -> {
-                        var loginResult =
-                                result instanceof Result.Success ?
-                                        new LoginResult(new LoggedInUserView((((Result.Success<User>) result).getData()).username))
-                                        : new LoginResult(R.string.login_failed);
-                        loginViewModel.setLoginResult(loginResult);
-                    });
-                    emailEditText.setText(null);
-                    passwordEditText.setText(null);
-                }
-        );
+        loginButton.setOnClickListener(v -> loginHandler(emailEditText,passwordEditText));
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -153,6 +136,13 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + name;
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+    }
+
+    private void loginHandler(EditText emailEditText, EditText passwordEditText) {
+        loadingProgressBar.setVisibility(View.VISIBLE);
+        loginViewModel
+                .login(emailEditText.getText().toString(), passwordEditText.getText().toString())
+                .observe(this, result -> loginViewModel.updateLoginResult(result));
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

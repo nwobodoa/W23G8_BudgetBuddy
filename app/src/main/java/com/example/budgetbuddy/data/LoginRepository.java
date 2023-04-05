@@ -1,8 +1,8 @@
 package com.example.budgetbuddy.data;
 
-import android.content.Context;
-
 import com.example.budgetbuddy.model.User;
+
+import kotlin.jvm.Synchronized;
 
 
 /**
@@ -13,20 +13,21 @@ public class LoginRepository {
 
     private static volatile LoginRepository instance;
 
-    private final LoginDataSource dataSource;
+
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
     private User user = null;
 
     // private constructor : singleton access
-    private LoginRepository(LoginDataSource dataSource) {
-        this.dataSource = dataSource;
+    private LoginRepository() {
+
     }
 
-    public static LoginRepository getInstance(LoginDataSource dataSource) {
+    @Synchronized
+    public static LoginRepository getInstance() {
         if (instance == null) {
-            instance = new LoginRepository(dataSource);
+            instance = new LoginRepository();
         }
         return instance;
     }
@@ -37,10 +38,9 @@ public class LoginRepository {
 
     public void logout() {
         user = null;
-        dataSource.logout();
     }
 
-    private void setUser(User user) {
+    public void setUser(User user) {
         this.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore

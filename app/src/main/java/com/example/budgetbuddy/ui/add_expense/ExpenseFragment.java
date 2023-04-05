@@ -37,8 +37,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class ExpenseFragment extends Fragment {
-
-
     List<CategoryIcon> categories = new ArrayList<>();
     EditText editTextExpense;
     RecyclerView recyclerViewCategories;
@@ -65,7 +63,7 @@ public class ExpenseFragment extends Fragment {
         btnAddExpense = binding.btnAddExpense;
         editTextCategory = binding.editTextCategory;
         editTextExpenseDate = binding.editTextExpenseDate;
-        var fm =((AppCompatActivity) getActivity()).getSupportFragmentManager();
+        var fm =((AppCompatActivity) requireActivity()).getSupportFragmentManager();
         AddData();
         editTextCategory.setInputType(InputType.TYPE_NULL);
         editTextCategory.setOnClickListener(view -> {

@@ -1,7 +1,6 @@
 package com.example.budgetbuddy.ui.add_expense;
 
 public class CategoryIcon {
-
     private int categoryId;
     private String categoryName;
     private int categoryPic;

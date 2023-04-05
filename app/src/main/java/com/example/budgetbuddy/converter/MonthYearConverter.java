@@ -1,7 +1,6 @@
 package com.example.budgetbuddy.converter;
 
 import androidx.room.TypeConverter;
-
 import java.time.YearMonth;
 
 public class MonthYearConverter {

@@ -1,35 +1,23 @@
 package com.example.budgetbuddy;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.widget.ImageView;
-import android.view.MenuItem;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.budgetbuddy.auth.ProtectedActivity;
 import com.example.budgetbuddy.databinding.ActivityMainBinding;
-import com.example.budgetbuddy.ui.add_income.IncomeFragment;
-import com.example.budgetbuddy.ui.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalTime;
 
-import static android.content.ContentValues.TAG;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ProtectedActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -57,40 +45,28 @@ public class MainActivity extends AppCompatActivity {
         imgViewExpense = binding.drawerLayout.findViewById(R.id.imgViewExpenseIcon);
         imgViewBudget = binding.drawerLayout.findViewById(R.id.imgViewBudgettIcon);
 
-        imgViewIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-                navControllerIncome.navigateUp();
-                navControllerIncome.navigate(R.id.nav_addIncome);
-            }
+        imgViewIncome.setOnClickListener(view -> {
+            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+            navControllerIncome.navigateUp();
+            navControllerIncome.navigate(R.id.nav_addIncome);
         });
 
-        imgViewExpense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-                navControllerIncome.navigateUp();
-                navControllerIncome.navigate(R.id.nav_addExpense);
-            }
+        imgViewExpense.setOnClickListener(view -> {
+            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+            navControllerIncome.navigateUp();
+            navControllerIncome.navigate(R.id.nav_addExpense);
         });
 
-        imgViewBudget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-                navControllerIncome.navigateUp();
-                navControllerIncome.navigate(R.id.nav_addBudget);
-            }
+        imgViewBudget.setOnClickListener(view -> {
+            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+            navControllerIncome.navigateUp();
+            navControllerIncome.navigate(R.id.nav_addBudget);
         });
 
-        imgViewHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-                navControllerIncome.navigateUp();
-                navControllerIncome.navigate(R.id.nav_home);
-            }
+        imgViewHome.setOnClickListener(view -> {
+            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
+            navControllerIncome.navigateUp();
+            navControllerIncome.navigate(R.id.nav_home);
         });
 
        DrawerLayout drawer = binding.drawerLayout;

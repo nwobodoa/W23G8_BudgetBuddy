@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgetbuddy.model.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionRVAdapter extends RecyclerView.Adapter<TransactionRVAdapter.myViewHolder> {
