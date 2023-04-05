@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.budgetbuddy.model.Category;
 import com.example.budgetbuddy.model.Income;
 import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.TransactionByCategory;
@@ -23,6 +24,7 @@ public interface TransactionDao {
             "and  substr(createdAt,7) = strftime('%Y', date('now'))  group by category;")
     LiveData<List<TransactionByCategory>> getTransactionsSummaryByCategory();
 
+    @Query("SELECT * FROM `transaction` where category = :category order by createdAt DESC LIMIT 50")
+    LiveData<List<Transaction>> getTransactions(Category category);
 }
 
-// |   |  |

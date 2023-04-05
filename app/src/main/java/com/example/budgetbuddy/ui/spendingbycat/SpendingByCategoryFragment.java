@@ -1,7 +1,10 @@
 package com.example.budgetbuddy.ui.spendingbycat;
 
+import static android.content.ContentValues.TAG;
+
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.databinding.FragmentSpendingByCatBinding;
+import com.example.budgetbuddy.model.Category;
 import com.example.budgetbuddy.model.TransactionByCategory;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -29,12 +33,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class SpendingByCategoryFragment extends Fragment {
     private FragmentSpendingByCatBinding binding;
     PieChart pieChart;
     ListView listViewExpense;
     TextView txtHomeTitle;
+
+    PieDataSet pieDataSet;
     private SpendingByCatViewModel spendingByCatViewModel;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,14 +56,14 @@ public class SpendingByCategoryFragment extends Fragment {
         initPieChart();
         showPieChart();
 
+
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                if(e == null)
-                    return;
-               // listViewExpense.setAdapter();
-                    //TODO set adapter to display details of the clicked category
+                var label = ((PieEntry)e).getLabel().toLowerCase();
+                Log.d(TAG, "onValueSelected: "+ Category.valueOfLabel(label));
 
+                    //TODO set adapter to display details of the clicked category
             }
 
             @Override
@@ -92,20 +99,13 @@ public class SpendingByCategoryFragment extends Fragment {
 
 
     private void setupPieChart(List<TransactionByCategory> transactionByCategories) {
-        Map<String, Double> expenseCategory = new HashMap<>();
-        ArrayList<PieEntry> pieEntries = new ArrayList<>();
-        String label = "type";
-        transactionByCategories.forEach(t ->
-                expenseCategory.put(t.category.toString(),Math.abs(t.total))
-        );
-
-        for(String type: expenseCategory.keySet()){
-            pieEntries.add(new PieEntry(Objects.requireNonNull(expenseCategory.get(type)).floatValue(),type));
-        }
-        var colors = getPieChartColors();
-        PieDataSet pieDataSet = new PieDataSet(pieEntries,label);
+       var pieEntries =  transactionByCategories
+               .stream()
+               .map(t -> new PieEntry((float) Math.abs(t.total),t.category.toString()))
+               .collect(Collectors.toList());
+        pieDataSet = new PieDataSet(pieEntries,"type");
         pieDataSet.setValueTextSize(12f);
-        pieDataSet.setColors(colors);
+        pieDataSet.setColors(getPieChartColors());
         PieData pieData = new PieData(pieDataSet);
         pieData.setDrawValues(true);
         pieChart.setData(pieData);
@@ -114,7 +114,6 @@ public class SpendingByCategoryFragment extends Fragment {
     }
 
     private void initPieChart(){
-       //pieChart.setOnChartValueSelectedListener(this);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setRotationEnabled(true);
