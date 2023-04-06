@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.example.budgetbuddy.databinding.FragmentAddExpenseBinding;
 import com.example.budgetbuddy.model.Category;
 import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.ui.adapters.CategoryRecyclerViewAdapter;
+import com.example.budgetbuddy.ui.budget.AddBudgetViewModel;
 import com.example.budgetbuddy.utils.VectorDrawableUtils;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -37,7 +40,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class ExpenseFragment extends Fragment {
-    List<CategoryIcon> categories = new ArrayList<>();
+
     EditText editTextExpense;
     RecyclerView recyclerViewCategories;
     EditText editTextExpenseDescription;
@@ -64,12 +67,14 @@ public class ExpenseFragment extends Fragment {
         editTextCategory = binding.editTextCategory;
         editTextExpenseDate = binding.editTextExpenseDate;
         var fm =((AppCompatActivity) requireActivity()).getSupportFragmentManager();
-        AddData();
+
         editTextCategory.setInputType(InputType.TYPE_NULL);
         editTextCategory.setOnClickListener(view -> {
             Log.d("MyActivity", "EditText clicked");
             recyclerViewCategories.setVisibility(View.VISIBLE);
         });
+
+
 
         editTextCategory.setOnFocusChangeListener((view, hasFocus) -> {
             if (!hasFocus) {
@@ -84,6 +89,7 @@ public class ExpenseFragment extends Fragment {
 
         GridLayoutManager gm = new GridLayoutManager(getContext(), 3);
         recyclerViewCategories.setLayoutManager(gm);
+        var categories = addExpenseViewModel.getCategoryIcons();
         CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(categories, i -> {
             editTextCategory.setText(categories.get(i).getCategoryName());
             int selectedImage = categories.get(i).getCategoryPic();
@@ -108,42 +114,82 @@ public class ExpenseFragment extends Fragment {
             datePicker.show(fm, "MATERIAL_DATE_PICKER");
         });
 
+        btnAddExpense.setOnClickListener(v -> addExpenseListener(addExpenseViewModel));
+        btnAddExpense.setEnabled(false);
 
+        addExpenseViewModel.getExpenseFormState().observe(getViewLifecycleOwner(), this::expenseFormStateListener);
+        var afterTextChangedListener = setUpTextWatcher(editTextExpenseDescription,editTextCategory,editTextExpense,editTextExpenseDate,addExpenseViewModel);
 
-        btnAddExpense.setOnClickListener(v -> {
-            if (isValidInput()) {
-                double expense = Double.parseDouble(editTextExpense.getText().toString());
-                String description = editTextExpenseDescription.getText().toString();
-                String expenseDate = editTextExpenseDate.getText().toString();
-                MutableLiveData<List<Long>> savedIds = new MutableLiveData<>();
-                addExpenseViewModel.insert(savedIds,
-                        new Transaction(-1 * expense,
-                                description,
-                                Category.valueOfLabel(editTextCategory.getText().toString().toLowerCase()),
-                                LocalDateConverter.fromString(expenseDate)));
-                savedIds.observe(getViewLifecycleOwner(), ids -> {
-                    if(!ids.isEmpty()) {
-                        Toast.makeText(getContext(), "Expense added successfully", Toast.LENGTH_LONG).show();
-                        clearInput();
-                    }
-                });
-            }
-        });
+        editTextExpenseDescription.addTextChangedListener(afterTextChangedListener);
+        editTextCategory.addTextChangedListener(afterTextChangedListener);
+        editTextExpense.addTextChangedListener(afterTextChangedListener);
+        editTextExpenseDate.addTextChangedListener(afterTextChangedListener);
 
         return root;
     }
 
-    private void AddData() {
-        categories.add(new CategoryIcon(103, Category.DINING_OUT.toString(), R.drawable.utensils_solid));
-        categories.add(new CategoryIcon(101, Category.SHOPPING.toString(), R.drawable.basket_shopping_solid));
-        categories.add(new CategoryIcon(102, Category.TRAVEL.toString(), R.drawable.bus_simple_solid));
-        categories.add(new CategoryIcon(106, Category.CASH.toString(), R.drawable.cash_wave_solid));
-        categories.add(new CategoryIcon(101, Category.HOME.toString(), R.drawable.house_solid));
-        categories.add(new CategoryIcon(106, Category.HEALTH.toString(), R.drawable.medical_solid));
-        categories.add(new CategoryIcon(105, Category.ENTERTAINMENT.toString(), R.drawable.film_solid));
-        categories.add(new CategoryIcon(104, Category.EDUCATION.toString(), R.drawable.education_solid));
-        categories.add(new CategoryIcon(104, Category.UTILITIES.toString(), R.drawable.utilities_solid));
-        categories.add(new CategoryIcon(106, Category.MISCELLANEOUS.toString(), R.drawable.miscellaneous));
+    private void expenseFormStateListener(ExpenseFormState expenseFormState) {
+        if(expenseFormState == null) {
+            return;
+        }
+        btnAddExpense.setEnabled(expenseFormState.isDataValid());
+        if(expenseFormState.getExpenseError() != null){
+            editTextExpense.setError(getString(expenseFormState.getExpenseError()));
+        }
+        if(expenseFormState.getCategoryError() != null) {
+            editTextCategory.setError(getString(expenseFormState.getCategoryError()));
+        }
+        if(expenseFormState.getDescriptionError() != null) {
+            editTextExpenseDescription.setError(getString(expenseFormState.getDescriptionError()));
+        }
+        if(expenseFormState.getExpenseDateError() != null) {
+            editTextExpenseDate.setError(getString(expenseFormState.getExpenseDateError()));
+        }
+    }
+
+    private void addExpenseListener(ExpenseViewModel addExpenseViewModel) {
+        double expense = Double.parseDouble(editTextExpense.getText().toString());
+        String description = editTextExpenseDescription.getText().toString();
+        String expenseDate = editTextExpenseDate.getText().toString();
+        MutableLiveData<List<Long>> savedIds = new MutableLiveData<>();
+        addExpenseViewModel.insert(savedIds,
+                new Transaction(-1 * expense,
+                        description,
+                        Category.valueOfLabel(editTextCategory.getText().toString().toLowerCase()),
+                        LocalDateConverter.fromString(expenseDate)));
+        savedIds.observe(getViewLifecycleOwner(), ids -> {
+            if(!ids.isEmpty()) {
+                Toast.makeText(getContext(), "Expense added successfully", Toast.LENGTH_LONG).show();
+                clearInput();
+            }
+        });
+    }
+
+
+
+    public TextWatcher setUpTextWatcher(EditText editTextExpenseDescription,
+                                        EditText editTextCategory,
+                                        EditText editTextExpense,
+                                        EditText editTextExpenseDate,
+                                        ExpenseViewModel expenseViewModel) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // ignore
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // ignore
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                expenseViewModel.addExpenseTextChanged(
+                        editTextExpenseDescription.getText().toString(),
+                         editTextCategory.getText().toString(),
+                         editTextExpense.getText().toString(),
+                        editTextExpenseDate.getText().toString());
+            }
+        };
     }
 
 
@@ -153,26 +199,7 @@ public class ExpenseFragment extends Fragment {
         editTextCategory.setText(null);
         editTextExpenseDate.setText(null);
         editTextExpense.setText(null);
-    }
 
-    public boolean isValidInput() {
-        if (editTextExpense.getText().toString().equalsIgnoreCase("0") ||
-                editTextExpense.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(getContext(), "Income cannot be 0 or empty", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (editTextExpenseDescription.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(getContext(), "Please enter a description", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (editTextExpenseDate.getText().toString().equalsIgnoreCase("") ||
-                editTextExpenseDate.getText().toString().toLowerCase().contains("d") ||
-                editTextExpenseDate.getText().toString().toLowerCase().contains("m") ||
-                editTextExpenseDate.getText().toString().toLowerCase().contains("y")) {
-            Toast.makeText(getContext(), "Please enter a valid date", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true;
     }
     @Override
     public void onDestroyView() {
