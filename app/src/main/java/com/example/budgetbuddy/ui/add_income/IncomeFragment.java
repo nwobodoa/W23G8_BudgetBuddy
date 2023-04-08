@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Entity;
@@ -42,8 +43,8 @@ public class IncomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         AddIncomeViewModel addIncomeViewModel = new ViewModelProvider(this).get(AddIncomeViewModel.class);
-        var datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select date").build();
-        var fm =((AppCompatActivity) requireActivity()).getSupportFragmentManager();
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select date").build();
+        FragmentManager fm =((AppCompatActivity) requireActivity()).getSupportFragmentManager();
 
         binding = FragmentAddIncomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -86,7 +87,7 @@ public class IncomeFragment extends Fragment {
             double income = Double.parseDouble(editTextIncome.getText().toString());
             String description = editTextDescription.getText().toString();
             String incomeDate = editTextDate.getText().toString();
-            var tx = new Transaction(income, description, Category.INCOME, LocalDateConverter.fromString(incomeDate));
+            Transaction tx = new Transaction(income, description, Category.INCOME, LocalDateConverter.fromString(incomeDate));
             MutableLiveData<List<Long>> txIds = new MutableLiveData<>();
             addIncomeViewModel.saveTransaction(tx, txIds);
             txIds.observe(getViewLifecycleOwner(), ids -> {

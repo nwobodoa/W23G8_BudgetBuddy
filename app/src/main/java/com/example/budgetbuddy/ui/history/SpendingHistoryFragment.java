@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.databinding.FragmentSpendingHistoryBinding;
-import com.example.budgetbuddy.ui.adapters.TransactionAdapter;
+import com.example.budgetbuddy.adapters.TransactionAdapter;
 
 public class SpendingHistoryFragment extends Fragment {
     private FragmentSpendingHistoryBinding binding;
