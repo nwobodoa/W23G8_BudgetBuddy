@@ -9,15 +9,30 @@ import java.time.LocalDate;
 @Entity
 public class Budget {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private Long id;
     private LocalDate createdAt;
     private YearMonth yearMonth;
 
-    public int getId() {
+    public Budget() {
+
+    }
+
+    public Budget(LocalDate createdAt, YearMonth yearMonth){
+        this.createdAt = createdAt;
+        this.yearMonth = yearMonth;
+    }
+
+    public Budget(Long id, LocalDate createdAt, YearMonth yearMonth){
+        this.createdAt = createdAt;
+        this.yearMonth = yearMonth;
+        this.id = id;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

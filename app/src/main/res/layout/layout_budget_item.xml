@@ -8,30 +8,35 @@
         android:id="@+id/imgBudgetItem"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.3"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="0.2"
         app:srcCompat="@drawable/housing" />
 
     <TextView
         android:id="@+id/txtViewBudgetItem"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:gravity="center|left"
-        android:paddingLeft="20dp"
+        android:paddingLeft="15dp"
         android:text="TextView"
-        android:textColor="#151414" />
+        android:textAlignment="viewStart"
+        android:textColor="#151414"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/editTextBudgetItem"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:autofillHints=""
         android:background="@drawable/input_bg"
         android:drawableStart="@drawable/baseline_attach_money_24"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="0"
+        android:hint="0.00"
         android:inputType="number"
         android:minHeight="20dp"
         android:textColor="@color/red_700"

@@ -13,18 +13,19 @@ import java.util.List;
 
 @Dao
 public interface TransactionDao {
-    @Query("SELECT * FROM `transaction` order by createdAt DESC LIMIT 50")
+    @Query("SELECT * FROM `transaction` ORDER BY createdAt DESC")
     LiveData<List<Transaction>> getAll();
     @Insert
     List<Long> insertAll(Transaction... transactions);
-    @Query("select category, sum(amount) as total from `transaction` " +
-            "where  substr(createdAt,4,2)  = strftime('%m', date('now')) " +
-            "and  substr(createdAt,7) = strftime('%Y', date('now'))  group by category;")
+    @Query("SELECT category, sum(amount) AS total FROM `transaction` " +
+            "WHERE  substr(createdAt,4,2)  = strftime('%m', date('now')) " +
+            "AND  substr(createdAt,7) = strftime('%Y', date('now'))  GROUP BY category;")
     LiveData<List<TransactionByCategory>> getTransactionsSummaryByCategory();
 
-    @Query("SELECT * FROM `transaction` where category = :category and " +
-            "substr(createdAt,4,2)  = strftime('%m', date('now')) and substr(createdAt,7) = strftime('%Y', date('now'))" +
-            "order by createdAt DESC LIMIT 50")
+
+    @Query("SELECT * FROM `transaction` WHERE category = :category AND " +
+            "substr(createdAt,4,2)  = strftime('%m', date('now')) AND substr(createdAt,7) = strftime('%Y', date('now'))" +
+            "ORDER BY createdAt DESC")
     LiveData<List<Transaction>> getTransactions(Category category);
 }
 
