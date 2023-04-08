@@ -66,7 +66,8 @@
     <string name="txtaddnewbudget">ADD BUDGET</string>
 
 
-    <string name="txtbtnExport">Export Report</string>
+    <string name="txtbtnExport">Export Report(PDF)</string>
+    <string name="txtbtnExport2">Export Report(CSV)</string>
     <string name="select_category">Select Category</string>
     <string name="add_expense">Add Expense</string>
     <string name="expense">Expense</string>

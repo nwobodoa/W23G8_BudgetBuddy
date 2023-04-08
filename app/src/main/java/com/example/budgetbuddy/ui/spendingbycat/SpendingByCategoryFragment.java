@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class SpendingByCategoryFragment extends Fragment {
+public class  SpendingByCategoryFragment extends Fragment {
 
 
     private FragmentSpendingByCatBinding binding;
