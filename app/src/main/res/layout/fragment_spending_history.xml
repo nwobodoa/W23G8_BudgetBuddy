@@ -7,11 +7,21 @@
     android:background="@color/brown_100"
     tools:context=".ui.home.HomeFragment">
 
+    <Button
+        android:id="@+id/btnExport2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/txtbtnExport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewTransactionHistory" />
+
     <TextView
         android:id="@+id/txtHomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="@string/menu_history"
         android:textColor="@color/red_200"
         android:textSize="24sp"
@@ -24,9 +34,12 @@
         android:id="@+id/btnExport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtbtnExport"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/txtbtnExport2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnExport2"
         app:layout_constraintTop_toBottomOf="@+id/listViewTransactionHistory" />
 
     <LinearLayout
