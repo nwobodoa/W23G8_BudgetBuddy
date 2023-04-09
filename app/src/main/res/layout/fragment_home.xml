@@ -106,7 +106,14 @@
                 android:textColor="@color/red_700"
                 android:textAlignment="center" />
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/budgetCompareTitle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="16dp"
+            android:text="Budget Comparison"
+            android:textColor="@color/red_700"
+            android:textStyle="bold" />
         <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
