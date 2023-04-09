@@ -49,7 +49,7 @@ public class LineItemViewAdapter extends RecyclerView.Adapter<LineItemViewAdapte
 
         holder.imageViewItem.setImageResource(lineItems.get(position).getCategory().getDrawableId());
         holder.textViewItem.setText(lineItems.get(position).getCategory().toString());
-        var startingAmount = lineItems.get(position).getAmount() == 0.0 ? "" : String.valueOf(lineItems.get(position).getAmount() );
+        String startingAmount = lineItems.get(position).getAmount() == 0.0 ? "" : String.valueOf(lineItems.get(position).getAmount() );
         holder.editTextItem.setText(startingAmount);
         holder.editTextItem.addTextChangedListener(new TextWatcher() {
             @Override
@@ -59,7 +59,7 @@ public class LineItemViewAdapter extends RecyclerView.Adapter<LineItemViewAdapte
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                var amount = charSequence.toString().isBlank() ? 0.0 : Double.parseDouble((charSequence.toString()));
+                double amount = charSequence.toString().isBlank() ? 0.0 : Double.parseDouble((charSequence.toString()));
                 filledLineItems.get(holder.getAdapterPosition()).setAmount(amount);
             }
 
