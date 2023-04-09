@@ -1,4 +1,4 @@
-package com.example.budgetbuddy.ui.adapters;
+package com.example.budgetbuddy.adapters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -21,22 +21,13 @@ public class TransactionAdapter extends BaseAdapter {
     TextView textViewTransaction;
     TextView textViewTransactionDescription;
     TextView textViewTransactionDate;
+    TextView textViewTransactionCategory;
     public TransactionAdapter(List<Transaction> transactionList) {
         TransactionList = transactionList;
         setSelectedIndex(-1);
     }
 
-    public List<Transaction> getTransactionList() {
-        return TransactionList;
-    }
 
-    public void setTransactionList(List<Transaction> transactionList) {
-        TransactionList = transactionList;
-    }
-
-    public int getSelectedIndex() {
-        return SelectedIndex;
-    }
 
     public void setSelectedIndex(int selectedIndex) {
         SelectedIndex = selectedIndex;
@@ -66,6 +57,7 @@ public class TransactionAdapter extends BaseAdapter {
         textViewTransaction = convertView.findViewById(R.id.textViewTransactionAmount);
         textViewTransactionDescription = convertView.findViewById(R.id.textViewTransactionDescription);
         textViewTransactionDate = convertView.findViewById(R.id.textViewTransactionDate);
+        textViewTransactionCategory = convertView.findViewById(R.id.textViewTransactionCategory);
 
         String amount = "" + TransactionList.get(position).getAmount();
         String prefix = "";
@@ -78,16 +70,13 @@ public class TransactionAdapter extends BaseAdapter {
         textViewTransaction.setText(prefix + amount);
         textViewTransactionDescription.setText(""+TransactionList.get(position).getDescription());
         textViewTransactionDate.setText(""+TransactionList.get(position).getCreatedAt());
+        textViewTransactionCategory.setText(TransactionList.get(position).getCategory().toString());
 
-
-        int textColor = R.color.green;
-        if (TransactionList.get(position).getAmount() < 0 ) {
-            textColor = R.color.red;
-        }
-
+        int textColor = TransactionList.get(position).getAmount() >= 0 ? R.color.green : R.color.red;
         textViewTransaction.setTextColor(ContextCompat.getColor(parent.getContext(), textColor));
         textViewTransactionDescription.setTextColor(ContextCompat.getColor(parent.getContext(), textColor));
         textViewTransactionDate.setTextColor(ContextCompat.getColor(parent.getContext(), textColor));
+        textViewTransactionCategory.setTextColor(ContextCompat.getColor(parent.getContext(), textColor));
 
         return convertView;
     }

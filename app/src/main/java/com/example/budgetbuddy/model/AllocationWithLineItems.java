@@ -5,16 +5,16 @@ import androidx.room.Relation;
 
 import java.util.Set;
 
-public class BudgetWithLineItems {
+public class AllocationWithLineItems {
     @Embedded
-    private Budget budget;
+    private Allocation allocation;
 
-    public Budget getBudget() {
-        return budget;
+    public Allocation getAllocation() {
+        return allocation;
     }
 
-    public void setBudget(Budget budget) {
-        this.budget = budget;
+    public void setAllocation(Allocation allocation) {
+        this.allocation = allocation;
     }
 
     public Set<LineItem> getLineItems() {
@@ -27,12 +27,12 @@ public class BudgetWithLineItems {
 
     @Relation(
             parentColumn = "id",
-            entityColumn = "budgetId"
+            entityColumn = "allocationId"
     )
     private Set<LineItem> lineItems;
 
-    public BudgetWithLineItems(Budget budget, Set<LineItem> lineItems) {
-        this.budget = budget;
+    public AllocationWithLineItems(Allocation allocation, Set<LineItem> lineItems) {
+        this.allocation = allocation;
         this.lineItems = lineItems;
     }
 }

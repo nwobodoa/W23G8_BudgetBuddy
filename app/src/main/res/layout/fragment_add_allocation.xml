@@ -7,12 +7,29 @@
     android:background="@color/brown_100"
     tools:context=".ui.add_expense.ExpenseFragment">
 
+    <Button
+        android:id="@+id/btnAddAllocation"
+        android:layout_width="354dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_corner"
+
+        android:text="@string/txtaddnewallocation"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewBudgetLineItem"
+        app:layout_constraintVertical_bias="0.23000002"
+        tools:ignore="DuplicateSpeakableTextCheck,VisualLintButtonSize" />
+
     <TextView
         android:id="@+id/txtBudgetTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="Add Budget"
+        android:text="@string/add_allocation"
         android:textColor="@color/red_200"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -21,29 +38,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBudget"
+        android:id="@+id/recyclerViewBudgetLineItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddAllocation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBudgetTitle" />
-
-    <Button
-        android:id="@+id/btnAddBudget"
-        android:layout_width="354dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/rounded_corner"
-
-        android:text="@string/txtaddnewbudget"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewBudget"
-        app:layout_constraintVertical_bias="0.23000002"
-        tools:ignore="DuplicateSpeakableTextCheck,VisualLintButtonSize" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBudgetTitle"
+        app:layout_constraintVertical_bias="0.38" />
 </androidx.constraintlayout.widget.ConstraintLayout>

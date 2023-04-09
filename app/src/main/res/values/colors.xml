@@ -9,6 +9,8 @@
     <color name="blue">#0C00FE</color>
     <color name="white">#ffffff</color>
     <color name="icon_brown">#e37644</color>
+    <color name="green_indicator">#4CE0B3</color>
+    <color name="warning_indicator">#FF8400</color>
 
 
     <color name="green">#26A82B</color>

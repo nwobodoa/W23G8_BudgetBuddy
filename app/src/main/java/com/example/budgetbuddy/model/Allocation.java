@@ -7,17 +7,32 @@ import java.time.YearMonth;
 import java.time.LocalDate;
 
 @Entity
-public class Budget {
+public class Allocation {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private Long id;
     private LocalDate createdAt;
     private YearMonth yearMonth;
 
-    public int getId() {
+    public Allocation() {
+
+    }
+
+    public Allocation(LocalDate createdAt, YearMonth yearMonth){
+        this.createdAt = createdAt;
+        this.yearMonth = yearMonth;
+    }
+
+    public Allocation(Long id, LocalDate createdAt, YearMonth yearMonth){
+        this.createdAt = createdAt;
+        this.yearMonth = yearMonth;
+        this.id = id;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
