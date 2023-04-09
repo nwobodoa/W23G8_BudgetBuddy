@@ -1,55 +1,86 @@
 package com.example.budgetbuddy.ui.budget;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.databinding.FragmentAddBudgetBinding;
-import com.example.budgetbuddy.ui.adapters.BudgetRecyclerViewAdapter;
+import com.example.budgetbuddy.adapters.LineItemViewAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
 public class AddBudgetFragment extends Fragment {
-    List<Budget> budgets = new ArrayList<>();
-    RecyclerView recyclerViewBudget;
+
+    RecyclerView recyclerView;
     private FragmentAddBudgetBinding binding;
 
+    BudgetViewModel budgetViewModel;
+
+    Button button;
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAddBudgetBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        recyclerViewBudget =binding.recyclerViewBudget;
+        recyclerView = binding.recyclerViewBudgetLineItem;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerViewBudget.setLayoutManager(layoutManager);
-        BudgetRecyclerViewAdapter adapter = new BudgetRecyclerViewAdapter(budgets);
-        recyclerViewBudget.setAdapter(adapter);
-        AddData();
+        budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
+        recyclerView.setLayoutManager(layoutManager);
+        setRecyclerView();
         return root;
     }
 
+    private void setRecyclerView() {
+        budgetViewModel.getBudget().observe(getViewLifecycleOwner(), budget -> {
+            budgetViewModel.getLineItems(budget).observe(getViewLifecycleOwner(), data -> {
+                LineItemViewAdapter adapter = new LineItemViewAdapter(data);
+                recyclerView.setAdapter(adapter);
+                button = binding.btnAddBudget;
+                button.setOnClickListener(view -> saveBudget(adapter));
+            });
+        });
+
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    public void saveBudget(LineItemViewAdapter adapter) {
+        boolean allZeroes = adapter.getFilledLineItems().stream().allMatch(lineItem -> lineItem.getAmount() == 0.0);
+        boolean hasNegative = adapter.getFilledLineItems().stream().anyMatch(lineItem -> lineItem.getAmount() < 0.0);
+        if (allZeroes) {
+            Toast.makeText(getContext(),"Please provide at least one value for any line item", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (hasNegative) {
+            Toast.makeText(getContext(),"Negative budget items are not allowed", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        budgetViewModel.saveLineItems(adapter.getFilledLineItems());
+        budgetViewModel.getSavedLineItemIds().observe(getViewLifecycleOwner(), ids -> {
+            if(ids.isEmpty()) {
+                Toast.makeText(getContext(),"Transaction save failed", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(getContext(),"Transaction saved successfully", Toast.LENGTH_SHORT).show();
+
+        });
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    private void AddData() {
-        budgets.add(new Budget(101, "Housing", R.drawable.housing,0));
-        budgets.add(new Budget(102, "Transportation", R.drawable.transportation,0));
-        budgets.add(new Budget(103, "Food and Dining", R.drawable.feeding,0));
-        budgets.add(new Budget(104, "Utilities", R.drawable.utilities,0));
-        budgets.add(new Budget(105, "Insurance", R.drawable.insurance,0));
-        budgets.add(new Budget(106, "Medical and Healthcare", R.drawable.medical,0));
-        budgets.add(new Budget(104, "Personal Spending", R.drawable.personal_spending,0));
-        budgets.add(new Budget(105, "Recreation and Entertainment", R.drawable.entertainment,0));
-        budgets.add(new Budget(106, "Miscellaneous", R.drawable.miscellaneous,0));
     }
 }

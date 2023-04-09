@@ -14,6 +14,7 @@ import com.example.budgetbuddy.model.LineItem;
 import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.User;
 import com.example.budgetbuddy.repository.dao.BudgetDao;
+import com.example.budgetbuddy.repository.dao.LineItemDao;
 import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.repository.dao.UserDao;
 
@@ -29,16 +30,21 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TransactionDao transactionDao();
 
+    public abstract LineItemDao lineItemDao();
+
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
+    //Singleton pattern to ensure that the app on has one instance at a time
+    // synchronized is to ensure that different threads are aware of the singleton for thread safety
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "budget_buddy")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
