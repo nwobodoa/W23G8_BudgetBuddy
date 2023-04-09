@@ -82,6 +82,11 @@
     <string name="expense_category_error">Category is unknown</string>
     <string name="statistics">Statistics</string>
     <string name="expense_date_error">Please provide a valid date in the dd-mm-yyyy format</string>
+    <string name="txtMonthlyExpenditure">Total Monthly Expenditure</string>
+    <string name="txtMonthlyBudgeted">Total Monthly Budgeted</string>
+    <string name="no_expenditure">No expenditure added yet</string>
+    <string name="select_category_to_view">Select a Category to view details</string>
+    <string name="no_budget">No budget found for the month</string>
     <string-array name="Categories">
         <item>Housing</item>
         <item>Transportation</item>

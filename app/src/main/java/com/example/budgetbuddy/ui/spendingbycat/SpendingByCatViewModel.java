@@ -15,21 +15,17 @@ import com.example.budgetbuddy.repository.respository.TransactionRepository;
 import java.util.List;
 
 public class SpendingByCatViewModel extends AndroidViewModel {
-    private final MutableLiveData<String> mText;
+
 
     private final TransactionRepository transactionRepository;
-    private MutableLiveData<List<Transaction>> transactionsForCategory = new MutableLiveData();
+    private final MutableLiveData<List<Transaction>> transactionsForCategory = new MutableLiveData<>();
     public SpendingByCatViewModel(@NonNull Application application) {
         super(application);
         transactionRepository = new TransactionRepository(application);
-        mText = new MutableLiveData<>();
-        mText.setValue("");
+
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
-    public LiveData<List<TransactionByCategory>> getSpendingByCategory() {
+        public LiveData<List<TransactionByCategory>> getSpendingByCategory() {
         return transactionRepository.getSpendingByCategory();
     }
 

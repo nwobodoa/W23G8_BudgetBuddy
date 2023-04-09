@@ -36,8 +36,6 @@ public class BudgetViewModel extends AndroidViewModel {
 
 
     public void saveLineItems(List<LineItem> filledLineItems) {
-        Budget budget = new Budget();
-        budget.setYearMonth(YearMonth.now());
         budgetRepository.insert(filledLineItems);
     }
 

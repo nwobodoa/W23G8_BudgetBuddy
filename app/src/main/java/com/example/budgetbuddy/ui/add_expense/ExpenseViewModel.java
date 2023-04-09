@@ -37,7 +37,7 @@ public class ExpenseViewModel extends AndroidViewModel {
 
     private boolean isValidExpense(String expense) {
         try {
-            var expDouble = Double.parseDouble(expense);
+            double expDouble = Double.parseDouble(expense);
             return expDouble > 0.0;
         } catch (Exception e) {
             return false;
@@ -68,12 +68,8 @@ public class ExpenseViewModel extends AndroidViewModel {
             );
             return;
         }
-        if (Category.valueOfLabel(category.toLowerCase()) == null) {
-            expenseFormState.postValue(
-                    new ExpenseFormState(null, null, R.string.expense_category_error, null, false)
-            );
-            return;
-        }
+
+
         if (!isValidDate(expenseDate)) {
             expenseFormState.postValue(
                     new ExpenseFormState(null, null, null, R.string.expense_date_error, false)
@@ -87,16 +83,4 @@ public class ExpenseViewModel extends AndroidViewModel {
         return expenseFormState;
     }
 
-    public List<CategoryIcon> getCategoryIcons() {
-        return List.of(new CategoryIcon(103, Category.DINING_OUT.toString(), R.drawable.utensils_solid)
-                , new CategoryIcon(101, Category.SHOPPING.toString(), R.drawable.basket_shopping_solid)
-                , new CategoryIcon(102, Category.TRAVEL.toString(), R.drawable.bus_simple_solid)
-                , new CategoryIcon(106, Category.CASH.toString(), R.drawable.cash_wave_solid)
-                , new CategoryIcon(101, Category.HOME.toString(), R.drawable.house_solid)
-                , new CategoryIcon(106, Category.HEALTH.toString(), R.drawable.medical_solid)
-                , new CategoryIcon(105, Category.ENTERTAINMENT.toString(), R.drawable.film_solid)
-                , new CategoryIcon(104, Category.EDUCATION.toString(), R.drawable.education_solid)
-                , new CategoryIcon(104, Category.UTILITIES.toString(), R.drawable.utilities_solid)
-                , new CategoryIcon(106, Category.MISCELLANEOUS.toString(), R.drawable.miscellaneous));
-    }
 }

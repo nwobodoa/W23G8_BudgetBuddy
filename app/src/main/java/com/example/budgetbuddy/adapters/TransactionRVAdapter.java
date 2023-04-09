@@ -1,4 +1,4 @@
-package com.example.budgetbuddy.ui.adapters;
+package com.example.budgetbuddy.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
