@@ -69,7 +69,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.SummaryV
             linearProgressIndicator.setIndicatorColor(Color.RED);
             return;
         }
-        var percentageSpent = calculatedPercentSpent(budgetAmt, amtSpent);
+        double percentageSpent = calculatedPercentSpent(budgetAmt, amtSpent);
         if((int) percentageSpent > 60) {
             linearProgressIndicator.setIndicatorColor(ContextCompat.getColor(context, R.color.warning_indicator));
             linearProgressIndicator.setProgress((int) percentageSpent);
