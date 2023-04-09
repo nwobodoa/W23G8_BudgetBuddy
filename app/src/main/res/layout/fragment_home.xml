@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brown_100"
+    tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/txtHomeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/red_200"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHomeTitle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/linearLayoutHeadings"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTotalBudgetHeader"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="Total Budget"
+                android:textAlignment="center"
+                android:textColor="@color/red_700"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTotalIncomeHeader"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="Total Income"
+                android:textAlignment="center"
+                android:textColor="@color/red_700"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTotalExpenseHeader"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="Total Expense"
+                android:textAlignment="center"
+                android:textColor="@color/red_700"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutValues"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTotalBudgetValues"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="100.00"
+                android:textColor="@color/red_700"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textViewTotalIncomeValues"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="20;00"
+                android:textColor="@color/red_700"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textViewTotalExpenseValues"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="199.00"
+                android:textColor="@color/red_700"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="800dp"
+            android:layout_height="600dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/txtHomeTitle"
+            tools:layout_editor_absoluteX="0dp" />
+    </LinearLayout>
+    </HorizontalScrollView>
+    </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,6 @@ package com.example.budgetbuddy;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -41,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_addExpense,
                 R.id.nav_addIncome,
-                R.id.nav_addBudget,
+                R.id.nav_addAllocation,
                 R.id.nav_stats,
+                R.id.nav_home,
+                R.id.nav_addBudget,
                 R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();

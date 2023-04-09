@@ -52,6 +52,7 @@
     <string name="menu_income">Add Income</string>
     <string name="menu_expense">Add Expense</string>
     <string name="menu_addAllocation">Add Allocation</string>
+    <string name="menu_addBudget">Add Budget</string>
     <string name="menu_history">Transaction History</string>
     <string name="menu_spendingByCat">Spending by Category</string>
     <string name="txtExpenseIcon">EXPENSE</string>
@@ -64,7 +65,7 @@
     <string name="txtView">Text View</string>
 
     <string name="txtaddnewallocation">ADD ALLOCATION</string>
-
+    <string name="txtaddnewbudget">ADD BUDGET</string>
 
     <string name="txtbtnExport">Export Report</string>
     <string name="select_category">Select Category</string>

@@ -27,5 +27,9 @@ public interface TransactionDao {
             "substr(createdAt,4,2)  = strftime('%m', date('now')) AND substr(createdAt,7) = strftime('%Y', date('now'))" +
             "ORDER BY createdAt DESC")
     LiveData<List<Transaction>> getTransactions(Category category);
+    @Query("SELECT * FROM `transaction` WHERE amount < 0")
+    List<Transaction> getAllNegativeTransactions();
+    @Query("SELECT * FROM `transaction` WHERE amount > 0")
+    List<Transaction> getAllPositiveTransactions();
 }
 

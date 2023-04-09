@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brown_100"
+    tools:context=".ui.add_expense.ExpenseFragment">
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerViewBudget"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txtBudgetTitle" />-->
+    <TextView
+        android:id="@+id/txtBudgetTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Add Budget"
+        android:textColor="@color/red_200"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/linearLayoutHousing"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/txtBudgetTitle"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewHousing"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/housing" />
+
+        <TextView
+            android:id="@+id/textViewHousing"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Housing"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextHousing"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTransportation"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutHousing"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewTransportation"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/transportation" />
+
+        <TextView
+            android:id="@+id/textViewTransportation"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Transportation"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextTransportation"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutFood"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTransportation"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewFood"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/feeding" />
+
+        <TextView
+            android:id="@+id/textViewFood"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Food and Dining"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextFood"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutUtilities"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutFood"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewUtilities"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/utilities" />
+
+        <TextView
+            android:id="@+id/textViewUtilities"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Utilities"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextUtilities"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutInsurance"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutUtilities"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewInsurance"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/insurance" />
+
+        <TextView
+            android:id="@+id/textViewInsurance"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Insurance"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextInsurance"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutMedical"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutInsurance"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewMedical"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/medical" />
+
+        <TextView
+            android:id="@+id/textViewMedical"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Medical and Healthcare"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextMedical"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPersonal"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutMedical"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewPersonal"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/personal_spending" />
+
+        <TextView
+            android:id="@+id/textViewPersonal"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Personal Spending"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextPersonal"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutEntertainment"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPersonal"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewEntertainment"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/entertainment" />
+
+        <TextView
+            android:id="@+id/textViewEntertainment"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Recreation and Entertainment"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextEntertainment"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutMiscellaneous"
+        android:layout_width="409dp"
+        android:layout_height="40dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutEntertainment"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imageViewMiscellaneous"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:maxWidth="0dp"
+            android:src="@drawable/miscellaneous" />
+
+        <TextView
+            android:id="@+id/textViewMiscellaneous"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.6"
+            android:maxWidth="0dp"
+            android:text="Miscellaneous"
+            android:textAlignment="viewStart"
+            android:textColor="@color/red_700"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editTextMiscellaneous"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="0.00"
+            android:textColorHint="@color/red_700"
+            android:background="@drawable/input_bg"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:maxWidth="0dp"
+            android:textColor="@color/red_700" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddBudget"
+        android:layout_width="354dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_corner"
+        android:text="@string/txtaddnewbudget"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutMiscellaneous"
+        tools:ignore="DuplicateSpeakableTextCheck,VisualLintButtonSize" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,10 +10,12 @@ import androidx.room.TypeConverters;
 import com.example.budgetbuddy.converter.LocalDateConverter;
 import com.example.budgetbuddy.converter.MonthYearConverter;
 import com.example.budgetbuddy.model.Allocation;
+import com.example.budgetbuddy.model.Budget;
 import com.example.budgetbuddy.model.LineItem;
 import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.User;
 import com.example.budgetbuddy.repository.dao.AllocationDao;
+import com.example.budgetbuddy.repository.dao.BudgetDao;
 import com.example.budgetbuddy.repository.dao.LineItemDao;
 import com.example.budgetbuddy.repository.dao.TransactionDao;
 import com.example.budgetbuddy.repository.dao.UserDao;
@@ -21,7 +23,7 @@ import com.example.budgetbuddy.repository.dao.UserDao;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Transaction.class, Allocation.class, LineItem.class}, version = 8)
+@Database(entities = {User.class, Transaction.class, Allocation.class, LineItem.class, Budget.class}, version = 8)
 @TypeConverters({LocalDateConverter.class, MonthYearConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao   userDao();
@@ -31,6 +33,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TransactionDao transactionDao();
 
     public abstract LineItemDao lineItemDao();
+
+    public abstract BudgetDao budgetDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
