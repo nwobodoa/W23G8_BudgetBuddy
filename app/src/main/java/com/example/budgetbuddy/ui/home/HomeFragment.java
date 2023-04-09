@@ -205,7 +205,7 @@ BarChart mChart;
                     break;
                 }
             }
-            barOne.add(new BarEntry(i, expenseAmount));
+//            barOne.add(new BarEntry(i, expenseAmount));
             barTwo.add(new BarEntry(i, budgetAmount));
         }
 
