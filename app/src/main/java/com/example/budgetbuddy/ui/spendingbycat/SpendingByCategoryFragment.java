@@ -1,6 +1,6 @@
 package com.example.budgetbuddy.ui.spendingbycat;
 
-import static android.content.ContentValues.TAG;
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,24 +8,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.converter.LocalDateConverter;
-import com.example.budgetbuddy.converter.MonthYearConverter;
+import com.example.budgetbuddy.adapters.TransactionRVAdapter;
 import com.example.budgetbuddy.databinding.FragmentSpendingByCatBinding;
 import com.example.budgetbuddy.model.Category;
-import com.example.budgetbuddy.model.Transaction;
 import com.example.budgetbuddy.model.TransactionByCategory;
-import com.example.budgetbuddy.ui.adapters.TransactionRVAdapter;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -36,23 +31,18 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SpendingByCategoryFragment extends Fragment {
 
 
-    private FragmentSpendingByCatBinding binding;
     PieChart pieChart;
-   TextView txtHomeTitle;
+    TextView txtHomeTitle;
     RecyclerView recyclerView;
     PieDataSet pieDataSet;
+    private FragmentSpendingByCatBinding binding;
     private SpendingByCatViewModel spendingByCatViewModel;
 
 
@@ -65,18 +55,17 @@ public class SpendingByCategoryFragment extends Fragment {
         txtHomeTitle = binding.txtHomeTitle;
         pieChart = binding.pieChartView;
         recyclerView = binding.recyclerViewTransaction;
-        txtHomeTitle.setText("Select a Category to view details");
+        txtHomeTitle.setText(R.string.select_category_to_view);
         spendingByCatViewModel = new ViewModelProvider(this).get(SpendingByCatViewModel.class);
-
-        LinearLayoutManager lm = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager lm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(lm);
 
         spendingByCatViewModel
                 .getTransactionsForCategory()
-                .observe(getViewLifecycleOwner(),transactions -> {
-                   TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(transactions);
-            recyclerView.setAdapter(transactionAdapter);
-        });
+                .observe(getViewLifecycleOwner(), transactions -> {
+                    TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(transactions);
+                    recyclerView.setAdapter(transactionAdapter);
+                });
 
         spendingByCatViewModel = new ViewModelProvider(this).get(SpendingByCatViewModel.class);
         initPieChart();
@@ -86,7 +75,7 @@ public class SpendingByCategoryFragment extends Fragment {
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                String label = ((PieEntry)e).getLabel().toLowerCase();
+                String label = ((PieEntry) e).getLabel().toLowerCase();
                 Category selectedCategory = Category.valueOfLabel(label);
                 spendingByCatViewModel.getTransactionsForCategory(selectedCategory).observe(
                         getViewLifecycleOwner(), transactions -> {
@@ -99,8 +88,7 @@ public class SpendingByCategoryFragment extends Fragment {
 
             @Override
             public void onNothingSelected() {
-
-                txtHomeTitle.setText("Select a Category to view details");
+                txtHomeTitle.setText(R.string.select_category_to_view);
                 TransactionRVAdapter transactionAdapter = new TransactionRVAdapter(List.of());
                 recyclerView.setAdapter(transactionAdapter);
             }
@@ -110,32 +98,37 @@ public class SpendingByCategoryFragment extends Fragment {
     }
 
 
-
-    private void showPieChart(){
-            spendingByCatViewModel.getSpendingByCategory().observe(getViewLifecycleOwner(), this::setupPieChart);
+    private void showPieChart() {
+        spendingByCatViewModel.getSpendingByCategory().observe(getViewLifecycleOwner(), this::setupPieChart);
     }
 
     private List<Integer> getPieChartColors() {
-        ArrayList<Integer> colors =  new ArrayList<>();
-        colors.add(Color.parseColor("#304567"));
-        colors.add(Color.parseColor("#309967"));
-        colors.add(Color.parseColor("#476567"));
-        colors.add(Color.parseColor("#890567"));
-        colors.add(Color.parseColor("#a35567"));
-        colors.add(Color.parseColor("#ff5f67"));
-        colors.add(Color.parseColor("#3ca567"));
-        colors.add(Color.parseColor("#FFA600"));
-        colors.add(Color.parseColor("#DE425B"));
-        return colors;
+        return List.of(
+                Color.parseColor("#304567"),
+                Color.parseColor("#309967"),
+                Color.parseColor("#476567"),
+                Color.parseColor("#890567"),
+                Color.parseColor("#a35567"),
+                Color.parseColor("#ff5f67"),
+                Color.parseColor("#3ca567"),
+                Color.parseColor("#FFA600"),
+                Color.parseColor("#DE425B"));
     }
 
 
     private void setupPieChart(List<TransactionByCategory> transactionByCategories) {
-       List<PieEntry> pieEntries =  transactionByCategories
-               .stream()
-               .map(t -> new PieEntry((float) Math.abs(t.total),t.category.toString()))
-               .collect(Collectors.toList());
-        pieDataSet = new PieDataSet(pieEntries,"type");
+        if(transactionByCategories.isEmpty()) {
+            txtHomeTitle.setText(R.string.no_expenditure);
+            pieChart.setVisibility(View.GONE);
+            return;
+        }
+        pieChart.setVisibility(View.VISIBLE);
+        txtHomeTitle.setText(R.string.select_category_to_view);
+        List<PieEntry> pieEntries = transactionByCategories
+                .stream()
+                .map(t -> new PieEntry((float) Math.abs(t.total), t.category.toString()))
+                .collect(Collectors.toList());
+        pieDataSet = new PieDataSet(pieEntries, "type");
         pieDataSet.setValueTextSize(12f);
         pieDataSet.setColors(getPieChartColors());
         PieData pieData = new PieData(pieDataSet);
@@ -145,7 +138,7 @@ public class SpendingByCategoryFragment extends Fragment {
         pieData.setValueFormatter(new PercentFormatter());
     }
 
-    private void initPieChart(){
+    private void initPieChart() {
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setRotationEnabled(true);
@@ -155,7 +148,7 @@ public class SpendingByCategoryFragment extends Fragment {
         pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         pieChart.setHoleRadius(40f);
         pieChart.setTransparentCircleRadius(50f);
-        pieChart.setHoleColor( Color.parseColor("#F5E3DC"));
+        pieChart.setHoleColor(Color.parseColor("#F5E3DC"));
         pieChart.getLegend().setEnabled(false);
     }
 

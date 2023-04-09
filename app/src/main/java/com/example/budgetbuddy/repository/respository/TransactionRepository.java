@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
 import com.example.budgetbuddy.model.Category;
 import com.example.budgetbuddy.model.Transaction;
@@ -12,6 +13,7 @@ import com.example.budgetbuddy.repository.AppDatabase;
 import com.example.budgetbuddy.repository.dao.TransactionDao;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TransactionRepository {
     private final TransactionDao transactionDao;
@@ -26,8 +28,21 @@ public class TransactionRepository {
     }
 
     public LiveData<List<TransactionByCategory>> getSpendingByCategory() {
-       return transactionDao.getTransactionsSummaryByCategory();
+       return Transformations.map(transactionDao.getTransactionsSummaryByCategory(), this::filterExpensesOnly);
     }
+
+    private List<TransactionByCategory> filterExpensesOnly(List<TransactionByCategory> transactionByCategories) {
+       return transactionByCategories.stream()
+                .filter(transactionByCategory -> transactionByCategory.category != Category.INCOME)
+                .collect(Collectors.toList());
+    }
+
+    private List<TransactionByCategory> filterIncome(List<TransactionByCategory> transactionByCategories) {
+        return transactionByCategories.stream()
+                .filter(transactionByCategory -> transactionByCategory.category == Category.INCOME)
+                .collect(Collectors.toList());
+    }
+
    public void insert(MutableLiveData<List<Long>> transactionIds, Transaction... transactions) {
       AppDatabase.databaseWriteExecutor.execute(() -> transactionIds.postValue(transactionDao.insertAll(transactions)));
     }

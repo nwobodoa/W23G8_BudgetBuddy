@@ -18,23 +18,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.converter.LocalDateConverter;
 import com.example.budgetbuddy.databinding.FragmentAddExpenseBinding;
 import com.example.budgetbuddy.model.Category;
 import com.example.budgetbuddy.model.Transaction;
-import com.example.budgetbuddy.ui.adapters.CategoryRecyclerViewAdapter;
-import com.example.budgetbuddy.ui.budget.AddBudgetViewModel;
+import com.example.budgetbuddy.adapters.CategoryRecyclerViewAdapter;
 import com.example.budgetbuddy.utils.VectorDrawableUtils;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -57,7 +55,7 @@ public class ExpenseFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         ExpenseViewModel addExpenseViewModel =
                 new ViewModelProvider(this).get(ExpenseViewModel.class);
-        var datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select date").build();
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select date").build();
         binding = FragmentAddExpenseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         recyclerViewCategories = binding.recyclerViewCategories;
@@ -66,7 +64,7 @@ public class ExpenseFragment extends Fragment {
         btnAddExpense = binding.btnAddExpense;
         editTextCategory = binding.editTextCategory;
         editTextExpenseDate = binding.editTextExpenseDate;
-        var fm =((AppCompatActivity) requireActivity()).getSupportFragmentManager();
+        FragmentManager fm =((AppCompatActivity) requireActivity()).getSupportFragmentManager();
 
         editTextCategory.setInputType(InputType.TYPE_NULL);
         editTextCategory.setOnClickListener(view -> {
@@ -89,10 +87,10 @@ public class ExpenseFragment extends Fragment {
 
         GridLayoutManager gm = new GridLayoutManager(getContext(), 3);
         recyclerViewCategories.setLayoutManager(gm);
-        var categories = addExpenseViewModel.getCategoryIcons();
+        List<Category> categories = Category.getAllCategories();
         CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(categories, i -> {
-            editTextCategory.setText(categories.get(i).getCategoryName());
-            int selectedImage = categories.get(i).getCategoryPic();
+            editTextCategory.setText(categories.get(i).toString());
+            int selectedImage = categories.get(i).getDrawableId();
             Bitmap bitmap = VectorDrawableUtils.getBitmapFromVectorDrawable(requireContext(),selectedImage);
             int desiredWidth = 55;
             int desiredHeight = 55;
@@ -118,7 +116,7 @@ public class ExpenseFragment extends Fragment {
         btnAddExpense.setEnabled(false);
 
         addExpenseViewModel.getExpenseFormState().observe(getViewLifecycleOwner(), this::expenseFormStateListener);
-        var afterTextChangedListener = setUpTextWatcher(editTextExpenseDescription,editTextCategory,editTextExpense,editTextExpenseDate,addExpenseViewModel);
+        TextWatcher afterTextChangedListener = setUpTextWatcher(editTextExpenseDescription,editTextCategory,editTextExpense,editTextExpenseDate,addExpenseViewModel);
 
         editTextExpenseDescription.addTextChangedListener(afterTextChangedListener);
         editTextCategory.addTextChangedListener(afterTextChangedListener);

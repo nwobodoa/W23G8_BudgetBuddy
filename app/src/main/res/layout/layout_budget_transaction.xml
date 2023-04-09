@@ -3,38 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    android:textAlignment="textEnd">
+    android:textAlignment="textStart">
 
     <TextView
         android:id="@+id/textViewTransactionAmount"
         android:layout_width="0dp"
         android:layout_height="32dp"
-        android:layout_weight="0.33"
+        android:layout_weight="0.25"
         android:height="70dp"
         android:padding="5dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="textStart"
         android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textViewTransactionDescription"
         android:layout_width="0dp"
         android:layout_height="32dp"
-        android:layout_weight="0.33"
+        android:layout_weight="0.25"
         android:height="70dp"
         android:padding="5dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="textStart"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewTransactionCategory"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="0.25"
+        android:height="70dp"
+        android:padding="5dp"
+        android:text="@string/txtView"
+        android:textAlignment="textStart"
         android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textViewTransactionDate"
         android:layout_width="0dp"
         android:layout_height="32dp"
-        android:layout_weight="0.33"
+        android:layout_weight="0.25"
         android:height="70dp"
         android:padding="5dp"
         android:text="@string/txtView"
-        android:textAlignment="textEnd"
+        android:textAlignment="textStart"
         android:textColor="@color/white" />
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.budgetbuddy.ui.adapters;
+package com.example.budgetbuddy.adapters;
 
 import android.graphics.Color;
 import android.view.Gravity;
@@ -12,23 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.ui.add_expense.CategoryIcon;
+import com.example.budgetbuddy.model.Category;
 
 import java.util.List;
 
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.CategoryViewHolder>{
 
 
-    List<CategoryIcon> categories;
+    List<Category> categories;
     int clickedIndex = -1;
     onItemClickListener onItemClickListener;
 
 
-    public CategoryRecyclerViewAdapter(List<CategoryIcon> categories) {
-        this.categories = categories;
-    }
-
-    public CategoryRecyclerViewAdapter(List<CategoryIcon> categories, CategoryRecyclerViewAdapter.onItemClickListener onItemClickListener) {
+    public CategoryRecyclerViewAdapter(List<Category> categories, CategoryRecyclerViewAdapter.onItemClickListener onItemClickListener) {
         this.categories = categories;
         this.onItemClickListener = onItemClickListener;
     }
@@ -49,8 +45,8 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-            holder.imgViewItem.setImageResource(categories.get(position).getCategoryPic());
-            holder.txtViewItem.setText(categories.get(position).getCategoryName());
+            holder.imgViewItem.setImageResource(categories.get(position).getDrawableId());
+            holder.txtViewItem.setText(categories.get(position).toString());
             holder.txtViewItem.setGravity(Gravity.CENTER);
             if (position == clickedIndex){
                 holder.itemView.setBackgroundColor(Color.parseColor("#d5896c"));

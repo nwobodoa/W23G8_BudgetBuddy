@@ -51,7 +51,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_income">Add Income</string>
     <string name="menu_expense">Add Expense</string>
-    <string name="menu_addBudget">Add Budget</string>
+    <string name="menu_addAllocation">Add Allocation</string>
     <string name="menu_history">Transaction History</string>
     <string name="menu_spendingByCat">Spending by Category</string>
     <string name="txtExpenseIcon">EXPENSE</string>
@@ -63,7 +63,7 @@
     <string name="evening">Good Evening %1$s!</string>
     <string name="txtView">Text View</string>
 
-    <string name="txtaddnewbudget">ADD BUDGET</string>
+    <string name="txtaddnewallocation">ADD ALLOCATION</string>
 
 
     <string name="txtbtnExport">Export Report</string>
@@ -80,7 +80,14 @@
     <string name="expense_error">Expense cannot be less than or equal to 0</string>
     <string name="expense_description_error">Description cannot be empty or greater than 25 characters long</string>
     <string name="expense_category_error">Category is unknown</string>
+    <string name="statistics">Statistics</string>
     <string name="expense_date_error">Please provide a valid date in the dd-mm-yyyy format</string>
+    <string name="txtMonthlyExpenditure">Total Monthly Expenditure</string>
+    <string name="txtMonthlyAllocated">Total Monthly Allocated</string>
+    <string name="no_expenditure">No expenditure added yet</string>
+    <string name="select_category_to_view">Select a Category to view details</string>
+    <string name="no_budget">No allocation found for the month</string>
+    <string name="add_allocation">Add Allocation</string>
     <string-array name="Categories">
         <item>Housing</item>
         <item>Transportation</item>

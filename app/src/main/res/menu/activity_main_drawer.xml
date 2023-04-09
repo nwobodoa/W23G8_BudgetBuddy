@@ -5,9 +5,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_home"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_stats"
+            android:icon="@drawable/chart_column_solid"
+            android:title="@string/statistics" />
         <item
             android:id="@+id/nav_addExpense"
             android:icon="@drawable/ic_menu_money"
@@ -19,15 +19,7 @@
         <item
             android:id="@+id/nav_addBudget"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_addBudget" />
-        <item
-            android:id="@+id/nav_spendingHistory"
-            android:icon="@drawable/ic_menu_history"
-            android:title="@string/SpendingHistory" />
-        <item
-            android:id="@+id/nav_spendingByCat"
-            android:icon="@drawable/ic_menu_category"
-            android:title="@string/spendingByCat" />
+            android:title="@string/menu_addAllocation" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_logout"

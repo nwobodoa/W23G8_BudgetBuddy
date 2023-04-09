@@ -1,33 +1,50 @@
 package com.example.budgetbuddy.model;
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class LineItem {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private Long id;
     private double amount;
     private Category category;
 
-    private String description;
-
-    private long budgetId;
-
-    public int getId() {
-        return id;
+    public LineItem(double amount, Category category) {
+        this.amount = amount;
+        this.category = category;
     }
 
-    public void setId(int id) {
+    public LineItem(@Nullable Long id,@Nullable Long budgetId, double amount, Category category) {
+        this.amount = amount;
+        this.category = category;
+        this.allocationId = budgetId;
         this.id = id;
     }
 
-    public long getBudgetId() {
-        return budgetId;
+    public  LineItem() {
+
     }
 
-    public void setBudgetId(long budgetId) {
-        this.budgetId = budgetId;
+    @Nullable
+    private Long allocationId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Nullable
+    public Long getAllocationId() {
+        return allocationId;
+    }
+
+    public void setAllocationId(long allocationId) {
+        this.allocationId = allocationId;
     }
 
     public double getAmount() {
@@ -44,13 +61,5 @@ public class LineItem {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
