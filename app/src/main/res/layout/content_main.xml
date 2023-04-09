@@ -11,100 +11,10 @@
         android:id="@+id/nav_host_fragment_content_main2"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:navGraph="@navigation/mobile_navigation"
         tools:layout_editor_absoluteX="0dp" />
-
-    <ImageView
-        android:id="@+id/imgViewBudgettIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.819"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_chart_round" />
-
-    <TextView
-        android:id="@+id/txtViewBudgetIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="@string/txtAddBudget"
-        android:textColor="@color/brown_100"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewBudgettIcon" />
-
-    <ImageView
-        android:id="@+id/imgViewExpenseIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/imgViewBudgettIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_expense_round" />
-
-    <TextView
-        android:id="@+id/txtViewExpenseIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txtExpenseIcon"
-        android:textColor="@color/brown_100"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/txtViewBudgetIcon"
-        app:layout_constraintStart_toEndOf="@+id/txtViewIncomeIcon"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewExpenseIcon" />
-
-    <ImageView
-        android:id="@+id/imgViewAddIncome"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/imgViewExpenseIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_income_round" />
-
-    <TextView
-        android:id="@+id/txtViewIncomeIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:text="@string/txtIconAddIncome"
-        android:textColor="@color/brown_100"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/txtViewHomeIcon"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewAddIncome" />
-
-    <ImageView
-        android:id="@+id/imgViewHomeIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/imgViewAddIncome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_home_round"
-        />
-
-    <TextView
-        android:id="@+id/txtViewHomeIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:text="@string/txtHomeIcon"
-        android:textColor="@color/brown_100"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewHomeIcon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

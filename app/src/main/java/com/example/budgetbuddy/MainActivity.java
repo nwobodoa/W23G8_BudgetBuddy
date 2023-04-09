@@ -2,34 +2,28 @@ package com.example.budgetbuddy;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.budgetbuddy.auth.ProtectedActivity;
 import com.example.budgetbuddy.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalTime;
 
-public class MainActivity extends ProtectedActivity {
+public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private ImageView imgViewExpenseIcon;
 
-
+    TextView txtGreeting;
     TextView txtViewGreeting;
-    ImageView imgViewHome;
-    ImageView imgViewIncome;
-    ImageView imgViewExpense;
-    ImageView imgViewBudget;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,43 +33,17 @@ public class MainActivity extends ProtectedActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
 
-
-        imgViewHome = binding.drawerLayout.findViewById(R.id.imgViewHomeIcon);
-        imgViewIncome = binding.drawerLayout.findViewById(R.id.imgViewAddIncome);
-        imgViewExpense = binding.drawerLayout.findViewById(R.id.imgViewExpenseIcon);
-        imgViewBudget = binding.drawerLayout.findViewById(R.id.imgViewBudgettIcon);
-
-        imgViewIncome.setOnClickListener(view -> {
-            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-            navControllerIncome.navigateUp();
-            navControllerIncome.navigate(R.id.nav_addIncome);
-        });
-
-        imgViewExpense.setOnClickListener(view -> {
-            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-            navControllerIncome.navigateUp();
-            navControllerIncome.navigate(R.id.nav_addExpense);
-        });
-
-        imgViewBudget.setOnClickListener(view -> {
-            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-            navControllerIncome.navigateUp();
-            navControllerIncome.navigate(R.id.nav_addBudget);
-        });
-
-        imgViewHome.setOnClickListener(view -> {
-            NavController navControllerIncome = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main2);
-            navControllerIncome.navigateUp();
-            navControllerIncome.navigate(R.id.nav_home);
-        });
-
-       DrawerLayout drawer = binding.drawerLayout;
+        DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         txtViewGreeting =  navigationView.getHeaderView(0).findViewById(R.id.txtViewGreeting);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        txtGreeting = findViewById(R.id.toolbar_title);
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_addExpense, R.id.nav_addIncome, R.id.nav_addBudget, R.id.nav_spendingByCat, R.id.nav_spendingHistory,R.id.nav_logout)
+                R.id.nav_addExpense,
+                R.id.nav_addIncome,
+                R.id.nav_addBudget,
+                R.id.nav_stats,
+                R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main2);
@@ -89,7 +57,7 @@ public class MainActivity extends ProtectedActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main_activity, menu);
         return true;
     }
@@ -105,13 +73,15 @@ public class MainActivity extends ProtectedActivity {
     public void displayGreeting(String name) {
             int timeOfDay =  LocalTime.now().getHour();
             if (timeOfDay >= 0 && timeOfDay < 12) {
-
-                txtViewGreeting.setText("Good Morning " + name + "!");
+                txtGreeting.setText("Good Morning " + name + " !");
+                txtViewGreeting.setText("Good Morning " + name + " !");
 
             } else if (timeOfDay >= 12 && timeOfDay < 16) {
-                txtViewGreeting.setText("Good Afternoon " + name + "!");
+                txtGreeting.setText("Good Afternoon " + name + " !");
+                txtViewGreeting.setText("Good Afternoon " + name + " !");
             } else {
-                txtViewGreeting.setText("Good Evening " + name + "!");
+                txtGreeting.setText("Good Evening " + name + " !");
+                txtViewGreeting.setText("Good Evening " + name + " !");
             }
     }
 
