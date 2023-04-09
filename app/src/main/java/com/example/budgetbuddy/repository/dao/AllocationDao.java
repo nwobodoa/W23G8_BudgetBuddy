@@ -17,18 +17,18 @@ import java.util.List;
 @Dao
 public interface AllocationDao {
     @Query("SELECT * FROM Allocation where createdAt between :start and :end")
-    List<Allocation> findBudgetBetweenDates(LocalDate start, LocalDate end);
+    List<Allocation> findAllocationBetweenDates(LocalDate start, LocalDate end);
     @Query("SELECT * FROM Allocation LIMIT 50")
     List<Allocation> getAll();
 
     @Transaction
     @Query("SELECT * FROM Allocation WHERE yearMonth = :yearMonth")
-    LiveData<AllocationWithLineItems> getBudgetWithLineItems(YearMonth yearMonth);
+    LiveData<AllocationWithLineItems> getAllocationWithLineItems(YearMonth yearMonth);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Allocation... allocations);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Allocation allocation);
 
     @Query("SELECT * FROM Allocation WHERE yearMonth = :yearMonth")
-    LiveData<Allocation> getBudget(YearMonth yearMonth);
+    LiveData<Allocation> getAllocation(YearMonth yearMonth);
 }

@@ -41,7 +41,7 @@ public class AllocationViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<SummaryItem>> getBudgetSummary() {
-       return Transformations.switchMap(allocationRepository.getBudgetWithLineItems(YearMonth.now()), this::calculateSummary);
+       return Transformations.switchMap(allocationRepository.getAllocationWithLineItems(YearMonth.now()), this::calculateSummary);
     }
 
     private List<SummaryItem> calculateSummary(List<TransactionByCategory> trx, Map<Category, LineItem> categoryLineItemMap ) {
@@ -80,7 +80,7 @@ public class AllocationViewModel extends AndroidViewModel {
     }
 
     public LiveData<Allocation> getBudget() {
-        return allocationRepository.getBudget(YearMonth.now());
+        return allocationRepository.getAllocation(YearMonth.now());
     }
 
     private List<LineItem> addData() {

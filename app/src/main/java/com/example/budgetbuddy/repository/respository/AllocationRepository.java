@@ -25,13 +25,13 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 public class AllocationRepository {
 
-    private final AllocationDao budgetDao;
+    private final AllocationDao allocationDao;
     private final LineItemDao lineItemDao;
 
     private final MutableLiveData<List<Long>> savedIds = new MutableLiveData<>();
 
     public AllocationRepository(Application application) {
-        this.budgetDao = AppDatabase.getDatabase(application).budgetDao();
+        this.allocationDao = AppDatabase.getDatabase(application).allocationDao();
         this.lineItemDao = AppDatabase.getDatabase(application).lineItemDao();
     }
 
@@ -48,9 +48,9 @@ public class AllocationRepository {
                     allocation = new Allocation(LocalDate.now(), YearMonth.now());
                 }
 
-                long budgetId = budgetDao.insert(allocation);
+                long allocationId = allocationDao.insert(allocation);
                 lineItems.forEach(lineItem -> {
-                    lineItem.setAllocationId(budgetId);
+                    lineItem.setAllocationId(allocationId);
                 });
                 List<Long> lineItemIds = lineItemDao.insertAll(lineItems);
                 savedIds.postValue(lineItemIds);
@@ -66,15 +66,15 @@ public class AllocationRepository {
         return savedIds;
     }
 
-    public LiveData<Allocation> getBudget(YearMonth yearMonth) {
-        return budgetDao.getBudget(yearMonth);
+    public LiveData<Allocation> getAllocation(YearMonth yearMonth) {
+        return allocationDao.getAllocation(yearMonth);
     }
 
     public LiveData<List<LineItem>> getLineItems(Allocation allocation) {
         return lineItemDao.getLineItems(allocation.getId());
     }
 
-    public LiveData<AllocationWithLineItems> getBudgetWithLineItems(YearMonth yearMonth) {
-        return budgetDao.getBudgetWithLineItems(yearMonth);
+    public LiveData<AllocationWithLineItems> getAllocationWithLineItems(YearMonth yearMonth) {
+        return allocationDao.getAllocationWithLineItems(yearMonth);
     }
 }
