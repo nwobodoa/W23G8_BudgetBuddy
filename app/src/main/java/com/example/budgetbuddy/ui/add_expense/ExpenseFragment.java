@@ -64,7 +64,7 @@ public class ExpenseFragment extends Fragment {
         btnAddExpense = binding.btnAddExpense;
         editTextCategory = binding.editTextCategory;
         editTextExpenseDate = binding.editTextExpenseDate;
-        FragmentManager fm =((AppCompatActivity) requireActivity()).getSupportFragmentManager();
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
 
         editTextCategory.setInputType(InputType.TYPE_NULL);
         editTextCategory.setOnClickListener(view -> {
@@ -80,10 +80,8 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
-        pickedTime.observe(getViewLifecycleOwner(), time -> {
-            editTextExpenseDate.setText(
-                    LocalDateConverter.fromLocalDate(LocalDateTime.ofInstant(time.toInstant(),time.getTimeZone().toZoneId()).toLocalDate()));
-        });
+        pickedTime.observe(getViewLifecycleOwner(), time -> editTextExpenseDate.setText(
+                LocalDateConverter.fromLocalDate(LocalDateTime.ofInstant(time.toInstant(),time.getTimeZone().toZoneId()).toLocalDate())));
 
         GridLayoutManager gm = new GridLayoutManager(getContext(), 3);
         recyclerViewCategories.setLayoutManager(gm);
@@ -108,9 +106,7 @@ public class ExpenseFragment extends Fragment {
             pickedTime.setValue(calendar);
         });
 
-        editTextExpenseDate.setOnClickListener(v -> {
-            datePicker.show(fm, "MATERIAL_DATE_PICKER");
-        });
+        editTextExpenseDate.setOnClickListener(v -> datePicker.show(fm, "MATERIAL_DATE_PICKER"));
 
         btnAddExpense.setOnClickListener(v -> addExpenseListener(addExpenseViewModel));
         btnAddExpense.setEnabled(false);
