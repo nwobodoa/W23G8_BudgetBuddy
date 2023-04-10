@@ -5,13 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/brown_100"
-    tools:context=".ui.allocation.AllocationFragment">
+    tools:context=".ui.home.HomeFragment">
+
+    <Button
+        android:id="@+id/btnExport2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginTop="8dp"
+        android:text="@string/txtbtnExport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewTransactionHistory" />
 
     <TextView
         android:id="@+id/txtHomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="@string/menu_history"
         android:textColor="@color/red_200"
         android:textSize="24sp"
@@ -24,9 +35,13 @@
         android:id="@+id/btnExport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtbtnExport"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/txtbtnExport2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnExport2"
         app:layout_constraintTop_toBottomOf="@+id/listViewTransactionHistory" />
 
     <LinearLayout
@@ -51,8 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="@string/Amount"
-            android:textAlignment="textStart"
+            android:text="Amount"
+            android:textAlignment="center"
             android:textColor="#222332"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,23 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="@string/description"
-            android:textAlignment="textStart"
-            android:textColor="#222332"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textViewIncomeHeader"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/textViewCategoryHeader"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/category"
-            android:textAlignment="textStart"
+            android:text="Description"
+            android:textAlignment="center"
             android:textColor="#222332"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -96,8 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="@string/date"
-            android:textAlignment="textStart"
+            android:text="Date"
+            android:textAlignment="center"
             android:textColor="#222332"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/listViewBudgetReport"
