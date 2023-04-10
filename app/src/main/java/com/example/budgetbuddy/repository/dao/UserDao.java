@@ -11,6 +11,8 @@ import com.example.budgetbuddy.model.User;
 public interface UserDao {
     @Query("SELECT * FROM USER where email = :email")
     LiveData<User> findByEmail(String email);
+    @Query("SELECT * FROM USER where email = :email")
+    User getUserByEmail(String email);
     @Insert
     Long insert(User user);
 }

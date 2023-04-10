@@ -1,6 +1,7 @@
 package com.example.budgetbuddy.repository.respository;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +11,10 @@ import com.example.budgetbuddy.data.Result;
 import com.example.budgetbuddy.model.User;
 import com.example.budgetbuddy.repository.AppDatabase;
 import com.example.budgetbuddy.repository.dao.UserDao;
+import com.example.budgetbuddy.ui.signup.SignUpState;
 import com.example.budgetbuddy.utils.PasswordHelper;
+
+import static android.content.ContentValues.TAG;
 
 public class UserRepository {
     private final UserDao userDao;
@@ -18,10 +22,6 @@ public class UserRepository {
     public UserRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         userDao = db.userDao();
-    }
-
-    public LiveData<User> findUserByEmail(String email) {
-        return userDao.findByEmail(email);
     }
 
     public LiveData<Result<User>> login(String email, String password) {
@@ -38,9 +38,29 @@ public class UserRepository {
 
     public void insert(MutableLiveData<Long> userId, User user) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
+
             var generatedId =  userDao.insert(user);
             userId.postValue(generatedId);
         });
+    }
+
+    public LiveData<SignUpState> addNewUser(String username, String email, String password) {
+        MutableLiveData<SignUpState> result =  new MutableLiveData<>();
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            try {
+                if(userDao.getUserByEmail(email) != null) {
+                    result.postValue(SignUpState.DUPLICATE);
+                      return;
+                }
+                User user = new User(username,email,password);
+                userDao.insert(user);
+                result.postValue(SignUpState.SUCCESS);
+            } catch (Exception e) {
+                Log.e(TAG, "addNewUser: ", e);
+                result.postValue(SignUpState.ERROR);
+            }
+        });
+        return result;
     }
 }
 

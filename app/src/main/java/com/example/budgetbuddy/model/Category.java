@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public enum Category {
     INCOME("income", R.drawable.cash_wave_solid),
     DINING_OUT("dining out", R.drawable.utensils_solid),
-    SHOPPING("dining out", R.drawable.basket_shopping_solid),
+    SHOPPING("shopping", R.drawable.basket_shopping_solid),
     TRAVEL("travel spending", R.drawable.bus_simple_solid),
     CASH("cash", R.drawable.cash_wave_solid),
     HOME("home", R.drawable.house_solid),

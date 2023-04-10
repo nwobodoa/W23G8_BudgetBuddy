@@ -61,10 +61,13 @@ public class AllocationViewModel extends AndroidViewModel {
     private LiveData<List<SummaryItem>> calculateSummary(@Nullable AllocationWithLineItems budget) {
         Map<Category, LineItem> categoryLineItemMap =  new HashMap<>();
         if(budget != null) {
-            budget.getLineItems().forEach(lineItem -> categoryLineItemMap.put(lineItem.getCategory(),lineItem));
+            budget.getLineItems().forEach(lineItem ->
+                    categoryLineItemMap.put(lineItem.getCategory(),lineItem));
         }
-     return  Transformations.map(transactionRepository.getSpendingByCategory(), trx -> calculateSummary(trx,categoryLineItemMap));
+     return  Transformations.map(transactionRepository.getSpendingByCategory(), trx ->
+             calculateSummary(trx,categoryLineItemMap));
     }
+
 
     public LiveData<String> getText() {
         return mText;
