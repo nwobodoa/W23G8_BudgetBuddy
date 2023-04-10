@@ -132,6 +132,7 @@ public class SpendingByCategoryFragment extends Fragment {
         pieDataSet.setValueTextSize(12f);
         pieDataSet.setColors(getPieChartColors());
         PieData pieData = new PieData(pieDataSet);
+        pieData.setValueTextColor(Color.parseColor("#ffffff"));
         pieData.setDrawValues(true);
         pieChart.setData(pieData);
         pieChart.invalidate();
@@ -139,6 +140,7 @@ public class SpendingByCategoryFragment extends Fragment {
     }
 
     private void initPieChart() {
+        pieChart.setEntryLabelColor(Color.parseColor("#ffffff"));
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setRotationEnabled(true);

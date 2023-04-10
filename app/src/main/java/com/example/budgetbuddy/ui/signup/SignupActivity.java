@@ -13,7 +13,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.model.User;
 import com.example.budgetbuddy.ui.login.LoginActivity;
 import com.example.budgetbuddy.utils.PasswordHelper;
 
@@ -54,7 +53,7 @@ public class SignupActivity extends AppCompatActivity {
         logInLink = findViewById(R.id.txtViewSignIn);
     }
 
-    private void clearTextFields(){
+    private void clearTextFields() {
         userName.setText(null);
         email.setText(null);
         password.setText(null);
@@ -80,27 +79,16 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "please enter your Username", Toast.LENGTH_SHORT).show();
             return;
         }
-        signupViewModel.userExists(email.getText().toString().trim()).observe(
-                this, userExists -> {
-                    if (userExists) {
-                        Toast.makeText(this, "User already Exists", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    User user =
-                            new User(userName.getText().toString().trim(),
-                                    email.getText().toString().trim(),
-                                    PasswordHelper.hashedPassword(password.getText().toString().trim()));
-                    signupViewModel.addNewUser(userId, user);
-                }
-        );
 
-        userId.observe(this, id -> {
-            if (id != null) {
-                Toast.makeText(this, "User Added Successfully", Toast.LENGTH_SHORT).show();
-                clearTextFields();
+
+        signupViewModel.addNewUser(userName.getText().toString().trim(),
+                        email.getText().toString().trim(),
+                        PasswordHelper.hashedPassword(password.getText().toString().trim()))
+                .observe(this, signUpState -> {
+            Toast.makeText(this, signUpState.toString(), Toast.LENGTH_SHORT).show();
+            clearTextFields();
+            if (signUpState == SignUpState.SUCCESS) {
                 startActivity(new Intent(this, LoginActivity.class));
-            } else {
-                Toast.makeText(this, "User registration unsuccessful", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -54,9 +54,6 @@ public class AddAllocationFragment extends Fragment {
 
     }
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     public void saveBudget(LineItemViewAdapter adapter) {
         boolean allZeroes = adapter.getFilledLineItems().stream().allMatch(lineItem -> lineItem.getAmount() == 0.0);
         boolean hasNegative = adapter.getFilledLineItems().stream().anyMatch(lineItem -> lineItem.getAmount() < 0.0);

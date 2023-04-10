@@ -49,7 +49,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "budget_buddy")
                             .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
+                            .allowMainThreadQueries() //used to accommodate smart's version
                             .build();
                 }
             }

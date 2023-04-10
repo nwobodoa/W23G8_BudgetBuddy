@@ -2,6 +2,7 @@ package com.example.budgetbuddy.model;
 
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -11,11 +12,14 @@ public class LineItem {
     private double amount;
     private Category category;
 
+    @Ignore
+
     public LineItem(double amount, Category category) {
         this.amount = amount;
         this.category = category;
     }
 
+    @Ignore
     public LineItem(@Nullable Long id,@Nullable Long budgetId, double amount, Category category) {
         this.amount = amount;
         this.category = category;
@@ -43,7 +47,7 @@ public class LineItem {
         return allocationId;
     }
 
-    public void setAllocationId(long allocationId) {
+    public void setAllocationId(@Nullable Long allocationId) {
         this.allocationId = allocationId;
     }
 
