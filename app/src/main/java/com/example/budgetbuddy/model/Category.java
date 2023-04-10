@@ -25,7 +25,7 @@ public enum Category {
     EDUCATION("education", R.drawable.education_solid),
     UTILITIES("utilities", R.drawable.utilities_solid),
 
-    MISCELLANEOUS("Miscellaneous", R.drawable.dice_solid);
+    MISCELLANEOUS("miscellaneous", R.drawable.dice_solid);
 
 
     private static final Map<String, Category> BY_LABEL = new HashMap<>();
