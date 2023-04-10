@@ -37,6 +37,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="txtForgotPassword">Forgot Password</string>
+    <string name="txtbtnExport">Export Report(PDF)</string>
+    <string name="txtbtnExport2">Export Report(CSV)</string>
     <string name="txtEmail">Email*</string>
     <string name="txtViewText">Please enter your registered email below to receive password reset link </string>
     <string name="btnResetPwd">Reset Password</string>
@@ -67,7 +69,7 @@
     <string name="txtaddnewallocation">ADD ALLOCATION</string>
     <string name="txtaddnewbudget">ADD BUDGET</string>
 
-    <string name="txtbtnExport">Export Report</string>
+
     <string name="select_category">Select Category</string>
     <string name="add_expense">Add Expense</string>
     <string name="expense">Expense</string>
